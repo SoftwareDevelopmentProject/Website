@@ -21,14 +21,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             $(".dropdown dt a").click(function() {
                 $(".dropdown dd ul").toggle();
             });
-                        
+
             $(".dropdown dd ul li a").click(function() {
                 var text = $(this).php();
                 $(".dropdown dt a span").php(text);
                 $(".dropdown dd ul").hide();
                 $("#result").php("Selected value is: " + getSelectedValue("sample"));
             });
-                        
+
             function getSelectedValue(id) {
                 return $("#" + id).find("dt a span.value").php();
             }
@@ -45,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             });
         });
      </script>
-<!-- start menu -->     
+<!-- start menu -->
 <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
@@ -87,12 +87,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script type="text/javascript" src="js/easing.js"></script>
    <script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
+			$(".scroll").click(function(event){
 				event.preventDefault();
 				$('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
 			});
 		});
-	</script>					
+	</script>
 </head>
 <body>
   <div class="header-top">
