@@ -1220,7 +1220,7 @@ p#login-form-remember label a:hover{
 .register_account form input[type="text"]:hover, .register_account form select:hover{
 	border:1px solid #DBDADA;
 }
-button.grey {
+button.grey, input[type=submit].grey {
 	background: #555;
 	color: #FFF;
 	/* font-size: 0.8em; */

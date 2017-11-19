@@ -10,20 +10,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Free Adidas Website Template | Register :: w3layouts</title>
     <?php include "_head.php";?>
 </head>
+<?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country']);
+    }
+?>
 <body>
     <?php include "_header.php";?>
-       <div class="register_account">
+       <div class="register_account" style="margin-bottom: 50px;">
           	<div class="wrap">
     	      <h4 class="title">Create an Account</h4>
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
-		   			 <div><input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
-		    			<div><input type="text" value="Company Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Company Name';}"></div>
-		    			<div><input type="text" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
-		    			<div><input type="text" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
+		   			 <div><input type="text" name ="name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
+		    			<div><input type="text" name="email" value="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}"></div>
+		    			<div><input type="text" name="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
+                     <div><input type="text" name="confirmpassword" value="confirmpassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'confirmpassword';}"></div>
 		    	 </div>
-		    	  <div class="col_1_of_2 span_1_of_2">	
-		    		<div><input type="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
+		    	  <div class="col_1_of_2 span_1_of_2">
+                      <div><input type="text" name="phone" value="phone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone';}"></div>
+                      <div><input type="text" name="address" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
 		    		<div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
 		            <option value="null">Select a Country</option>         
 		            <option value="AX">Åland Islands</option>
@@ -220,14 +226,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		            <option value="ST">Sao Tome and Principe</option>
 		            <option value="SA">Saudi Arabia</option>
 		            <option value="SN">Senegal</option>
-		         </select></div>		        
-		          <div><input type="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}"></div>
-		             <input type="text" value="" class="code"> - <input type="text" value="" class="number">
-		          	 <p class="code">Country Code + Phone Number</p>
+		         </select></div>
 		          </div>
-		         <button class="grey">Submit</button>
-		         <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+
 		         <div class="clear"></div>
+                   <input type="submit" class="grey" value="Submit" />
+                   <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
 		    </form>
     	  </div> 
         </div>

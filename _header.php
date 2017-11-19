@@ -1,7 +1,4 @@
-<?php
-    include_once 'include/DbFunction.php';
-    $db = new DbFunction();
-?>
+
 
 <div class="header-top">
     <div class="wrap">

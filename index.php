@@ -15,12 +15,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
     <?php include "_header.php"; ?>
-    <?php
-    $books = $db->getBooks();
-    foreach ($books as $book){
-        echo $book['book_author'];
-    }
-    ?>
         <div class="index-banner">
        	  <div class="wmuSlider example1" style="height: 560px;">
 			  <div class="wmuSliderWrapper">
