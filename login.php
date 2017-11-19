@@ -1,15 +1,14 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>Free Adidas Website Template | Login :: w3layouts</title>
     <?php include "_head.php"; ?>
 </head>
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $db->login($_POST['email'], $_POST['password']);
+}
+?>
 <body>
   <?php include "_header.php";?>
        <div class="login">
@@ -27,16 +26,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				  <div class="login-title">
 	           		<h4 class="title">Registered Customers</h4>
 					 <div class="comments-area">
-						<form>
+						<form method="post">
 							<p>
 								<label>Name</label>
 								<span>*</span>
-								<input type="text" value="">
+								<input name="email" type="email" value="">
 							</p>
 							<p>
 								<label>Password</label>
 								<span>*</span>
-								<input type="password" value="">
+								<input name="password" type="password" value="">
 							</p>
 							 <p id="login-form-remember">
 								<label><a href="#">Forget Your Password ? </a></label>

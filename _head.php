@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once 'include/DbFunction.php';
     $db = new DbFunction();
 ?>
