@@ -15,7 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        <div class="register_account">
           	<div class="wrap">
     	      <h4 class="title">Create an Account</h4>
-    		   <form>
+    		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
 		   			 <div><input type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
 		    			<div><input type="text" value="Company Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Company Name';}"></div>
