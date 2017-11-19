@@ -1,3 +1,7 @@
+<?php
+    $page = 'charts';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

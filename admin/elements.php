@@ -1,3 +1,7 @@
+<?php
+    $page = 'elements';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

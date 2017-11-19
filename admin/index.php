@@ -1,3 +1,7 @@
+<?php
+    $page = 'dashboard';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

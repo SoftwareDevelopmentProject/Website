@@ -1,3 +1,7 @@
+<?php
+    $page = 'panels';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

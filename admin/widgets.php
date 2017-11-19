@@ -1,3 +1,7 @@
+<?php
+    $page = 'widgets';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
