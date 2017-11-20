@@ -21,14 +21,19 @@
 				<li>Staff</li>
 			</ol>
 		</div><!--/.row-->
-		
+		<?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $result = $db->up_staff($_POST['id'],$_POST['role']);
+		/*if ($result) {
+			echo 'Updated';
+		} else {
+			echo 'no';
+		}*/
+    }
+?>
 		<div class="padding">
-			<?php require_once("conn.php");
-				$result = mysqli_query($con,"SELECT * FROM staff ORDER BY staff_role");
-				?>
-			<table class="padding">
-				<tr class="staff_tr" style="color: #fff;
-    background-color: #30a5ff; border-radius:1em; border:20">
+			<table class="padding" style="">
+				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; ">
 					<td width="35%" class="staff_td">Name</td>
 					<td width="10%" class="staff_td">Phone</td>
 					<td width="25%" class="staff_td">Email</td>
@@ -38,46 +43,47 @@
 					<td></td>
 				</tr>
 				<?php
-					while($row = mysqli_fetch_array($result))	{
+					$staffs = $db->get_staff();
+					foreach($staffs as $staff) {
+					
+				
 						echo "<tr>";
 						echo "<td>";
-						echo $row['staff_name'];
+						echo $staff['staff_name'];
 						echo "</td>";
 						echo "<td>";
-						echo $row['staff_phone'];
+						echo $staff['staff_phone'];
 						echo "</td>";
 						echo "<td>";
-						echo " <a href=\"mailto:" .$row['staff_email']. "\">". $row['staff_email'] . "</a> ";
+						echo " <a href=\"mailto:" .$staff['staff_email']. "\">". $staff['staff_email'] . "</a> ";
 						echo "</td>";
 						echo "<td>";
-						echo $row['staff_address'];
+						echo $staff['staff_address'];
 						echo "</td>";
 						echo "<td>";
 						echo '
-							<form action="update_role.php" method="post">
+							<form action="staff.php" method="post">
 								<select name="role" required class="drop_down">
 									<option value="0" ';
-									if ($row['staff_role']==0){
+									if ($staff['staff_role']==0){
 										echo'selected';
 									}
 									echo '>Staff</option><option value="1"';
-									if ($row['staff_role']==1){ 
+									if ($staff['staff_role']==1){ 
 										echo'selected';
 									} 
-									 echo '>Admin</option></select><input type="hidden" name="id" value="'.$row['staff_id'].'">';
+									 echo '>Admin</option></select><input type="hidden" name="id" value="'.$staff['staff_id'].'">';
 						echo "</td>";
 						echo '<td><input type="submit" value="Save"></form>';
 						echo "</td>";
 						echo "<td>";
 						echo 
-							'<form id="delete' . $row['staff_id'] . '" action="delete_member.php" method="post"><input type="button" value="Delete" onClick="R_U_Sure(' . $row['member_id'] . ',\''.$row['staff_name'].')" class="btn">
-							<input type="hidden" name="id" value="'.$row['staff_id'].'"></form>';
+							'<form id="delete' . $staff['staff_id'] . '" action="delete_member.php" method="post"><input type="button" value="Delete" onClick="R_U_Sure(' . $staff['member_id'] . ',\''.$staff['staff_name'].')" class="btn">
+							<input type="hidden" name="id" value="'.$staff['staff_id'].'"></form>';
 								echo '</td></tr>';
 								}
-								mysqli_close($con); //to close the database connection
 								?>
 								</table>
-								<button onclick="window.open('my_account.php','_self')" class="btn">Back</button>
 								<script>
 									function R_U_Sure(id,name) {
 										var x = confirm("Are you sure to remove " + name + " " + "?");

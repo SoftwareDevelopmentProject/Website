@@ -1038,10 +1038,10 @@ p.back-link {
   	height: 50px; 
 }
 table tr .staff_tr {
-	color: #fff;
-    background-color: #30a5ff;
+	color: #fff !important;
+    background-color: #30a5ff !important;
 	
 }
 table td .staff_td {
-	text-align: center;
+	text-align: center !important;
 }

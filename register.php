@@ -14,6 +14,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country']);
     }
+
 ?>
 <body>
     <?php include "_header.php";?>

@@ -42,6 +42,26 @@ class DbFunction {
             return LOGIN_USER_NOT_FOUND;
         }
     }
+	public function up_staff($id, $role){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $up_staff= mysqli_query($con, "UPDATE staff SET (staff_role) VALUES ($role) WHERE staff_id = $id ");
+        return mysqli_affected_rows($con) > 0;
+	}
+	
+	 public function get_staff() {
+        $db = new DbConnect();
+        $con = $db->connect();
+		$staffs= array();
+        $result = mysqli_query($con, "SELECT * FROM staff");
+		while ($staff = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+            array_push($staffs, $staff);
+        }
+        return $staffs;
+    }
+        	
+	 
+    
 
 }
 
