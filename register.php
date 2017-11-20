@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Free Adidas Website Template | Register :: w3layouts</title>
+    <title>Register</title>
     <?php include "_head.php";?>
 </head>
 <?php

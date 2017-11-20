@@ -81,6 +81,7 @@
     </form>
     <ul class="nav menu">
         <li <?php if (isset($page) && ($page == 'dashboard')) echo 'class="active"'; ?>><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+        <li <?php if (isset($page) && ($page == 'staff')) echo 'class="active"'; ?>><a href="staffs.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
         <li <?php if (isset($page) && ($page == 'widgets')) echo 'class="active"'; ?>><a href="widgets.php"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
         <li <?php if (isset($page) && ($page == 'charts')) echo 'class="active"'; ?>><a href="charts.php"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
         <li <?php if (isset($page) && ($page == 'elements')) echo 'class="active"'; ?>><a href="elements.php"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
