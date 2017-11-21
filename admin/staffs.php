@@ -33,12 +33,15 @@
 ?>
 		<div class="padding">
 			<table class="padding" style="">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; ">
+			<tr>
+				<td colspan="7" align="right"><button onclick="window.open('add_staff.php','_self')" class="btn btn-primary btn-md">Add New Staff</button></td>
+			</tr>
+				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
 					<td width="35%" class="staff_td">Name</td>
-					<td width="10%" class="staff_td">Phone</td>
-					<td width="25%" class="staff_td">Email</td>
+					<td width="5%" class="staff_td">Phone</td>
+					<td width="20%" class="staff_td">Email</td>
 					<td width="50%" class="staff_td">Address</td>
-					<td width="10%" class="staff_td">Role</td>
+					<td width="5%" class="staff_td">Role</td>
 					<td></td>
 					<td></td>
 				</tr>

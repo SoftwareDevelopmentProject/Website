@@ -200,7 +200,7 @@ a.btn:active, button:active {
   border-color: #e9ecf2;
   color: #1b3548; }
 
-.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, .btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, .btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active ,.btn-AddStaff{
   background-color: #30a5ff;
   border-color: #30a5ff; }
 
@@ -1044,4 +1044,14 @@ table tr .staff_tr {
 }
 table td .staff_td {
 	text-align: center !important;
+}
+
+#btn_add_staff {
+	background-color: rgba(48,165,255,0.5);
+    border-color: rgba(48,165,255,1.00);
+	color: #fff;
+}
+#btn_add_staff:hover {
+	background-color: rgba(48,165,255,0.5);
+    border-color: rgba(48,165,255,1.00);
 }
