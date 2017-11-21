@@ -59,6 +59,13 @@ class DbFunction {
         }
         return $staffs;
     }
+	
+	    public function add_staff($name, $email, $phone, $address, $role){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$phone','$address','$role')");
+        return $new_staff;
+    }
         	
 	 
     

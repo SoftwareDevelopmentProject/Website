@@ -18,7 +18,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li>Staff</li>
+				<li><a href="staffs.php">Staff</a<</li>
 			</ol>
 		</div><!--/.row-->
 		<?php
@@ -32,18 +32,18 @@
     }
 ?>
 		<div class="padding">
-			<table class="padding" style="">
+			<table class="padding" style="" width="100%">
 			<tr>
-				<td colspan="7" align="right"><button onclick="window.open('add_staff.php','_self')" class="btn btn-primary btn-md">Add New Staff</button></td>
+				<td colspan="7" align="right" height="50px"><button onclick="window.open('add_staff.php','_self')" class="btn btn-primary btn-md">Add New Staff</button></td>
 			</tr>
 				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
-					<td width="35%" class="staff_td">Name</td>
-					<td width="5%" class="staff_td">Phone</td>
+					<td width="20%" class="staff_td">Name</td>
+					<td width="10%" class="staff_td">Phone</td>
 					<td width="20%" class="staff_td">Email</td>
-					<td width="50%" class="staff_td">Address</td>
-					<td width="5%" class="staff_td">Role</td>
-					<td></td>
-					<td></td>
+					<td width="30%" class="staff_td">Address</td>
+					<td width="10%" class="staff_td">Role</td>
+					<td width="5%" class="staff_td"></td>
+					<td width="5%" class="staff_td"></td>
 				</tr>
 				<?php
 					$staffs = $db->get_staff();
