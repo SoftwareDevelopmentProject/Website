@@ -18,7 +18,7 @@
 				<li><a href="#">
 					<em class="fa fa-home"></em>
 				</a></li>
-				<li><a href="staffs.php">Staff</a<</li>
+				<li><a href="staffs.php">Staff</a></li>
 			</ol>
 		</div><!--/.row-->
 		<?php
@@ -34,7 +34,7 @@
 		<div class="padding">
 			<table class="padding" style="" width="100%">
 			<tr>
-				<td colspan="7" align="right" height="50px"><button onclick="window.open('add_staff.php','_self')" class="btn btn-primary btn-md">Add New Staff</button></td>
+				<td colspan="7" align="right" height="50px"><button onclick="window.location.replace('add_staff.php','_self')" class="btn btn-primary btn-md">Add New Staff</button></td>
 			</tr>
 				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
 					<td width="20%" class="staff_td">Name</td>
@@ -121,6 +121,10 @@
 	scaleFontColor: "#c5c7cc"
 	});
 };
+		$(document).ready(function() {
+			document.getElementById('click').click();
+		});
+	
 	</script>
 		
 </body>

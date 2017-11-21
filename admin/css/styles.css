@@ -1059,3 +1059,11 @@ table td .staff_td {
 	background-color: rgba(48,165,255,0.5);
     border-color: rgba(48,165,255,1.00);
 }
+
+#click {
+	margin: 0;
+    padding: 0;
+    display: block;
+    width: 100px;
+    border: 0;
+}

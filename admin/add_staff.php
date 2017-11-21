@@ -30,8 +30,8 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Add Staff
-			<span class="pull-right"><button onclick="window.open('staffs.php','_self')" class="btn btn-primary btn-md">Back</button></span></div>
-				<div class="panel-body" onload="down()">
+			<span class="pull-right clickable panel-toggle panel-button-tab-left panel-collapsed" id="click"><button onclick="window.location.replace('staffs.php','_self')" class="btn btn-primary btn-md" style="width: 100%">Back</button></span></div>
+				<div class="panel-body" style="display: none;">
 					<form class="form-horizontal" action="" method="post">
 						<fieldset>
 							<!-- Name input-->
@@ -110,9 +110,11 @@
 	});
 };
 		
-	function down() {
-    document.getElementsByClassName('.panel').find('.panel-body').slideDown();
-	}
+		$(document).ready(function() {
+			document.getElementById('click').click();
+		});
+	
+		
 	</script>
 		
 </body>
