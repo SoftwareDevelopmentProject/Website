@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Staff</title>
+	<title>Add Staff</title>
     <?php include_once '_head.php'; ?>
 </head>
 <body>
@@ -29,9 +29,9 @@
 		</div><!--/.row-->
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Contact Form
-			<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-				<div class="panel-body">
+			Add Staff
+			<span class="pull-right"><button onclick="window.open('staffs.php','_self')" class="btn btn-primary btn-md">Back</button></span></div>
+				<div class="panel-body" onload="down()">
 					<form class="form-horizontal" action="" method="post">
 						<fieldset>
 							<!-- Name input-->
@@ -109,6 +109,10 @@
 	scaleFontColor: "#c5c7cc"
 	});
 };
+		
+	function down() {
+    document.getElementsByClassName('.panel').find('.panel-body').slideDown();
+	}
 	</script>
 		
 </body>
