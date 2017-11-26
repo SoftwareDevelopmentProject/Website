@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </li>
-            <li class="active grid"><a class="color4" href="#">New Arrivals</a>
+            <li class="active grid"><a class="color4" href="new-arrival.php">New Arrivals</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
