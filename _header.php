@@ -159,7 +159,7 @@
                     </div>
                 </div>
             </li>
-            <li><a class="color5" href="#">Top Ratings</a>
+            <li><a class="color5" href="ratings.php">Top Ratings</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
