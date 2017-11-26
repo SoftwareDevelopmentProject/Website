@@ -9,9 +9,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
     <title>Free Adidas Website Template | Home :: w3layouts</title>
     <?php include "_head.php"; ?>
-    <?php
-
-    ?>
 </head>
 <body>
     <?php include "_header.php"; ?>

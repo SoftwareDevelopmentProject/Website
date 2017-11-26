@@ -10,9 +10,31 @@ class DbFunction {
         $db = new DbConnect();
         $con = $db->connect();
         $books = array();
-        $result = mysqli_query($con, "SELECT * FROM book");
-        while ($book = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+        $result_book = mysqli_query($con, "SELECT book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id");
+        $result_feedback = mysqli_query($con, "SELECT * FROM feedback");
+        $result_feedback_rating = mysqli_query($con, "SELECT * FROM feedback_rating");
+        while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
+            $book['feedback'] = array();
             array_push($books, $book);
+        }
+        while ($feedback = mysqli_fetch_array($result_feedback, MYSQLI_ASSOC)) {
+            foreach ($books as &$book) {
+                if ($book['book_id'] == $feedback['book_id']){
+                    $feedback['rating'] = array();
+                    array_push($book['feedback'], $feedback);
+                    break;
+                }
+            }
+        }
+        while ($feedback_rating = mysqli_fetch_array($result_feedback_rating, MYSQLI_ASSOC)) {
+            foreach ($books as &$book) {
+                foreach ($book['feedback'] as &$feedback) {
+                    if ($feedback['feedback_id'] == $feedback_rating['feedback_id']) {
+                        array_push($feedback['rating'], $feedback_rating);
+                        break;
+                    }
+                }
+            }
         }
         return $books;
     }
