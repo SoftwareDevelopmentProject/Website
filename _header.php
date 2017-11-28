@@ -16,7 +16,7 @@
         <ul class="icon2 sub-icon2 profile_img">
             <li><a class="active-icon c2" href="#"> </a>
                 <ul class="sub-icon2 list">
-                    <li><h3>Products</h3><a href=""></a></li>
+                    <li><h3>Products</h3><a href="shop.php"></a></li>
                     <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
                 </ul>
             </li>
@@ -28,8 +28,8 @@
     <div class="wrap">
         <!-- start header menu -->
         <ul class="megamenu skyblue">
-            <li><a class="color1" href="#">Home</a></li>
-            <li class="grid"><a class="color2" href="#">Shop</a>
+            <li><a class="color1" href="index.php">Home</a></li>
+            <li class="grid"><a class="color2" href="shop.php">Shop</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </li>
-            <li class="active grid"><a class="color4" href="#">New Arrivals</a>
+            <li class="active grid"><a class="color4" href="new-arrival.php">New Arrivals</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
@@ -159,7 +159,7 @@
                     </div>
                 </div>
             </li>
-            <li><a class="color5" href="#">Top Ratings</a>
+            <li><a class="color5" href="ratings.php">Top Ratings</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
