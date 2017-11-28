@@ -45,7 +45,7 @@ class DbFunction {
 	public function up_staff($id, $role){
         $db = new DbConnect();
         $con = $db->connect();
-        $up_staff= mysqli_query($con, "UPDATE staff SET (staff_role) VALUES ($role) WHERE staff_id = $id ");
+        $up_staff= mysqli_query($con, "UPDATE staff SET staff_role = $rolesu WHERE staff_id = $id ");
         return mysqli_affected_rows($con) > 0;
 	}
 	
