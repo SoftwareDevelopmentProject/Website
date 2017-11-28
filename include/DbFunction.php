@@ -151,7 +151,7 @@ class DbFunction {
 	public function up_staff($id, $role){
         $db = new DbConnect();
         $con = $db->connect();
-        $up_staff= mysqli_query($con, "UPDATE staff SET staff_role = $rolesu WHERE staff_id = $id ");
+        $up_staff= mysqli_query($con, "UPDATE staff SET staff_role = $role WHERE staff_id = $id ");
         return mysqli_affected_rows($con) > 0;
 	}
 	
@@ -171,6 +171,12 @@ class DbFunction {
         $con = $db->connect();
         $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$phone',$phone,'$address',$role)");
         return $new_staff;
+    }
+	  public function del_staff($id){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
+        return $ter_staff;
     }
         	
 	 

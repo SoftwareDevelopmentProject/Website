@@ -49,10 +49,10 @@
 						<div id="popupcontent" class="popup-content">
 							<div class="popup-header">
 								<span class="close">&times;</span>
-								<h2>Unsuccessful</h2>
+								<h2>Error</h2>
 							</div>
 							<div class="popup-body" style="background-color:red">
-								Add staff unsuccessful !
+								No change is made !
 
 							</div>
 							<div class="popup-footer">
@@ -86,10 +86,10 @@
 						<div id="popupcontent" class="popup-content">
 							<div class="popup-header">
 								<span class="close">&times;</span>
-								<h2>Unsuccessful</h2>
+								<h2>Error</h2>
 							</div>
 							<div class="popup-body" style="background-color:red">
-								Change role unsuccessful !
+								No change is made!
 
 							</div>
 							<div class="popup-footer">
@@ -102,26 +102,65 @@
 				
 			}
 			
-		}
-    } 
-?>
-	<!--/.row--<div id="popupBox" style="display:block">
-  					<div id="popupcontent" class="popup-content">
-						<div class="popup-header">
-      						<span class="close">&times;</span>
-      						<h2>Update successful</h2>
-    					</div>
-    					<div class="popup-body">
-      						Add staff successful !
-      							
-    					</div>
-						<div class="popup-footer">
-							<button class="btn-primary btn-md" id="ok">OK</button>
-    					</div>
-  					</div>
+		}else if (isset($_POST['del'])){
+			  $result= $db->del_staff($_POST['id']);
+			if ($result) {
+				echo '<div id="popupBox" style="display:block">
+						<div id="popupcontent" class="popup-content">
+							<div class="popup-header">
+								<span class="close">&times;</span>
+								<h2>Delected</h2>
+							</div>
+							<div class="popup-body">
+								Change role successful !
 
-				</div>
-				//-->
+							</div>
+							<div class="popup-footer">
+								<button class="btn btn-primary btn-md" id="ok" >OK</button>
+							</div>
+						</div>
+
+					</div>';
+			}else{
+				echo '<div id="popupBox" style="display:block">
+						<div id="popupcontent" class="popup-content">
+							<div class="popup-header">
+								<span class="close">&times;</span>
+								<h2>Error</h2>
+							</div>
+							<div class="popup-body" style="background-color:red">
+								No change is made!
+
+							</div>
+							<div class="popup-footer">
+								<button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
+							</div>
+						</div>
+
+					</div>';
+			}
+    	}
+	}
+?>
+	<!--confirmation message--//-->
+		<div id="confirmBox">
+						<div id="confirmContent" class="popup-content">
+							<div class="popup-header">
+								<span class="close">&times;</span>
+								<h2>Remove Confirmation</h2>
+							</div>
+							<div class="popup-body" id="confirmMessage">
+								Are you sure to remove?
+
+							</div>
+							<div class="popup-footer">
+								<button class="btn btn-primary btn-md" id="yes" onclick="delStaff()">Yes</button>
+								<button class="btn btn-primary btn-md" id="no" >No</button>
+							</div>
+						</div>
+
+					</div>
+			
 				
 		<div class="padding" style="overflow: auto; height: auto;">
 					<tr>
@@ -159,7 +198,7 @@
 						echo "<td>";
 						echo '
 							<form action="" method="post">
-								<select name="role" required class="drop_down" >
+								<select name="role" required class="drop_down" onchange="changeRole(this.value,'.$staff['staff_role'].','.$staff['staff_id'].')">
 									<option value="0" ';
 									if ($staff['staff_role']==0){
 										echo'selected';
@@ -170,25 +209,16 @@
 									} 
 									 echo '>Admin</option></select><input type="hidden" name="id" value="'.$staff['staff_id'].'">';
 						echo "</td>";
-						echo '<td><input type="submit" class="btn btn-default btn-sm" id="" name="save_staff_role" value="Save"></form>';
+						echo '<td><input type="submit" class="btn btn-default btn-sm" id="saveBtn'.$staff['staff_id'].'" name="save_staff_role" value="Save" disabled></form>';
 						echo "</td>";
 						echo "<td>";
 						echo 
-							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="R_U_Sure(' . $staff['staff_id'] . ',\''.$staff['staff_name'].')" class="btn btn-default btn-sm">
-							<input type="hidden" name="id" value="'.$staff['staff_id'].'"></form>';
+							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="removeStaff(' . $staff['staff_id'] . ',\''.$staff['staff_name'].'\')" class="btn btn-default btn-sm" id="revBtn">
+							<input type="hidden" name="id" value="'.$staff['staff_id'].'"><input type="submit" name="del" style="display:none"></form>';
 								echo '</td></tr>';
 								}
 								?>
 								</table>
-								<script>
-									function R_U_Sure(id,name) {
-										var x = confirm("Are you sure to remove " + name + " " + "?");
-										if (x) {
-											document.getElementById("delete" + id).submit();
-										}
-									}
-									
-								</script>
 			  			
 						</div>
 						
@@ -257,6 +287,8 @@
 						</div>
 					</div>
 		</div>
+	
+		
 		
             <?php include_once '_footer.php'; ?>
             
@@ -272,36 +304,30 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
 	<script>
-		window.onload = function () {
-	var chart1 = document.getElementById("line-chart").getContext("2d");
-	window.myLine = new Chart(chart1).Line(lineChartData, {
-	responsive: true,
-	scaleLineColor: "rgba(0,0,0,.2)",
-	scaleGridLineColor: "rgba(0,0,0,.05)",
-	scaleFontColor: "#c5c7cc"
-	});
-};
-		$(document).ready(function() {
-			document.getElementById('click').click();
-		});
-	
 	
 		var form = document.getElementById("form");
 		var box = document.getElementById("popupBox");
 		var boxBody = document.getElementById("popupcontent");
 		var span = document.getElementsByClassName("close")[0];
-		var btn = document.getElementById("addBtn");
+		var addBtn = document.getElementById("addBtn");
 		var cancel = document.getElementById("close");
 		var ok = document.getElementById("ok");
 		var formBody = document.getElementById("form-body");
+		var revBtn = document.getElementById("revBtn");
+		var yes = document.getElementById("yes");
+		var no = document.getElementById("no");
+		var confirBox = document.getElementById("confirmBox");
+		var confirmContent = document.getElementById("confirmContent");
 
 		
-		btn.onclick = function() {
+		addBtn.onclick = function() {
 			form.style.display = "block";
 
-			
-
 		}
+		
+		
+		
+		
 			
 			cancel.onclick = function() {
 				formBody.style.animationName="animateback"; 
@@ -346,6 +372,20 @@
 				
 
 		}
+		
+		no.onclick = function() {
+				confirmContent.style.animationName="animateback"; 
+				confirmContent.style.animationDuration="0.4s";
+				confirmContent.style.webkitAnimationDuration="0.4s";
+				confirmContent.style.webkitAnimationName="animateback";	
+				setTimeout(function() {
+					confirBox.style.display = "none";
+					confirmContent.style.animationName= confirmContent.style.webkitAnimationDuration = confirmContent.style.webkitAnimationName = confirmContent.style.animationDuration = "";
+					
+				}, 400);
+				
+
+		}
 			
 		window.onclick = function(event) {
 			if (event.target == box) {
@@ -362,7 +402,32 @@
 				
 			}
 		}
+		//disabling save button
 		
+			function changeRole(changedVal, oriVal, id) {
+				if (oriVal!= changedVal) {
+					document.getElementById('saveBtn'+ id).disabled = false;
+				} else {
+					document.getElementById('saveBtn'+ id).disabled = true;
+				}				
+			}
+		//delete confirmation
+	
+			function removeStaff(id, name){
+				document.getElementById("confirmBox").style.display = "block";
+				document.getElementById("confirmMessage").innerHTML = "Are you sure to remove " + name + " ?";
+				return id;
+					
+			}
+	
+	
+		//DELETE STAFF
+			function delStaff(id){
+				
+				alert(id);
+				document.getElementById("delete" + this.x ).submit();
+			}
+
 		
 	</script>
 	

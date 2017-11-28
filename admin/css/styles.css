@@ -1069,7 +1069,7 @@ table td .staff_td {
     border: 0;
 }
 
-#form, #popupBox {
+#form, #popupBox, #confirmBox {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 2; /* Sit on top */
