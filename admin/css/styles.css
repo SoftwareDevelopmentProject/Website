@@ -1158,6 +1158,7 @@ table td .staff_td {
 }
 .drop_down {
 	width: 80%;
+	height: 25px;
 	border: 0px;
 	border-radius: 4px;
 	background-color: rgba(114,194,255,1.00);

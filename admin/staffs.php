@@ -170,11 +170,11 @@
 									} 
 									 echo '>Admin</option></select><input type="hidden" name="id" value="'.$staff['staff_id'].'">';
 						echo "</td>";
-						echo '<td><input type="submit" class="btn btn-default" id="" name="save_staff_role" value="Save"></form>';
+						echo '<td><input type="submit" class="btn btn-default btn-sm" id="" name="save_staff_role" value="Save"></form>';
 						echo "</td>";
 						echo "<td>";
 						echo 
-							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="R_U_Sure(' . $staff['staff_id'] . ',\''.$staff['staff_name'].')" class="btn btn-default">
+							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="R_U_Sure(' . $staff['staff_id'] . ',\''.$staff['staff_name'].')" class="btn btn-default btn-sm">
 							<input type="hidden" name="id" value="'.$staff['staff_id'].'"></form>';
 								echo '</td></tr>';
 								}
