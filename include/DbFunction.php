@@ -166,21 +166,21 @@ class DbFunction {
         return $staffs;
     }
 	
-	    public function add_staff($name, $email, $phone, $address, $role){
+	  public function add_staff($name, $email, $phone, $address, $role){
         $db = new DbConnect();
         $con = $db->connect();
         $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$phone',$phone,'$address',$role)");
         return $new_staff;
     }
-	  public function del_staff($id){
+	public function del_staff($id){
         $db = new DbConnect();
         $con = $db->connect();
         $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
-        return $ter_staff;
+        return $tar_staff;
     }
+
         	
 	 
-    
 
 }
 
