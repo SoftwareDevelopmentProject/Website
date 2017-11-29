@@ -14,6 +14,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body>
  <?php include"_header.php";?>
+
        <div class="login">
          <div class="wrap">
      	    <div class="rsidebar span_1_of_left">
@@ -153,18 +154,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      	    <div class="clear"></div>
 	       </div>
 			    <div class="box1">
-				   <div class="col_1_of_single1 span_1_of_single1"><a href="single.php">
+                    <?php $books = $db->getBooks();
+                    foreach ($books as $book)   {
+                        echo '<div class="col_1_of_single1 span_1_of_single1"><a href="single.php">
 				     <div class="view1 view-fifth1">
+                       
 				  	  <div class="top_box">
-					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
+					  	<h3 class="m_1">  '.$book['book_title'].'</h3>
 					  	<p class="m_2">Lorem ipsum</p>
 				         <div class="grid_img">
-						   <div class="css3"><img src="images/pic11.jpg" alt=""/></div>
+						   <div class="css3"><img src="images/Products/'.$book['book_id'].'"  alt="" style ="height:300px;width: 230px;"/></div>
 					          <div class="mask1">
 	                       		<div class="info">Quick View</div>
 			                  </div>
 	                    </div>
-                       <div class="price">£480</div>
+                       <div class="price"> '.$book['book_price'].'</div>
 					   </div>
 					    </div>
 					   <span class="rating1">
@@ -179,7 +183,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				        <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
 				        <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
 		        	  (45)
-		    	      </span>
+                      </span>
 						 <ul class="list2">
 						  <li>
 						  	<img src="images/plus.png" alt=""/>
@@ -194,7 +198,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						   </li>
 					     </ul>
 			    	    <div class="clear"></div>
-			    	</a></div>
+			    	</a></div>';
+
+                    }
+                    ?>
+
 				    <div class="col_1_of_single1 span_1_of_single1"><a href="single.php">
 				     <div class="view1 view-fifth1">
 				  	  <div class="top_box">

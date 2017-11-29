@@ -6,6 +6,17 @@ include_once 'DbConnect.php';
 
 class DbFunction {
 
+    public function getGenre(){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $genres = array();
+        $result_genre =mysqli_query($con,"SELECT genre.genre_name from genre");
+        while ($genre = mysqli_fetch_array($result_genre,MYSQLI_ASSOC)){
+            array_push($genres, $genre);
+        }
+        return $genres;
+    }
+
     public function getBooks() {
         $db = new DbConnect();
         $con = $db->connect();

@@ -136,6 +136,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				   <div class="box1">
 				    <div class="col_1_of_3 span_1_of_3"><a href="single.php">
 				     <div class="view view-fifth">
+
 				  	  <div class="top_box">
 					  	<h3 class="m_1">Lorem ipsum dolor sit amet</h3>
 					  	<p class="m_2">Lorem ipsum</p>

@@ -36,36 +36,24 @@
                             <div class="h_nav">
                                 <h4>popular</h4>
                                 <ul>
-                                    <li><a href="shop.php">new arrivals</a></li>
-                                    <li><a href="shop.php">men</a></li>
-                                    <li><a href="shop.php">women</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">login</a></li>
+                                    <?php
+                                    $genres = $db->getGenre();
+                                    foreach($genres as $genre){
+                                        echo '<li><a href="shop.php">'.$genre['genre_name'].'</a></li>';
+
+
+                                    }
+                                    ?>
+
                                 </ul>
                             </div>
                             <div class="h_nav">
-                                <h4 class="top">New Arrivals</h4>
-                                <ul>
-                                    <li><a href="shop.php">new arrivals</a></li>
-                                    <li><a href="shop.php">men</a></li>
-                                    <li><a href="shop.php">women</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                </ul>
+
                             </div>
                         </div>
                         <div class="col1">
                             <div class="h_nav">
-                                <h4>style zone</h4>
-                                <ul>
-                                    <li><a href="shop.php">men</a></li>
-                                    <li><a href="shop.php">women</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">brands</a></li>
-                                </ul>
+
                             </div>
                         </div>
                         <div class="col1"></div>
