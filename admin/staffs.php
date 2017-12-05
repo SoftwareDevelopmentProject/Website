@@ -28,6 +28,7 @@
 			$result=$db->add_staff($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['role']);
 
 			if ($result) {
+				include_once('_email.php');
 				echo '<div id="popupBox" style="display:block">
 						<div id="popupcontent" class="popup-content">
 							<div class="popup-header">
@@ -35,7 +36,7 @@
 								<h2>Successful</h2>
 							</div>
 							<div class="popup-body">
-								Add staff successful !
+								Add staff successful and email is sent!
 
 							</div>
 							<div class="popup-footer">
@@ -109,10 +110,10 @@
 						<div id="popupcontent" class="popup-content">
 							<div class="popup-header">
 								<span class="close">&times;</span>
-								<h2>Delected</h2>
+								<h2>Deleted</h2>
 							</div>
 							<div class="popup-body">
-								Change role successful !
+								Staff is removed !
 
 							</div>
 							<div class="popup-footer">
@@ -154,7 +155,7 @@
 
 							</div>
 							<div class="popup-footer">
-								<button class="btn btn-primary btn-md" id="yes" onclick="delStaff()">Yes</button>
+								<button class="btn btn-primary btn-md" id="yes" >Yes</button>
 								<button class="btn btn-primary btn-md" id="no" >No</button>
 							</div>
 						</div>
@@ -214,7 +215,7 @@
 						echo "<td>";
 						echo 
 							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="removeStaff(' . $staff['staff_id'] . ',\''.$staff['staff_name'].'\')" class="btn btn-default btn-sm" id="revBtn">
-							<input type="hidden" name="id" value="'.$staff['staff_id'].'"><input type="submit" name="del" style="display:none"></form>';
+							<input type="hidden" name="id" value="'.$staff['staff_id'].'"><input type="submit" name="del" style="display:none" id="sub'. $staff['staff_id'] .'"></form>';
 								echo '</td></tr>';
 								}
 								?>
@@ -245,7 +246,8 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="email">E-mail</label>
 									<div class="col-md-9">
-										<input id="email" name="email" type="email" placeholder="Email" class="form-control" required>
+										<input id="email" name="email" type="email" placeholder="Email" class="form-control" onChange="checkEmail(this.value)" required>
+										<p class="err" id="email_err"></p>
 									</div>
 							</div>
 
@@ -253,7 +255,8 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="phone">Phone</label>
 									<div class="col-md-9">
-										<input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" required>
+										<input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" onchange="phoneValid()" required>
+										<p class="err" id="err">Only number allowed ! e.g. 0123456789 </p>
 									</div>
 							</div>
 							<!-- address body -->
@@ -416,7 +419,8 @@
 			function removeStaff(id, name){
 				document.getElementById("confirmBox").style.display = "block";
 				document.getElementById("confirmMessage").innerHTML = "Are you sure to remove " + name + " ?";
-				return id;
+				document.getElementById("yes").onclick="delStaff(id)";
+				$("#yes").attr("onclick", "delStaff(" + id + ")");
 					
 			}
 	
@@ -424,10 +428,52 @@
 		//DELETE STAFF
 			function delStaff(id){
 				
-				alert(id);
-				document.getElementById("delete" + this.x ).submit();
+				$("#sub" + id).click();
 			}
-
+		//registration form data validity
+			function phoneValid(){
+				var text = document.getElementById("phone").value;
+				if (/^\d+$/.test(text)) {
+					document.getElementById("err").style.display = "none";
+					document.getElementById("phone").style.borderColor = "";
+					document.getElementById("staffSub").disabled = false;
+					
+					
+				}else{
+					document.getElementById("err").style.display = "block";
+					document.getElementById("phone").style.borderColor = "red";
+					document.getElementById("staffSub").disabled = true;
+					
+			
+				}
+			}
+		//check email 
+			function checkEmail(str) {
+				  var xhttp;    
+				  if (str == "") {
+					  document.getElementById("email_err").style.display = "none";
+					  document.getElementById("email").style.borderColor = "";
+					  document.getElementById("staffSub").disabled = false;
+					  
+					return;
+				  }
+				  xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("email_err").innerHTML = this.responseText;
+						document.getElementById("email_err").style.display = "block";
+						if (this.response!=''){
+							document.getElementById("email").style.borderColor = "red";
+							document.getElementById("staffSub").disabled = true;
+						} else {
+							
+						}
+						
+					}
+				  };
+				  xhttp.open("GET", "checkemail.php?email="+str, true);
+				  xhttp.send();
+				}
 		
 	</script>
 	

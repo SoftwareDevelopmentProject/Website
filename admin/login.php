@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lumino - Login</title>
+	<title>Login</title>
     <?php include_once '_head.php'; ?>
 </head>
 <body>
@@ -13,7 +13,8 @@
 					<form role="form">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" autofocus="">
+								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" onChange="emailValid(this.value)" autofocus>
+								<p class="err" id="loginEmail">Incorrect email format ! E.g xxx@gmail.com</p>
 							</div>
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="password" type="password" value="">
@@ -22,8 +23,11 @@
 								<label>
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
+								<a href="index.php" style="float: right">Forgot password?</a>
 							</div>
-							<a href="index.php" class="btn btn-primary">Login</a></fieldset>
+							<a href="index.php" class="btn btn-primary">Login</a>
+							
+						</fieldset>
 					</form>
 				</div>
 			</div>
@@ -33,5 +37,19 @@
 
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+		function emailValid(email){
+			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+			if (emailReg.test(email)==false){
+  				document.getElementById("loginEmail").style.display = "block";
+				document.getElementById("email").style.borderColor = "red";
+			}else {
+				document.getElementById("loginEmail").style.display = "none";
+				document.getElementById("email").style.borderColor = "";
+				}
+			}
+		
+	
+	</script>
 </body>
 </html>
