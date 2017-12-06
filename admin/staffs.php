@@ -21,128 +21,120 @@
 				<li><a href="staffs.php">Staff</a></li>
 			</ol>
 		</div><!--/.row-->
-		<?php
-		
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (isset($_POST['add_staff_submit_btn'])){
-			$result=$db->add_staff($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['role']);
+		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+		    <?php
+            if (isset($_POST['add_staff_submit_btn'])):
+                $result=$db->add_staff($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['role']);
+                if ($result) :
+                    new Email($_POST['email'], "Account created", "Welcome to join as Technology Park's Bookstore staff. Your staff account is just been created and your password would be your phone number.");
+            ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Successful</h2>
+                        </div>
+                        <div class="popup-body">
+                            Add staff successful and email is sent!
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-primary btn-md" id="ok" >OK</button>
+                        </div>
+                    </div>
+                </div>
+			    <?php else: ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Error</h2>
+                        </div>
+                        <div class="popup-body" style="background-color:red">
+                            No change is made !
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
+                        </div>
+                    </div>
+                </div>
+			    <?php endif; ?>
+		    <?php
+            elseif (isset($_POST['save_staff_role'])):
+            $result= $db->up_staff($_POST['id'],$_POST['role']);
+                if ($result):
+            ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Successful</h2>
+                        </div>
+                        <div class="popup-body">
+                            Change role successful !
 
-			if ($result) {
-				include_once('_email.php');
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Successful</h2>
-							</div>
-							<div class="popup-body">
-								Add staff successful and email is sent!
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-primary btn-md" id="ok" >OK</button>
+                        </div>
+                    </div>
+                </div>
+                <?php else: ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Error</h2>
+                        </div>
+                        <div class="popup-body" style="background-color:red">
+                            No change is made!
 
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-primary btn-md" id="ok" >OK</button>
-							</div>
-						</div>
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
+                        </div>
+                    </div>
 
-					</div>';
-			} else {
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Error</h2>
-							</div>
-							<div class="popup-body" style="background-color:red">
-								No change is made !
+                </div>
+                <?php endif;?>
+            <?php
+            elseif (isset($_POST['del'])):
+            $result= $db->del_staff($_POST['id']);
+                if ($result):
+            ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Deleted</h2>
+                        </div>
+                        <div class="popup-body">
+                            Staff is removed !
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-primary btn-md" id="ok" >OK</button>
+                        </div>
+                    </div>
+                </div>
+			<?php else: ?>
+				<div id="popupBox" style="display:block">
+                    <div id="popupcontent" class="popup-content">
+                        <div class="popup-header">
+                            <span class="close">&times;</span>
+                            <h2>Error</h2>
+                        </div>
+                        <div class="popup-body" style="background-color:red">
+                            No change is made!
 
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
-							</div>
-						</div>
+                        </div>
+                        <div class="popup-footer">
+                            <button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
+                        </div>
+                    </div>
+                </div>
+			<?php endif; ?>
+    	<?php endif;?>
+    <?php endif; ?>
 
-					</div>';
-			}
-		}else if (isset($_POST['save_staff_role'])){
-			  $result= $db->up_staff($_POST['id'],$_POST['role']);
-			if ($result) {
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Successful</h2>
-							</div>
-							<div class="popup-body">
-								Change role successful !
-
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-primary btn-md" id="ok" >OK</button>
-							</div>
-						</div>
-
-					</div>';
-			}else{
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Error</h2>
-							</div>
-							<div class="popup-body" style="background-color:red">
-								No change is made!
-
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
-							</div>
-						</div>
-
-					</div>';
-				
-				
-			}
-			
-		}else if (isset($_POST['del'])){
-			  $result= $db->del_staff($_POST['id']);
-			if ($result) {
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Deleted</h2>
-							</div>
-							<div class="popup-body">
-								Staff is removed !
-
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-primary btn-md" id="ok" >OK</button>
-							</div>
-						</div>
-
-					</div>';
-			}else{
-				echo '<div id="popupBox" style="display:block">
-						<div id="popupcontent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Error</h2>
-							</div>
-							<div class="popup-body" style="background-color:red">
-								No change is made!
-
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-danger btn-md" id="ok" style="background-color:red" >OK</button>
-							</div>
-						</div>
-
-					</div>';
-			}
-    	}
-	}
-?>
 	<!--confirmation message--//-->
 		<div id="confirmBox">
 						<div id="confirmContent" class="popup-content">
@@ -180,48 +172,35 @@
 				</tr>
 				<?php
 					$staffs = $db->get_staff();
-					foreach($staffs as $staff) {
-					
-				
-						echo "<tr>";
-						echo "<td>";
-						echo $staff['staff_name'];
-						echo "</td>";
-						echo "<td>";
-						echo $staff['staff_phone'];
-						echo "</td>";
-						echo "<td>";
-						echo " <a href=\"mailto:" .$staff['staff_email']. "\">". $staff['staff_email'] . "</a> ";
-						echo "</td>";
-						echo "<td>";
-						echo $staff['staff_address'];
-						echo "</td>";
-						echo "<td>";
-						echo '
-							<form action="" method="post">
-								<select name="role" required class="drop_down" onchange="changeRole(this.value,'.$staff['staff_role'].','.$staff['staff_id'].')">
-									<option value="0" ';
-									if ($staff['staff_role']==0){
-										echo'selected';
-									}
-									echo '>Staff</option><option value="1"';
-									if ($staff['staff_role']==1){ 
-										echo'selected';
-									} 
-									 echo '>Admin</option></select><input type="hidden" name="id" value="'.$staff['staff_id'].'">';
-						echo "</td>";
-						echo '<td><input type="submit" class="btn btn-default btn-sm" id="saveBtn'.$staff['staff_id'].'" name="save_staff_role" value="Save" disabled></form>';
-						echo "</td>";
-						echo "<td>";
-						echo 
-							'<form id="delete' . $staff['staff_id'] . '" action="" method="post"><input type="button" value="Delete" onClick="removeStaff(' . $staff['staff_id'] . ',\''.$staff['staff_name'].'\')" class="btn btn-default btn-sm" id="revBtn">
-							<input type="hidden" name="id" value="'.$staff['staff_id'].'"><input type="submit" name="del" style="display:none" id="sub'. $staff['staff_id'] .'"></form>';
-								echo '</td></tr>';
-								}
-								?>
-								</table>
+					foreach($staffs as $staff) :
+                ?>
+					<tr>
+						<td><?php echo $staff['staff_name']; ?></td>
+                        <td><?php echo $staff['staff_phone']; ?></td>
+                        <td><a href="mailto:<?php echo $staff['staff_email']; ?>"><?php echo $staff['staff_email']; ?></a></td>
+                        <td><?php echo $staff['staff_address']; ?></td>
+						<td>
+						    <form method="post">
+								<select name="role" required class="drop_down" onchange="changeRole(this.value, <?php echo $staff['staff_role']; ?>, <?php echo $staff['staff_id']; ?>);">
+									<option value="0" <?php if ($staff['staff_role']==0){ echo 'selected'; } ?>>Staff</option>
+                                    <option value="1" <?php if ($staff['staff_role']==1){ echo 'selected'; } ?>>Admin</option>
+                                </select>
+                                <input type="hidden" name="id" value="<?php echo $staff['staff_id']; ?>">
+                        </td>
+						<td>
+                            <input type="submit" class="btn btn-default btn-sm" id="saveBtn'.$staff['staff_id'].'" name="save_staff_role" value="Save" disabled>
+						</td>
+						<td>
+							<form id="delete<?php echo $staff['staff_id']; ?>" method="post">
+                                <input type="button" value="Delete" onClick="removeStaff(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" id="revBtn">
+							    <input type="hidden" name="id" value="<?php echo $staff['staff_id']; ?>">
+                                <input type="submit" name="del" style="display:none" id="sub<?php echo $staff['staff_id']; ?>"></form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+            </table>
 			  			
-						</div>
+        </div>
 						
 		
 				<!-- Form  -->
@@ -246,7 +225,7 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="email">E-mail</label>
 									<div class="col-md-9">
-										<input id="email" name="email" type="email" placeholder="Email" class="form-control" onChange="checkEmail(this.value)" required>
+										<input id="email" name="email" type="email" placeholder="Email" class="form-control" onkeyup="checkEmail(this.value)" required>
 										<p class="err" id="email_err"></p>
 									</div>
 							</div>
@@ -294,8 +273,7 @@
 		
 		
             <?php include_once '_footer.php'; ?>
-            
-		</div><!--/.row-->
+
 	</div>	<!--/.main-->
 	
 	<script src="js/jquery-1.11.1.min.js"></script>
@@ -316,8 +294,6 @@
 		var cancel = document.getElementById("close");
 		var ok = document.getElementById("ok");
 		var formBody = document.getElementById("form-body");
-		var revBtn = document.getElementById("revBtn");
-		var yes = document.getElementById("yes");
 		var no = document.getElementById("no");
 		var confirBox = document.getElementById("confirmBox");
 		var confirmContent = document.getElementById("confirmContent");
@@ -462,13 +438,11 @@
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("email_err").innerHTML = this.responseText;
 						document.getElementById("email_err").style.display = "block";
+                        document.getElementById("email").style.borderColor = "";
 						if (this.response!=''){
 							document.getElementById("email").style.borderColor = "red";
 							document.getElementById("staffSub").disabled = true;
-						} else {
-							
 						}
-						
 					}
 				  };
 				  xhttp.open("GET", "checkemail.php?email="+str, true);
