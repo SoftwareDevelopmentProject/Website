@@ -142,29 +142,6 @@ class DbFunction {
         return LOGIN_USER_NOT_FOUND;
     }
 
-    public function login($email, $password) {
-        $db = new DbConnect();
-        $con = $db->connect();
-        $result = mysqli_query($con, "SELECT * FROM member WHERE member_email = '$email'");
-        if (mysqli_num_rows($result) > 0) {
-            $member = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            if ($this->isAccountLocked($member['member_id'])) {
-                return LOGIN_ACCOUNT_LOCKED;
-            }
-            if (password_verify($password, $member['member_password'])) {
-                $_SESSION['user'] = $email;
-                $_SESSION['password'] = md5($member['member_password']);
-                $this->recordLoginAttempt($member['member_id'], true);
-                return LOGIN_SUCCESS;
-            }
-            $this->recordLoginAttempt($member['member_id'], false);
-            return LOGIN_PASSWORD_INCORRECT;
-        }
-        return LOGIN_USER_NOT_FOUND;
-    }
-
-
-
     public function recordLoginAttempt($member_id, $status) {
         $db = new DbConnect();
         $con = $db->connect();
