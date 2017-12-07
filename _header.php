@@ -194,7 +194,7 @@
                     </div>
                 </div>
             </li>
-            <li><a class="color6" href="#">About</a>
+            <li><a class="color6" href="about.php">About</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
@@ -296,7 +296,7 @@
                     </div>
                 </div>
             </li>
-            <li><a class="color7" href="#">Contact</a>
+            <li><a class="color7" href="contact.php">Contact</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
