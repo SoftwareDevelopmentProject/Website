@@ -163,7 +163,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					  	<h3 class="m_1">  '.$book['book_title'].'</h3>
 					  	<p class="m_2">Lorem ipsum</p>
 				         <div class="grid_img">
-						   <div class="css3"><img src="images/Products/'.$book['book_id'].'"  alt="" style ="height:300px;width: 230px;"/></div>
+						   <div class="css3"><img src="images/Products/'.$book['book_id'].'"  alt=""/></div>
 					          <div class="mask1">
 	                       		<div class="info">Quick View</div>
 			                  </div>
