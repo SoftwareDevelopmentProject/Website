@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include_once '../include/DbFunction.php';
+    include_once '../include/Email.php';
 	$db = new DbFunction;
 ?>
 

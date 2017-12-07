@@ -1,9 +1,6 @@
 <?php
 
 include_once 'DbConnect.php';
-include_once 'Email.php';
-
-
 
 class DbFunction {
 
