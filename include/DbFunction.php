@@ -180,11 +180,19 @@ class DbFunction {
         }
         return $staffs;
     }
+	 public function get_staff_inf($email) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email=$email");
+		$staff_inf = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $code = md5($staff_inf['staff_password']).$staff_inf['staff_id'];
+    }
 	
 	  public function add_staff($name, $email, $phone, $address, $role){
         $db = new DbConnect();
         $con = $db->connect();
-        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$phone',$phone,'$address',$role)");
+		$ps = md5($phone);
+        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$ps',$phone,'$address',$role)");
         return $new_staff;
     }
 	public function del_staff($id){

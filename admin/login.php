@@ -13,7 +13,7 @@
 					<form role="form">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" onChange="emailValid(this.value)" autofocus>
+								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" onKeyUp="emailValid(this.value)" autofocus>
 								<p class="err" id="loginEmail">Incorrect email format ! E.g xxx@gmail.com</p>
 							</div>
 							<div class="form-group">
@@ -23,7 +23,7 @@
 								<label>
 									<input name="remember" type="checkbox" value="Remember Me">Remember Me
 								</label>
-								<a href="index.php" style="float: right">Forgot password?</a>
+								<a href="forgot_password.php" style="float: right">Forgot password?</a>
 							</div>
 							<a href="index.php" class="btn btn-primary">Login</a>
 							
@@ -43,6 +43,7 @@
 			if (emailReg.test(email)==false){
   				document.getElementById("loginEmail").style.display = "block";
 				document.getElementById("email").style.borderColor = "red";
+				
 			}else {
 				document.getElementById("loginEmail").style.display = "none";
 				document.getElementById("email").style.borderColor = "";
