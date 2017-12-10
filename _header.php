@@ -1,3 +1,17 @@
+<?php
+
+include_once 'include/DbFunction.php';
+$db = new DbFunction();
+
+if(isset($_SESSION['user'])) {
+  $user = $db->getmember();
+} else {
+    $user = null;
+
+
+}
+
+?>
 
 
 <div class="header-top">
@@ -9,8 +23,14 @@
             <ul>
                 <li class="active"><a href="register.php">Sign up & Save</a></li>
                 <li><a href="shop.php">Store Locator</a></li>
+<?php if($user == null) :?>
                 <li><a href="login.php">My Account</a></li>
+                <?php else:?>
+                <?php echo $user['member_name'];?>
+                <li><a href="logout.php">Logout</a></li>
+                <?php endif;?>
                 <li><a href="checkout.php">CheckOut</a></li>
+
             </ul>
         </div>
         <ul class="icon2 sub-icon2 profile_img">

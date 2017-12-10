@@ -149,6 +149,14 @@ class DbFunction {
         return LOGIN_USER_NOT_FOUND;
     }
 
+    public function getmember(){
+    $db = new DbConnect();
+    $con =$db->connect();
+    $result_member =mysqli_query($con, "SELECT member_name from member where member_id = '$_SESSION[user]'");
+        $user = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
+        return $user;
+    }
+
     public function recordLoginAttempt($member_id, $status) {
         $db = new DbConnect();
         $con = $db->connect();

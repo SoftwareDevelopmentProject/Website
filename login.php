@@ -5,8 +5,10 @@
     <?php include "_head.php"; ?>
 </head>
 <?php
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db->login($_POST['email'], $_POST['password']);
+
 }
 ?>
 <body>
