@@ -15,7 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
        <div class="login">
          <div class="wrap">
     	  <h1>About Us</h1>
-
+            <img src="images/bookstore.jpg" alt="" width="500px"/>
     	   </div>
 		</div>
        <?php include "_footer.php"?>

@@ -21,15 +21,16 @@ if(isset($_SESSION['user'])) {
         </div>
         <div class="cssmenu">
             <ul>
-                <li class="active"><a href="register.php">Sign up & Save</a></li>
-                <li><a href="shop.php">Store Locator</a></li>
+
+
 <?php if($user == null) :?>
-                <li><a href="login.php">My Account</a></li>
+    <li class="active"><a href="login.php">Sign up & Login</a></li>
                 <?php else:?>
-                <?php echo $user['member_name'];?>
-                <li><a href="logout.php">Logout</a></li>
+    <li class="active"><a href="#"><?php echo $user['member_name'];?></a></li>
+
+    <li class="active"><a href="logout.php">Logout</a></li>
                 <?php endif;?>
-                <li><a href="checkout.php">CheckOut</a></li>
+
 
             </ul>
         </div>
