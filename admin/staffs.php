@@ -171,7 +171,7 @@
 					<td width="5%" class="staff_td"></td>
 				</tr>
 				<?php
-					$staffs = $db->get_staff();
+					$staffs = $db->getAllStaff();
 					foreach($staffs as $staff) :
                 ?>
 					<tr>
@@ -188,7 +188,7 @@
                                 <input type="hidden" name="id" value="<?php echo $staff['staff_id']; ?>">
                         </td>
 						<td>
-                            <input type="submit" class="btn btn-default btn-sm" id="saveBtn'.$staff['staff_id'].'" name="save_staff_role" value="Save" disabled>
+                            <input type="submit" class="btn btn-default btn-sm" id="saveBtn<?php echo $staff['staff_id'];?>" name="save_staff_role" value="Save" disabled>
 						</td>
 						<td>
 							<form id="delete<?php echo $staff['staff_id']; ?>" method="post">
@@ -234,7 +234,7 @@
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="phone">Phone</label>
 									<div class="col-md-9">
-										<input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" onchange="phoneValid()" required>
+										<input id="phone" name="phone" type="text" placeholder="Phone" class="form-control" onKeyUp="phoneValid()" required>
 										<p class="err" id="err">Only number allowed ! e.g. 0123456789 </p>
 									</div>
 							</div>

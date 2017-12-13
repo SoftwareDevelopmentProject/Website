@@ -8,7 +8,7 @@
 	<?php /*if ($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
 		    <?php
             if (isset($_POST['sendCode'])):
-				 $code= $db->generate_code($_POST['email']);
+				 $code= $db->generateCode($_POST['email']);
                   new Email($_POST['email'], "Recovery Code", $code);
 				  */
             ?>

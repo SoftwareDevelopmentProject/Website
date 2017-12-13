@@ -172,6 +172,29 @@ class DbFunction {
         $result = mysqli_query($con, "SELECT * FROM login_attempt WHERE member_id = $member_id AND status = 0 AND created_at > NOW() - INTERVAL " . SECURITY_MAX_LOGIN_TIMEOUT . " MINUTE");
         return !(mysqli_num_rows($result) < SECURITY_MAX_LOGIN_ATTEMPT);
     }
+	
+	 public function loginStaff($email, $password) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email = '$email'");
+        if (mysqli_num_rows($result) > 0) {
+            $staff = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            if (md5($password) == $staff['staff_password']) {
+                $_SESSION['staff'] = $staff['staff_id'];
+                $_SESSION['staff_password'] = md5($staff['staff_password']);
+                return LOGIN_SUCCESS;
+            }
+            return LOGIN_PASSWORD_INCORRECT;
+        }
+        return LOGIN_USER_NOT_FOUND;
+    }
+	    public function getStaff(){
+    $db = new DbConnect();
+    $con =$db->connect();
+    $result_staff =mysqli_query($con, "SELECT * from staff where staff_id = '$_SESSION[staff]'");
+        $user = mysqli_fetch_array($result_staff,MYSQLI_ASSOC);
+        return $user;
+    }
 
 	public function up_staff($id, $role){
         $db = new DbConnect();
@@ -180,7 +203,7 @@ class DbFunction {
         return mysqli_affected_rows($con) > 0;
 	}
 	
-	 public function get_staff() {
+	 public function getAllStaff() {
         $db = new DbConnect();
         $con = $db->connect();
 		$staffs= array();
@@ -190,7 +213,7 @@ class DbFunction {
         }
         return $staffs;
     }
-	 public function get_staff_inf($email) {
+	 public function generateCode($email) {
         $db = new DbConnect();
         $con = $db->connect();
         $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email=$email");
