@@ -26,7 +26,12 @@ if(isset($_SESSION['user'])) {
 <?php if($user == null) :?>
     <li class="active"><a href="login.php">Sign up & Login</a></li>
                 <?php else:?>
-    <li class="active"><a href="#"><?php echo $user['member_name'];?></a></li>
+    <li class="dropbox"><a href="#"><?php echo $user['member_name'];?></a>
+        <div class="dropdown-content">
+            <a href="#">My Account</a>
+            <a href="#">My Order</a>
+            <a href="#">Reward &amp; Point</a>
+        </div></li>
 
     <li class="active"><a href="logout.php">Logout</a></li>
                 <?php endif;?>

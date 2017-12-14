@@ -3122,4 +3122,31 @@ p.cart a:hover {
 		font-size: 0.85em;
 		margin-bottom: 1%;
 	}
-}								
+}
+.dropbox {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content{
+	list-style:none;
+	margin:0;
+	padding:0;
+	display:none;
+	position:absolute;
+	z-index:999;
+	width:160px;
+	border:solid 1px rgba(0,0,0,0.1);
+	background:#fff
+}
+.dropdown-content a{
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+
+}
+.dropdown-content a:hover {background-color: #f1f1f1}
+.dropbox:hover .dropdown-content {
+	display: block;
+}
