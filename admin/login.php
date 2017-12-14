@@ -5,7 +5,6 @@
     <?php include_once '_head.php'; 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$result = $db->loginStaff($_POST['email'], $_POST['password']);
-			echo $result;
 			switch ($result) {
 				case LOGIN_SUCCESS:
 					header('location:index.php');		
@@ -27,7 +26,8 @@
 								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ;?>" onKeyUp="emailValid(this.value)" autofocus>
 								<p class="err" id="loginEmail" 
 								<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-									if($db->loginStaff($_POST['email'], $_POST['password'])== 'LOGIN_USER_NOT_FOUND'){
+									$loginResult=$db->loginStaff($_POST['email'], $_POST['password']);
+									if($loginResult== LOGIN_USER_NOT_FOUND){
 										echo 'style="display:block"';
 									}
 							
@@ -38,7 +38,7 @@
 							<div class="form-group">
 								<input class="form-control" placeholder="Password" name="password" type="password" value="">
 								<p class="err" id="loginEmail" <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-									if($db->loginStaff($_POST['email'], $_POST['password'])== 'LOGIN_PASSWORD_INCORRECT'){
+									if($loginResult== LOGIN_PASSWORD_INCORRECT){
 										echo 'style="display:block"';
 									}
 							
@@ -65,20 +65,6 @@
 
 <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script>
-		function emailValid(email){
-			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-			if (emailReg.test(email)==false){
-  				document.getElementById("loginEmail").style.display = "block";
-				document.getElementById("email").style.borderColor = "red";
-				
-			}else {
-				document.getElementById("loginEmail").style.display = "none";
-				document.getElementById("email").style.borderColor = "";
-				}
-			}
-		
 	
-	</script>
 </body>
 </html>

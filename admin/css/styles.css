@@ -1169,3 +1169,6 @@ table td .staff_td {
 	display: none;
 	color: red;
 }
+.hide {
+	display: none;
+}

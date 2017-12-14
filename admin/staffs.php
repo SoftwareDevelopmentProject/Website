@@ -411,13 +411,11 @@
 				var text = document.getElementById("phone").value;
 				if (/^\d+$/.test(text)) {
 					document.getElementById("err").style.display = "none";
-					document.getElementById("phone").style.borderColor = "";
 					document.getElementById("staffSub").disabled = false;
 					
 					
 				}else{
 					document.getElementById("err").style.display = "block";
-					document.getElementById("phone").style.borderColor = "red";
 					document.getElementById("staffSub").disabled = true;
 					
 			
@@ -438,9 +436,7 @@
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("email_err").innerHTML = this.responseText;
 						document.getElementById("email_err").style.display = "block";
-                        document.getElementById("email").style.borderColor = "";
 						if (this.response!=''){
-							document.getElementById("email").style.borderColor = "red";
 							document.getElementById("staffSub").disabled = true;
 						}
 					}
