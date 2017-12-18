@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>Reset Password</title>
 </head>
 <body>
@@ -25,11 +26,13 @@
 					<form role="form" method="post">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" onKeyUp="checkEmail(this.value)" autofocus>
-								<p class="err" id="email_err"></p>								
+								<input class="form-control" placeholder="Password" name="password" type="password" id="ps" autofocus>
+								<input class="form-control" placeholder="Confirm Password" name="confirmPassword" type="password" id="cps" style="margin-top: 2em" onKeyUp="checkPs(this.value)">
+								<p class="err" id="ps_err">Password does not match !</p>	
+								<input type="hidden" name="code" value="<?php if (isset($_POST['code']) && $_POST['code']==$realCode) echo $_POST['code'];?>"						
 							</div>
-							<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="emailSub" value="Send Recovery Code" name="sendCode">
-							<a href="index.php" class="btn btn-default" style="float: right">Back</a>
+							<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="psSub" value="Subit" name="setNewPs">
+							<a href="index.php" class="btn btn-default" style="float: right">Cancel</a>
 							
 							
 						</fieldset>
@@ -38,6 +41,18 @@
 			</div>
 		</div><!-- /.col-->
 	</div><!-- /.row -->
+		<script>
+		function checkPs(ps2){
+			if($('#ps').val()!=ps2){
+				$('#ps_err').css('display','block');
+				$('#psSub').attr('disabled','disabled');
+			}else{
+				$('#ps_err').css('display','none');
+				$('#psSub').removeAttr('disabled');
+			}
+			
+		}
 	
+	</script>
 </body>
 </html>
