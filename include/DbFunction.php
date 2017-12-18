@@ -188,12 +188,25 @@ class DbFunction {
         }
         return LOGIN_USER_NOT_FOUND;
     }
-	    public function getStaff(){
+	
+	//staff set new password 
+	    public function resetPsStaff($code,$ps){
     $db = new DbConnect();
     $con =$db->connect();
-    $result_staff =mysqli_query($con, "SELECT * from staff where staff_id = '$_SESSION[staff]'");
-        $user = mysqli_fetch_array($result_staff,MYSQLI_ASSOC);
-        return $user;
+	$id = substr($code,32);
+	$ps = md5($ps);	
+    $result_staff =mysqli_query($con, "UPDATE staff SET staff_password = '$ps' WHERE staff_id = $id ");
+        return mysqli_affected_rows($con) > 0;
+ 
+    }
+	
+	
+	
+	    public function getStaff(){
+			$db = new DbConnect();
+			$con =$db->connect();
+			$result_staff =mysqli_query($con, "SELECT * from staff where staff_id = '$_SESSION[staff]'");
+			return mysqli_fetch_assoc($result_staff);
     }
 
 	public function up_staff($id, $role){

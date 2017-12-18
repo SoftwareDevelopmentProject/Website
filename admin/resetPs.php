@@ -18,6 +18,11 @@
 	<title>Reset Password</title>
 </head>
 <body>
+<?php if(($_SERVER['REQUEST_METHOD']=='POST') && isset($_POST['setNewPs'],$_POST['password'],$_POST['confirmPassword']) && ($_POST['password']==$_POST['confirmPassword'])){
+	$result= $db->resetPsStaff($_POST['code'],$_POST['password']);
+	header('location:login.php');
+}
+	?>
 <div class="row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
@@ -26,9 +31,9 @@
 					<form role="form" method="post">
 						<fieldset>
 							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password" id="ps" autofocus>
+								<input class="form-control" placeholder="Password" name="password" type="password" id="ps" autofocus required>
 								<input class="form-control" placeholder="Confirm Password" name="confirmPassword" type="password" id="cps" style="margin-top: 2em" onKeyUp="checkPs(this.value)">
-								<p class="err" id="ps_err">Password does not match !</p>	
+								<p class="err" id="ps_err" required>Password does not match !</p>	
 								<input type="hidden" name="code" value="<?php if (isset($_POST['code']) && $_POST['code']==$realCode) echo $_POST['code'];?>"						
 							</div>
 							<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="psSub" value="Subit" name="setNewPs">
