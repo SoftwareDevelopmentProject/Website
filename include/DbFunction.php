@@ -158,6 +158,12 @@ class DbFunction {
         $user = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $user;
     }
+    public function myaccount($m_name,$m_email,$m_phone,$m_country){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $result_account =mysqli_query($con,"UPDATE member set member_name =$m_name, member_email=$m_email, member_phone =$m_phone, member_country =$m_country ");
+        return $result_account;
+    }
 
     public function recordLoginAttempt($member_id, $status) {
         $db = new DbConnect();

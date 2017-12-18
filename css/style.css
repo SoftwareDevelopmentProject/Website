@@ -358,6 +358,7 @@ h3.m_1{
 	font-size:0.9em;
 	text-transform:uppercase;
 	font-weight:500;
+	height:40px;
 
 }
 p.m_2{
@@ -1709,9 +1710,7 @@ p.cart a:hover {
 	text-decoration: none;
 }
 /*--shop--*/
-.col_1_of_single1:first-child {
-	margin-left: 0;
-}
+
 .span_1_of_single1{
 	width: 30.7%;
 	border: 1px solid #DDD;
