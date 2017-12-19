@@ -12,7 +12,7 @@
 
     <?php include_once '_header.php'; 
 	if($user['staff_role']<1){
-		header('location:index.php');
+	    echo '<script>window.location.replace("index.php", "_self")</script>';
 	}
 	?>
 		
