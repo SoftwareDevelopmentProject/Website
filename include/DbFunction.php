@@ -46,6 +46,22 @@ class DbFunction {
         }
         return $books;
     }
+	//add new book
+	public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $new_book = mysqli_query($con, "INSERT INTO book (book_title, book_author, genre_id, book_description, book_publisher, book_years, book_price, book_stock) VALUES ('$title', '$author', $genre,'$description','$publisher',$years, $price ,$amount)");
+        return $new_book;
+	}
+	//delete book
+	public function delBook($id){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $target_book = mysqli_query($con, "DELETE FROM book WHERE book_id=$id");
+        return $target_book;
+    }
+	
+	
 	
 	public function checkEmailExists($email) {
 		$db = new DbConnect();
