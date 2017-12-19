@@ -23,6 +23,7 @@
 					<form role="form" method="post">
 						<fieldset>
 							<div class="form-group">
+							<?php if(isset($GLOBALS['success'])){echo 'You have successfully reset your password';$GLOBALS['success']=null;}?>
 								<input class="form-control" placeholder="E-mail" name="email" type="email" id="email" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ;?>" onKeyUp="emailValid(this.value)" autofocus>
 								<p class="err" id="loginEmail" 
 								<?php if ($_SERVER['REQUEST_METHOD'] == 'POST') {

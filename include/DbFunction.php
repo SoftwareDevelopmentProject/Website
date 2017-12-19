@@ -60,6 +60,13 @@ class DbFunction {
         $target_book = mysqli_query($con, "DELETE FROM book WHERE book_id=$id");
         return $target_book;
     }
+	//update Book 
+	public function updateBook($id,$title, $author, $genre, $description, $publisher, $years, $price, $amount){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id");
+        return $result;
+	}
 	
 	
 	
@@ -107,7 +114,7 @@ class DbFunction {
         $db = new DbConnect();
         $con = $db->connect();
         $books = array();
-        $result_book = mysqli_query($con, "SELECT book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id AND book.book_id = $book_id");
+        $result_book = mysqli_query($con, "SELECT book.genre_id, book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id AND book.book_id = $book_id");
         $result_feedback = mysqli_query($con, "SELECT * FROM feedback");
         $result_feedback_rating = mysqli_query($con, "SELECT * FROM feedback_rating");
         while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {

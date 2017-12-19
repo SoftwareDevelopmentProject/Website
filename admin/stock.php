@@ -26,6 +26,8 @@
 	
 			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['del'])){
 				$db->delBook($_POST['id']);
+			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_book_submit_btn'])) {
+				$db->updateBook($_POST['id'],$_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount']);
 			}
 		
 		
@@ -54,7 +56,7 @@
 					<tr>
 				<td colspan="7" align="right" height="50px" >
 				<button style="float: right; margin: 10px 10px;" id="addBtn" class="btn btn-primary btn-md">Add New Book</button>
-				<button style="float: right; margin: 10px 0;" class="btn btn-primary btn-md">Place book request</button>
+				<button style="float: right; margin: 10px 0;" class="btn btn-primary btn-md" onClick="window.open('requestBook.php','_self')">Place book request</button>
 				
 				</td>
 				
@@ -64,6 +66,7 @@
 					<td width="" >Book ID</td>
 					<td width="">Book Title</td>
 					<td width="">Author</td>
+					<td width="">Description</td>
 					<td width="">Genre</td>
 					<td width="">Publisher</td>
 					<td width="">Years</td>
@@ -81,13 +84,15 @@
 						<td><?php echo $book['book_id']; ?></td>
 						<td><?php echo $book['book_title']; ?></td>
                         <td><?php echo $book['book_author']; ?></td>
+                        <td><?php echo $book['book_description']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>
                         <td><?php echo $book['book_publisher']; ?></td>
 						<td><?php echo $book['book_years']; ?></td>
 						<td><?php echo $book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
-						<td>
-                            <button class="btn btn-default btn-sm" id="editBtn<?php echo $book['book_id'];?>" name="" value="Edit"></button>
+						<td><form id="edit<?php echo $book['book_id'];?>" method="post" action="editBook.php">
+                            <input type="submit" class="btn btn-default btn-sm" id="editBtn<?php echo $book['book_id'];?>" name="edit<?php echo $book['book_id'];?>" value="Edit">
+                            <input type="hidden" value="<?php echo $book['book_id'];?>" name="id"></form>
 						</td>
 						<td>
 							<form id="delete<?php echo $book['book_id']; ?>" method="post">
@@ -105,9 +110,6 @@
 				<!-- Form  -->
 	<div id=filter>					
 	<div class="panel panel-default" id="form">
-		<div class="panel-heading" style="display: none">
-			Add Book
-			<span class="pull-right close">&times;</span></div>
 				<div class="panel-body" id="form-body">
 					<form class="form-horizontal" method="post" id="realForm" >
 						<fieldset style="padding: 20px; padding-right: 60px;">

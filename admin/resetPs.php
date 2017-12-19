@@ -20,6 +20,7 @@
 <body>
 <?php if(($_SERVER['REQUEST_METHOD']=='POST') && isset($_POST['setNewPs'],$_POST['password'],$_POST['confirmPassword']) && ($_POST['password']==$_POST['confirmPassword'])){
 	$result= $db->resetPsStaff($_POST['code'],$_POST['password']);
+	$GLOBALS['success']=1;
 	header('location:login.php');
 }
 	?>
