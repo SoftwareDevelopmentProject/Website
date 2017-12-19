@@ -253,8 +253,38 @@ class DbFunction {
         $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
         return $tar_staff;
     }
-	 
 
+
+
+    // Cart (cookie)
+
+    public function initializeCookie() {
+        $cart = array();
+        setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
+    }
+
+    public function addCart($product_id, $quantity) {
+        $product = array();
+        $product['product_id'] = $product_id;
+        $product['quantity'] = $quantity;
+        $cart = json_decode($_COOKIE['cart']);
+        array_push($cart, $product);
+        setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
+    }
+
+    public function deleteCart($product_id) {
+        $cart = json_decode($_COOKIE['cart']);
+        foreach ($cart as $key => $c) {
+            if ($c['product_id'] == $product_id) {
+                unset($cart[$key]);
+            }
+        }
+        setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
+    }
+
+    public function clearCart() {
+        $this->initializeCookie();
+    }
 }
 
 
