@@ -184,7 +184,7 @@ class DbFunction {
     public function myaccount($m_name,$m_email,$m_phone,$m_country){
         $db = new DbConnect();
         $con =$db->connect();
-        $result_account =mysqli_query($con,"UPDATE member set member_name =$m_name, member_email=$m_email, member_phone =$m_phone, member_country =$m_country ");
+        $result_account =mysqli_query($con,"UPDATE member set member_name = '$m_name', member_email='$m_email', member_phone ='$m_phone', member_country ='$m_country' ");
         return $result_account;
     }
 

@@ -28,7 +28,7 @@ if(isset($_SESSION['user'])) {
                 <?php else:?>
     <li class="dropbox"><a href="#"><?php echo $user['member_name'];?></a>
         <div class="dropdown-content">
-            <a href="#">My Account</a>
+            <a href="m-acc.php">My Account</a>
             <a href="#">My Order</a>
             <a href="#">Reward &amp; Point</a>
         </div></li>
