@@ -154,7 +154,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      	    <div class="clear"></div>
 	       </div>
 			    <div class="box1">
-                    <?php $books = $db->getBooks();
+                    <?php
+
+                    $books = $db->getBooks();
                     foreach ($books as $book)   {
                         echo '<div class="col_1_of_single1 span_1_of_single1"><a href="single.php">
 				     <div class="view1 view-fifth1">

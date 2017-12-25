@@ -65,7 +65,7 @@ if(isset($_SESSION['user'])) {
                                     <?php
                                     $genres = $db->getGenre();
                                     foreach($genres as $genre){
-                                        echo '<li><a href="shop.php">'.$genre['genre_name'].'</a></li>';
+                                        echo '<li><a href="shop/'.$genre['genre_name'].'">'.$genre['genre_name'].'</a></li>';
 
 
                                     }

@@ -8,6 +8,7 @@
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $db->login($_POST['email'], $_POST['password']);
+    header("location: index.php");
 
 }
 ?>

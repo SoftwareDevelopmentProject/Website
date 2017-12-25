@@ -142,7 +142,14 @@ class DbFunction {
         }
         return $books;
     }
+    public function getBooksGenre($genre_name){
+	    $db = new DbConnect();
+	    $con =$db->connect();
+	    $books = array();
+	    $result=mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where genre_name = '$genre_name'");
 
+
+        }
     public function register($name, $email, $password, $phone, $address, $country){
         $db = new DbConnect();
         $con = $db->connect();
