@@ -142,14 +142,31 @@ class DbFunction {
         }
         return $books;
     }
-    public function getBooksGenre($genre_name){
+    /*show book by genre in shop page*/
+    public function getBookGenre($genres_name){
 	    $db = new DbConnect();
 	    $con =$db->connect();
 	    $books = array();
-	    $result=mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where genre_name = '$genre_name'");
-
+	    $genre_name = mysqli_real_escape_string($con,$genres_name);
+	    $result = mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where genre_name = '$genre_name'");
+	    while($book = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+	        array_push($books,$book);
 
         }
+            return $books;
+
+        }
+        /* show a book in single page */
+    public function getBookid($book_id){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $books_id = mysqli_real_escape_string($con,$book_id);
+        $result = mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where book.book_id = '$books_id'");
+        $books = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $books;
+
+    }
+    /*member register*/
     public function register($name, $email, $password, $phone, $address, $country){
         $db = new DbConnect();
         $con = $db->connect();
@@ -157,7 +174,7 @@ class DbFunction {
         $register = mysqli_query($con, "INSERT INTO member(member_name, member_email, member_password, member_phone, member_address, member_country) VALUES ('$name','$email', '$password','$phone','$address','$country')");
         return $register;
     }
-
+    /*member login*/
     public function login($email, $password) {
         $db = new DbConnect();
         $con = $db->connect();
@@ -181,6 +198,7 @@ class DbFunction {
     /*
      Member functions
      */
+    /*get member information*/
     public function getmember(){
     $db = new DbConnect();
     $con =$db->connect();
@@ -188,6 +206,7 @@ class DbFunction {
         $user = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $user;
     }
+    /*member update own account*/
     public function myaccount($m_name,$m_email,$m_phone,$m_country){
         $db = new DbConnect();
         $con =$db->connect();

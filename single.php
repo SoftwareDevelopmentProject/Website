@@ -7,6 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
+    <base href="../">
 <title>Free Adidas Website Template | Single :: w3layouts</title>
     <?php include "_head.php";?>
 
@@ -52,52 +53,25 @@ License URL: http://creativecommons.org/licenses/by/3.0/
          <div class="wrap">
 		<div class="cont span_2_of_3" style ="width:100%;">
 			  <div class="labout span_1_of_a1">
-				<!-- start product_slider -->
-				     <ul id="etalage">
-							<li>
-								<a href="optionallink.php">
-									<img class="etalage_thumb_image" src="images/t1.jpg" />
-									<img class="etalage_source_image" src="images/t2.jpg" />
-								</a>
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t2.jpg" />
-								<img class="etalage_source_image" src="images/t2.jpg" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t3.jpg" />
-								<img class="etalage_source_image" src="images/t3.jpg" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t4.jpg" />
-								<img class="etalage_source_image" src="images/t4.jpg" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t5.jpg" />
-								<img class="etalage_source_image" src="images/t5.jpg" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t6.jpg" />
-								<img class="etalage_source_image" src="images/t6.jpg" />
-							</li>
-							<li>
-								<img class="etalage_thumb_image" src="images/t1.jpg" />
-								<img class="etalage_source_image" src="images/t1.jpg" />
-							</li>
-						</ul>
+
+                  <?php
+                  if (isset($_GET['book_id'])) {
+                      $books = $db->getBookid($_GET['book_id']);}?>
+                      <img src="images/Products/<?php echo $books['book_id']; ?>.jpg" alt="" style="width:330px"/>
 					
 					
-			<!-- end product_slider -->
+		
 			</div>
 			<div class="cont1 span_2_of_a1">
-				<h3 class="m_3">Lorem ipsum dolor sit amet</h3>
-				
+
+                        <h3 class="m_3"><?php echo $books['book_title']; ?></h3>
+
 				<div class="price_single">
-							  <span class="reducedfrom">$66.00</span>
-							  <span class="actual">$12.00</span><a href="#">click for offer</a>
+							  <span class="">&dollar;<?php echo $books['book_price']; ?></span>
+
 							</div>
 				<ul class="options">
-					<h4 class="m_9">Select a Size</h4>
+					<h4 class="m_9">Select Quantity</h4>
 					<li><a href="#">6</a></li>
 					<li><a href="#">7</a></li>
 					<li><a href="#">8</a></li>
@@ -106,20 +80,20 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</ul>
 				<div class="btn_form">
 				   <form>
-					 <input type="submit" value="buy now" title="">
+					 <input type="submit" value="Add to Cart" title="">
 				  </form>
 				</div>
 				<ul class="add-to-links">
-    			   <li><img src="images/wish.png" alt=""/><a href="#">Add to wishlist</a></li>
+    			   <li><img src="images/wish.png" alt=""/>book stock left: <?php echo $books['book_stock']; ?></li>
     			</ul>
-    			<p class="m_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-    			
-                <div class="social_single">	
-				   <ul>	
+    			<p class="m_desc" style="text-align: justify;"><?php echo $books['book_description']; ?></p>
+
+                <div class="social_single">
+				   <ul>
 					  <li class="fb"><a href="#"><span> </span></a></li>
 					  <li class="tw"><a href="#"><span> </span></a></li>
 					  <li class="g_plus"><a href="#"><span> </span></a></li>
-					  <li class="rss"><a href="#"><span> </span></a></li>		
+					  <li class="rss"><a href="#"><span> </span></a></li>
 				   </ul>
 			    </div>
 			</div>
@@ -181,8 +155,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script>
 	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 	 <div class="toogle">
-     	<h3 class="m_3">Product Details</h3>
-     	<p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+     	<h3 class="m_3">Book Details</h3>
+     	<table>
+     	<tr><td width="200">Author:</td>
+     	    <td><?php echo $books['book_author']; ?></td>
+     	</tr>
+     	<tr>
+     		<td width="200">Publisher:</td>
+     	    <td><?php echo $books['book_publisher']; ?></td>
+     	</tr>
+     	<tr>
+     		<td width="200">Year of publish:</td>
+     	    <td><?php echo $books['book_years']; ?></td>
+     	</tr>
+     	
+     	
+    </table>
+     
      </div>					
 	 <div class="toogle">
      	<h3 class="m_3">Product Reviews</h3>
@@ -192,6 +181,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      <div class="clear"></div>
 	 </div>
      </div>
+
 	  <?php include "_footer.php";?>
 </body>
 </html>

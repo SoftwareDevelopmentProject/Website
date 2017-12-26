@@ -55,7 +55,7 @@ if(isset($_SESSION['user'])) {
         <!-- start header menu -->
         <ul class="megamenu skyblue">
             <li><a class="color1" href="index.php">Home</a></li>
-            <li class="grid"><a class="color2" href="shop.php">Shop</a>
+            <li class="grid"><a class="color2" href="#">Shop</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
@@ -65,7 +65,7 @@ if(isset($_SESSION['user'])) {
                                     <?php
                                     $genres = $db->getGenre();
                                     foreach($genres as $genre){
-                                        echo '<li><a href="shop/'.$genre['genre_name'].'">'.$genre['genre_name'].'</a></li>';
+                                        echo '<li><a href="shops/'.$genre['genre_name'].'">'.$genre['genre_name'].'</a></li>';
 
 
                                     }
