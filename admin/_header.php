@@ -117,18 +117,20 @@ if(isset($_SESSION['staff'])) {
          <li <?php if (isset($page) && ($page == 'stock')) echo 'class="active"'; ?>><a href="stock.php"><em class="fa fa-list-ol">&nbsp;</em> Stock</a></li>
         <li <?php if (isset($page) && ($page == 'staff')) echo 'class="active"'; ?>><a href="staffs.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
         <?php endif; ?>
+        <?php if ($user['staff_role'] > 1) : ?>
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-line-chart">&nbsp;</em> Report <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
             </a>
-            <ul class="children collapse" id="sub-item-1">
+            <ul class="children <?php if (isset($page) && (($page == 'member report')||($page == 'sale report'))){ echo '';}else{ echo 'collapse';} ?>" id="sub-item-1">
                 <li><a class="" href="#">
                         <span class="fa fa-book">&nbsp;</span> Sale report
                     </a></li>
-                <li><a class="" href="#">
+                <li <?php if (isset($page) && ($page == 'member report')) echo 'class="active"'; ?>><a class="" href="memberReport.php">
                         <span class="fa fa-book">&nbsp;</span> Member report
                     </a></li>
             </ul>
         </li>
+        <?php endif ;?>
         <li <?php if (isset($page) && ($page == 'member')) echo 'class="active"'; ?>><a href="member.php"><em class="fa fa-address-card">&nbsp;</em> Member</a></li>
         <li <?php if (isset($page) && ($page == 'widgets')) echo 'class="active"'; ?>><a href="widgets.php"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
         <li <?php if (isset($page) && ($page == 'charts')) echo 'class="active"'; ?>><a href="charts.php"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
