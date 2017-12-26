@@ -54,7 +54,7 @@
 				
 		<div class="padding" style="overflow: auto; height: auto;">
 					<tr>
-				<td colspan="7" align="right" height="50px" >
+				<td colspan="11" align="right" height="50px" >
 				<button style="float: right; margin: 10px 10px;" id="addBtn" class="btn btn-primary btn-md">Add New Book</button>
 				<button style="float: right; margin: 10px 0;" class="btn btn-primary btn-md" onClick="window.open('requestBook.php','_self')">Place book request</button>
 				

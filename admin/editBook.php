@@ -29,7 +29,7 @@ if(isset($_POST['id'])){
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="booktitle">Book Title</label>
 									<div class="col-md-9">
-										<input id="bookTitle" name="bookTitle" type="text" placeholder="Book Title" class="form-control" value="<?php echo $book['book_title'];?>" onKeyUp="checkChanges()" required>
+										<input id="bookTitle" name="bookTitle" type="text" placeholder="Book Title" class="form-control" value="<?php echo $book['book_title'];?>" onChange="checkChanges()" required>
 									</div>
 							</div>
 
@@ -37,7 +37,7 @@ if(isset($_POST['id'])){
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="author">Author</label>
 									<div class="col-md-9">
-										<input id="author" name="author" type="text" placeholder="Author" class="form-control" value="<?php echo $book['book_author'];?>" onKeyUp="checkChanges()" required>
+										<input id="author" name="author" type="text" placeholder="Author" class="form-control" value="<?php echo $book['book_author'];?>" onChange="checkChanges()" required>
 									</div>
 							</div>
 
@@ -45,7 +45,7 @@ if(isset($_POST['id'])){
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="publisher">Publisher</label>
 									<div class="col-md-9">
-										<input id="publisher" name="publisher" type="text" placeholder="Publisher" class="form-control" value="<?php echo $book['book_publisher'];?>" onKeyUp="checkChanges()" required>
+										<input id="publisher" name="publisher" type="text" placeholder="Publisher" class="form-control" value="<?php echo $book['book_publisher'];?>" onChange="checkChanges()" required>
 									</div>
 							</div>
 							<!-- years body -->
@@ -84,14 +84,14 @@ if(isset($_POST['id'])){
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="description">Description</label>
 									<div class="col-md-9">
-										<textarea class="form-control" id="des" name="description" placeholder="Description" rows="5" onKeyUp="checkChanges()"><?php echo $book['book_description'];?></textarea>
+										<textarea class="form-control" id="des" name="description" placeholder="Description" rows="5" onChange="checkChanges()"><?php echo $book['book_description'];?></textarea>
 									</div>
 							</div>
 							<!-- amount body -->
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="amount">Amount</label>
 									<div class="col-md-9">
-										<input id="amount" name="amount" type="text" placeholder="Amount" class="form-control" onKeyUp="amountValid(this.value)" onChange="checkChanges()" value="<?php echo $book['book_stock'];?>" required>
+										<input id="amount" name="amount" type="text" placeholder="Amount" class="form-control" onChange="amountValid(this.value)" onChange="checkChanges()" value="<?php echo $book['book_stock'];?>" required>
 										<p class="err" id="err">Only number allowed !</p>
 									</div>
 							</div>
@@ -100,7 +100,7 @@ if(isset($_POST['id'])){
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="price">Price (RM) </label>
 									<div class="col-md-9">
-										<input id="price" name="price" type="text" placeholder="Price(RM)" class="form-control" onKeyUp="priceValid(this.value)" value="<?php echo $book['book_price'];?>" onChange="checkChanges()" required>
+										<input id="price" name="price" type="text" placeholder="Price(RM)" class="form-control" onChange="priceValid(this.value)" value="<?php echo $book['book_price'];?>" onChange="checkChanges()" required>
 										<p class="err" id="priceErr">Invalid currency</p>
 									</div>
 							</div>
@@ -109,7 +109,7 @@ if(isset($_POST['id'])){
 							<!-- Form actions -->
 							<div class="form-group">
 								<div class="col-md-12 widget-right" style="text-align: center">
-									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="editBookSub" value="Submit" name="edit_book_submit_btn">
+									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="editBookSub" value="Submit" name="edit_book_submit_btn" disabled>
 									<input type="hidden" value="<?php echo $_POST['id'];?>" name="id">
 									<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
 									<input type="button" class="btn btn-default" value="Back" id="close" onClick="window.open('stock.php','_self')" />
@@ -121,7 +121,7 @@ if(isset($_POST['id'])){
 		<script>
 			function checkChanges(){
 			var $new=$('#title').val() + $('#author').val() + $('#publisher').val() + $('#year').val() + $('#genre').val() + $('#des').val() + $('#amount').val() + $('#price').val();
-			var $old=<?php echo $book['book_title'].$book['book_author'].$book['book_publisher'].$book['book_years'].$book['genre_name'].$book['book_description'].$book['book_stock'].$book['book_price'];?>;
+			var $old='<?php echo $book['book_title'].$book['book_author'].$book['book_publisher'].$book['book_years'].$book['genre_name'].$book['book_description'].$book['book_stock'].$book['book_price'];?>';
 				if($new==$old){
 					$('#editBookSub').attr('disabled','disabled');
 				}else{
