@@ -55,26 +55,25 @@
     <div class="footer-bottom">
         <div class="wrap">
             <div class="section group">
-                <div class="col_1_of_3 span_1_of_3 no-border">
-                    <h3 class="m_9">Shop</h3>
-                    <ul class="sub_list">
-                        <h4 class="m_10">Men</h4>
-                        <li><a href="shop.php">Men's Shoes</a></li>
-                        <li><a href="shop.php">Men's Clothing</a></li>
-                        <li><a href="shop.php">Men's Accessories</a></li>
-                    </ul>
 
-                </div>
-                <div class="col_1_of_3 span_1_of_3 no-border">
-                    <h3 class="m_9">Shop</h3>
-                    <ul class="sub_list">
-                        <h4 class="m_10">Men</h4>
-                        <li><a href="shop.php">Men's Shoes</a></li>
-                        <li><a href="shop.php">Men's Clothing</a></li>
-                        <li><a href="shop.php">Men's Accessories</a></li>
-                    </ul>
+                        <?php
+                        $genres = $db->getGenre();
+                        foreach ($genres as $key => $genre) {
 
-                </div>
+                            if (((($key) % 5 == 0 || $key == 0) && $key != 4) ) {
+                                echo '<div class="col_1_of_3 span_1_of_3 no-border"><ul class="sub_list">';
+                                //echo 'start' . $key . ' ';
+                            }
+                            echo '<li><a href="shops/' . $genre['genre_name'] . '">' . $genre['genre_name'] . '</a></li>';
+                            //echo $key;
+                            if (($key) % 5  == 4 ) {
+                                echo '</ul></div>';
+                                //echo 'end' . $key . ' ';
+                            }
+                        }
+
+                  ?>
+
 
 
                 <div class="clear"></div>

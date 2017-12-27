@@ -166,7 +166,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                        
 				  	  <div class="top_box">
 					  	<h3 class="m_1">  ' . $book['book_title'] . '</h3>
-					  	<p class="m_2">Lorem ipsum</p>
 				         <div class="grid_img">
 						   <div class="css3"><img src="images/Products/' . $book['book_id'] . '"  alt=""/></div>
 					          <div class="mask1">
