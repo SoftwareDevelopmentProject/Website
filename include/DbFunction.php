@@ -142,7 +142,39 @@ class DbFunction {
         }
         return $books;
     }
-    /**/
+    /*show limit 5 books*/
+    public function get5book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books5 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 5");
+        while($book5 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books5,$book5);
+        }
+        return $books5;
+    }
+    /*show limit 6 books*/
+    public function get6book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books6 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 6");
+        while($book6 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books6,$book6);
+        }
+        return $books6;
+    }
+    /*show limit 9 books*/
+    public function get9book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books9 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 9");
+        while($book9 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books9,$book9);
+        }
+        return $books9;
+    }
     /*show book by genre in shop page*/
     public function getBookGenre($genres_name){
 	    $db = new DbConnect();
