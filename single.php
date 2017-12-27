@@ -12,7 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php include "_head.php";?>
 
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
-
+<script type="text/javascript" src ="js/quantity.js"></script>
 <script type="text/javascript" src="js/jquery.jscrollpane.min.js"></script>
 		<script type="text/javascript" id="sourcecode">
 			$(function()
@@ -62,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					
 		
 			</div>
-			<div class="cont1 span_2_of_a1">
+			<li class="cont1 span_2_of_a1">
 
                         <h3 class="m_3"><?php echo $books['book_title']; ?></h3>
 
@@ -72,10 +72,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</div>
 				<ul class="options">
 					<h4 class="m_9">Select Quantity</h4>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
+
+                        <li class="quantity" onclick="quantityCtrl(0)">-</li>
+                    <li id="qty" class="quantity number">1</li>
+                        <li class="quantity" onclick="quantityCtrl(1)">+</li>
+
+
 					<div class="clear"></div>
 				</ul>
 				<div class="btn_form">
@@ -101,11 +103,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      
      
          <ul id="flexiselDemo3">
-			<li><img src="images/pic11.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic10.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic9.jpg" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic8.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-			<li><img src="images/pic7.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+             <?php $books5 = $db->get5book();
+             foreach($books5 as $book5){
+                 echo'	<li><img src="images/Products/'.$book5['book_id'].'.jpg" /><div class="grid-flex"><a href="#">'.$book5['book_title'].'</a><p>&dollar;'.$book5['book_price'].'</p></div></li>';
+             }?>
+
 		 </ul>
 	    <script type="text/javascript">
 		 $(window).load(function() {
