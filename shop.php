@@ -7,6 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
+    <base href="../" />
 <title>Free Adidas Website Template | Shop :: w3layouts</title>
 
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
@@ -155,22 +156,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	       </div>
 			    <div class="box1">
                     <?php
+                    if(isset($_GET['genre'])) {
+                        $books = $db->getBookGenre($_GET['genre']);
 
-                    $books = $db->getBooks();
-                    foreach ($books as $book)   {
-                        echo '<div class="col_1_of_single1 span_1_of_single1"><a href="single.php">
+
+                        foreach ($books as $book) {
+                            echo '<div class="col_1_of_single1 span_1_of_single1"><a href="singles/'.$book['book_id'].'">
 				     <div class="view1 view-fifth1">
                        
 				  	  <div class="top_box">
-					  	<h3 class="m_1">  '.$book['book_title'].'</h3>
-					  	<p class="m_2">Lorem ipsum</p>
+					  	<h3 class="m_1">  ' . $book['book_title'] . '</h3>
 				         <div class="grid_img">
-						   <div class="css3"><img src="images/Products/'.$book['book_id'].'"  alt=""/></div>
+						   <div class="css3"><img src="images/Products/' . $book['book_id'] . '"  alt=""/></div>
 					          <div class="mask1">
 	                       		<div class="info">Quick View</div>
 			                  </div>
 	                    </div>
-                       <div class="price">&dollar; '.$book['book_price'].'</div>
+                       <div class="price">&dollar; ' . $book['book_price'] . '</div>
 					   </div>
 					    </div>
 					   <span class="rating1">
@@ -202,6 +204,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			    	    <div class="clear"></div>
 			    	</a></div>';
 
+                        }
                     }
                     ?>
 

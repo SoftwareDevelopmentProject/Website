@@ -142,14 +142,64 @@ class DbFunction {
         }
         return $books;
     }
-    public function getBooksGenre($genre_name){
+    /*show limit 5 books*/
+    public function get5book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books5 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 5");
+        while($book5 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books5,$book5);
+        }
+        return $books5;
+    }
+    /*show limit 6 books*/
+    public function get6book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books6 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 6");
+        while($book6 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books6,$book6);
+        }
+        return $books6;
+    }
+    /*show limit 9 books*/
+    public function get9book(){
+        $db =new DbConnect();
+        $con =$db->connect();
+        $books9 = array();
+        $result_book = mysqli_query($con,"SELECT * from book order by book_id DESC LIMIT 9");
+        while($book9 = mysqli_fetch_array($result_book,MYSQLI_ASSOC)){
+            array_push($books9,$book9);
+        }
+        return $books9;
+    }
+    /*show book by genre in shop page*/
+    public function getBookGenre($genres_name){
 	    $db = new DbConnect();
 	    $con =$db->connect();
 	    $books = array();
-	    $result=mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where genre_name = '$genre_name'");
-
+	    $genre_name = mysqli_real_escape_string($con,$genres_name);
+	    $result = mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where genre_name = '$genre_name'");
+	    while($book = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+	        array_push($books,$book);
 
         }
+            return $books;
+
+        }
+        /* show a book in single page */
+    public function getBookid($book_id){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $books_id = mysqli_real_escape_string($con,$book_id);
+        $result = mysqli_query($con,"SELECT * from book inner join genre ON book.genre_id = genre.genre_id where book.book_id = '$books_id'");
+        $books = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $books;
+
+    }
+    /*member register*/
     public function register($name, $email, $password, $phone, $address, $country){
         $db = new DbConnect();
         $con = $db->connect();
@@ -157,7 +207,7 @@ class DbFunction {
         $register = mysqli_query($con, "INSERT INTO member(member_name, member_email, member_password, member_phone, member_address, member_country) VALUES ('$name','$email', '$password','$phone','$address','$country')");
         return $register;
     }
-
+    /*member login*/
     public function login($email, $password) {
         $db = new DbConnect();
         $con = $db->connect();
@@ -181,6 +231,7 @@ class DbFunction {
     /*
      Member functions
      */
+    /*get member information*/
     public function getmember(){
     $db = new DbConnect();
     $con =$db->connect();
@@ -188,6 +239,7 @@ class DbFunction {
         $user = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $user;
     }
+    /*member update own account*/
     public function myaccount($m_name,$m_email,$m_phone,$m_country){
         $db = new DbConnect();
         $con =$db->connect();
@@ -273,8 +325,8 @@ class DbFunction {
 	  public function add_staff($name, $email, $phone, $address, $role){
         $db = new DbConnect();
         $con = $db->connect();
-		$ps = md5($phone); //passwprd = staff 's phone
-        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$ps',$phone,'$address',$role)"); 
+		$ps = md5($phone);
+        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$ps',$phone,'$address',$role)");
         return $new_staff;
     }
 	public function del_staff($id){
@@ -315,6 +367,7 @@ class DbFunction {
     public function clearCart() {
         $this->initializeCookie();
     }
+<<<<<<< HEAD
 	
 	//report fuction
 	public function reportGetMember(){
@@ -347,6 +400,15 @@ class DbFunction {
 			array_push($year, $result['year']);
 		}
         return $year;
+=======
+    //report fuction
+    public function reportGetMember(){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $result_member =mysqli_query($con, "SELECT * FROM member");
+        $result = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
+        return $result;
+>>>>>>> 8b40022c974a43137ecd736e08d2455f954f56e5
     }
 	
 	public function getMemberMonth($year){
@@ -370,6 +432,7 @@ class DbFunction {
         return $date;
 	}
 }
+
 
 
 ?>

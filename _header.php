@@ -55,7 +55,7 @@ if(isset($_SESSION['user'])) {
         <!-- start header menu -->
         <ul class="megamenu skyblue">
             <li><a class="color1" href="index.php">Home</a></li>
-            <li class="grid"><a class="color2" href="shop.php">Shop</a>
+            <li class="grid"><a class="color2" href="#">Shop</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">
@@ -65,7 +65,7 @@ if(isset($_SESSION['user'])) {
                                     <?php
                                     $genres = $db->getGenre();
                                     foreach($genres as $genre){
-                                        echo '<li><a href="shop/'.$genre['genre_name'].'">'.$genre['genre_name'].'</a></li>';
+                                        echo '<li><a href="shops/'.$genre['genre_name'].'">'.$genre['genre_name'].'</a></li>';
 
 
                                     }
@@ -86,92 +86,12 @@ if(isset($_SESSION['user'])) {
                         <div class="col1"></div>
                         <div class="col1"></div>
                         <div class="col1"></div>
-                        <img src="images/nav_img.jpg" alt=""/>
+                        <img src="images/Products/8.jpg" alt=""/>
                     </div>
                 </div>
             </li>
             <li class="active grid"><a class="color4" href="new-arrival.php">New Arrivals</a>
-                <div class="megapanel">
-                    <div class="row">
-                        <div class="col1">
-                            <div class="h_nav">
-                                <h4>shop</h4>
-                                <ul>
-                                    <li><a href="shop.php">new arrivals</a></li>
-                                    <li><a href="shop.php">men</a></li>
-                                    <li><a href="shop.php">women</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">brands</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col1">
-                            <div class="h_nav">
-                                <h4>help</h4>
-                                <ul>
-                                    <li><a href="shop.php">trends</a></li>
-                                    <li><a href="shop.php">sale</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col1">
-                            <div class="h_nav">
-                                <h4>my company</h4>
-                                <ul>
-                                    <li><a href="shop.php">trends</a></li>
-                                    <li><a href="shop.php">sale</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col1">
-                            <div class="h_nav">
-                                <h4>account</h4>
-                                <ul>
-                                    <li><a href="shop.php">login</a></li>
-                                    <li><a href="shop.php">create an account</a></li>
-                                    <li><a href="shop.php">create wishlist</a></li>
-                                    <li><a href="shop.php">my shopping bag</a></li>
-                                    <li><a href="shop.php">brands</a></li>
-                                    <li><a href="shop.php">create wishlist</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col1">
-                            <div class="h_nav">
-                                <h4>popular</h4>
-                                <ul>
-                                    <li><a href="shop.php">new arrivals</a></li>
-                                    <li><a href="shop.php">men</a></li>
-                                    <li><a href="shop.php">women</a></li>
-                                    <li><a href="shop.php">accessories</a></li>
-                                    <li><a href="shop.php">kids</a></li>
-                                    <li><a href="shop.php">style videos</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col1">
-                            <div class="h_nav">
-                                <img src="images/nav_img1.jpg" alt=""/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col2"></div>
-                        <div class="col1"></div>
-                        <div class="col1"></div>
-                        <div class="col1"></div>
-                        <div class="col1"></div>
-                    </div>
-                </div>
+
             </li>
             <li><a class="color5" href="ratings.php">Top Ratings</a>
                 <div class="megapanel">
