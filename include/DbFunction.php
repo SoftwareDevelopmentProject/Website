@@ -320,10 +320,55 @@ class DbFunction {
 	public function reportGetMember(){
     $db = new DbConnect();
     $con =$db->connect();
+	$report = array();
     $result_member =mysqli_query($con, "SELECT * FROM member");
-        $result = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
-        return $result;
+        while($result = mysqli_fetch_assoc($result_member)) {
+			array_push($report, $result);
+		}
+        return $report;
     }
+	public function getMemberByYear($year){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$report = array();
+    $result_member =mysqli_query($con, "SELECT * FROM member where YEAR(member_created_time)=$year");
+        while($result = mysqli_fetch_assoc($result_member)) {
+			array_push($report, $result);
+		}
+        return $report;
+    }
+	
+	public function getMemberYear(){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$year = array();
+    $result_year =mysqli_query($con, "SELECT  YEAR(member_created_time) AS year FROM member GROUP BY YEAR(member_created_time)");
+        while($result = mysqli_fetch_assoc($result_year)) {
+			array_push($year, $result['year']);
+		}
+        return $year;
+    }
+	
+	public function getMemberMonth($year){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$month = array();
+    $result_month =mysqli_query($con, "SELECT MONTH(member_created_time) AS month FROM member WHERE YEAR(member_created_time) = $year GROUP BY MONTH(member_created_time)");
+       while($result = mysqli_fetch_assoc($result_month)) {
+			array_push($month, $result['month']);
+		}
+        return $month;
+	}
+	public function getMemberDate($month){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$date = array();
+    $result_date =mysqli_query($con, "SELECT DAY(member_created_time) AS day FROM member WHERE MONTH(member_created_time) = $month GROUP BY DAY(member_created_time)");
+       while($result = mysqli_fetch_assoc($result_date)) {
+			array_push($date, $result['day']);
+		}
+        return $date;
+	}
 }
 
 

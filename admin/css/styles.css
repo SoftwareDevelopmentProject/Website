@@ -792,7 +792,7 @@ a.label:hover, a.label:focus {
   background-color: #30a5ff;
   color: #fff; }
 
-.sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active, .sidebar ul.nav .active > a:hover, .sidebar ul.nav li.parent a.active:hover, .sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus {
+.sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active, .sidebar ul.nav .active > a:hover, .sidebar ul.nav li.parent a.active:hover, .sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus, .sidebar-collapse ul li.active  {
   color: #fff;
   background-color: #30a5ff; }
 
@@ -854,6 +854,10 @@ a.label:hover, a.label:focus {
   float: left;
   text-align: left;
   margin: 10px 0 0 12px; }
+
+.sidebar-collapse ul li.active {
+	
+}
 
 .profile-usertitle-name {
   font-size: 20px;

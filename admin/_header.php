@@ -125,7 +125,7 @@ if(isset($_SESSION['staff'])) {
                 <li><a class="" href="#">
                         <span class="fa fa-book">&nbsp;</span> Sale report
                     </a></li>
-                <li <?php if (isset($page) && ($page == 'member report')) echo 'class="active"'; ?>><a class="" href="memberReport.php">
+                <li><a <?php if (isset($page) && ($page == 'member report')) echo 'class="active"'; ?> href="memberReport.php">
                         <span class="fa fa-book">&nbsp;</span> Member report
                     </a></li>
             </ul>

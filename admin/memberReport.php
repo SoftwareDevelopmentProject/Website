@@ -24,29 +24,30 @@
 				
 }
 		?>	
-		<?php  	
-			$dates=$db->reportGetMember();
-			foreach ($dates as $date):
-		?>		
+			
 		<div class="padding" style="overflow: auto; height: auto;">
 			<tr><form method="post">
 				<td colspan="11" align="right" height="50px" >
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="date">
+				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="date" id="date" disabled>
 					<option value="">Date</option>
-					<?php echo 
-	'<option value="'.$date['member_created_at'].'">'.$date['member_created_at'].'</option>';?>
 				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="month">
-					<option value="">Month</option>
+				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="month" id="month" onChange="loadDate(this.value)" disabled>
+					<option>Month</option>
 				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="year">
+				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="year" onChange="loadMonth(this.value)">
 					<option value="">Year</option>
+					<?php  	
+						$years=$db->getMemberYear();
+						foreach ($years as $year):
+							echo 
+	'<option value="'.$year.'">'.$year.'</option>';
+					endforeach;
+					?>
 				</select>
 				</td>
 			</tr></form>
-	<?php endforeach; ?>
 			<h4>Member Report</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
+			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white" id="table">
 				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
 					<td width="">Member ID</td>
 					<td width="">Member Name</td>
@@ -62,7 +63,7 @@
 					<tr>
 						<td><?php echo $member['member_id']; ?></td>
 						<td><?php echo $member['member_name']; ?></td>
-                        <td><?php echo $member['member_created_at']; ?></td>
+                        <td><?php echo $member['member_created_time']; ?></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -78,176 +79,68 @@
 	</div>	<!--/.main-->
 	
 	<script>
-	
-		var form = document.getElementById("form");
-		var box = document.getElementById("popupBox");
-		var boxBody = document.getElementById("popupcontent");
-		var span = document.getElementsByClassName("close")[0];
-		var addBtn = document.getElementById("addBtn");
-		var cancel = document.getElementById("close");
-		var ok = document.getElementById("ok");
-		var formBody = document.getElementById("form-body");
-		var no = document.getElementById("no");
-		var confirBox = document.getElementById("confirmBox");
-		var confirmContent = document.getElementById("confirmContent");
-
-		
-		addBtn.onclick = function() {
-			form.style.display = "block";
-
-		}
-		
-		
-		
-		
-			
-			cancel.onclick = function() {
-				formBody.style.animationName="animateback"; 
-				formBody.style.animationDuration="0.4s";
-				formBody.style.webkitAnimationDuration="0.4s";
-				formBody.style.webkitAnimationName="animateback";	
-				setTimeout(function() {
-					form.style.display = "none";
-					formBody.style.animationName= formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-					
-				}, 400);
-				
-
-		}
-			
-		window.onclick = function(event) {
-			if (event.target == form) {
-				
-				formBody.style.animationName="animateback"; 
-				formBody.style.animationDuration="0.4s";
-				formBody.style.webkitAnimationDuration="0.4s";
-				formBody.style.webkitAnimationName="animateback";	
-				setTimeout(function() {
-					form.style.display = "none";
-					formBody.style.animationName= formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-					
-				}, 400);
-				
-			}
-		}
-		
-		span.onclick = ok.onclick = function() {
-				boxBody.style.animationName="animateback"; 
-				boxBody.style.animationDuration="0.4s";
-				boxBody.style.webkitAnimationDuration="0.4s";
-				boxBody.style.webkitAnimationName="animateback";	
-				setTimeout(function() {
-					box.style.display = "none";
-					boxBody.style.animationName= boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-					
-				}, 400);
-				
-
-		}
-		
-		no.onclick = function() {
-				confirmContent.style.animationName="animateback"; 
-				confirmContent.style.animationDuration="0.4s";
-				confirmContent.style.webkitAnimationDuration="0.4s";
-				confirmContent.style.webkitAnimationName="animateback";	
-				setTimeout(function() {
-					confirBox.style.display = "none";
-					confirmContent.style.animationName= confirmContent.style.webkitAnimationDuration = confirmContent.style.webkitAnimationName = confirmContent.style.animationDuration = "";
-					
-				}, 400);
-				
-
-		}
-			
-		window.onclick = function(event) {
-			if (event.target == box) {
-				
-				boxBody.style.animationName="animateback"; 
-				boxBody.style.animationDuration="0.4s";
-				boxBody.style.webkitAnimationDuration="0.4s";
-				boxBody.style.webkitAnimationName="animateback";	
-				setTimeout(function() {
-					box.style.display = "none";
-					boxBody.style.animationName= boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-					
-				}, 400);
-				
-			}
-		}
-		//disabling save button
-		
-			function changeRole(changedVal, oriVal, id) {
-				if (oriVal!= changedVal) {
-					document.getElementById('saveBtn'+ id).disabled = false;
-				} else {
-					document.getElementById('saveBtn'+ id).disabled = true;
-				}				
-			}
-		//delete confirmation
-	
-			function removeBook(id, title){
-				$("#confirmBox").css("display","block");
-				$("#confirmMessage").html("Are you sure to remove " + title + " ?");
-				$("#yes").attr("onclick", "delBook(" + id + ")");
-			}
-	
-	
-		//DELETE STAFF
-			function delBook(id){
-				
-				$("#sub" + id).click();
-			}
-		//registration form data validity
-			function amountValid(text){
-				if (/^\d+$/.test(text)) {
-					document.getElementById("err").style.display = "none";
-					document.getElementById("newBookSub").disabled = false;
-					
-					
-				}else{
-					document.getElementById("err").style.display = "block";
-					document.getElementById("newBookSub").disabled = true;
-					
-			
+		//filter fuction 
+			function loadMemberByYear(year){
+						var xhttp;    
+						xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								alert(this.resoponseText);
+								}
+						  };
+						xhttp.open("GET", "getMemberByYear?year="+year, true);
+						xhttp.send();
 				}
-			}
-		
-		function priceValid(text){
-				if (/^-{0,1}\d*\.{0,1}\d+$/.test(text)) {
-					document.getElementById("priceErr").style.display = "none";
-					document.getElementById("newBookSub").disabled = false;
-					
-					
-				}else{
-					document.getElementById("priceErr").style.display = "block";
-					document.getElementById("newBookSub").disabled = true;
-					
-			
-				}
-			}
-		//check email 
-			function checkEmail(str) {
+			function loadMonth(year) {
 				  var xhttp;    
-				  if (str == "") {
-					  document.getElementById("email_err").style.display = "none";
-					  document.getElementById("email").style.borderColor = "";
-					  document.getElementById("newBookSub").disabled = false;
+				  if (year == "Year") {
+					$('#month').attr('disabled', 'disabled');
 					  
 					return;
 				  }
 				  xhttp = new XMLHttpRequest();
 				  xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("email_err").innerHTML = this.responseText;
-						document.getElementById("email_err").style.display = "block";
-						if (this.response!=''){
-							document.getElementById("newBookSub").disabled = true;
-						}
+						$('#month').removeAttr('disabled');
+						document.getElementById("month").innerHTML = this.responseText;
+						loadMemberByYear(year);
 					}
 				  };
-				  xhttp.open("GET", "checkemail.php?email="+str, true);
+				  xhttp.open("GET", "getMemberMonth?year="+year, true);
 				  xhttp.send();
 				}
+			function loadMemberByYear(year){
+				 	var xhttp;    
+					xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.getElementById('table').innerHTML=this.responseText;
+							alert(this.responseText);
+
+							}
+					  };
+					xhttp.open("GET", "getMemberByYear?year="+year, true);
+					xhttp.send();
+			}
+
+			function loadDate(month) {
+					  var xhttp;    
+					  if (month == "Month") {
+						$('#date').attr('disabled', 'disabled');
+
+						return;
+					  }
+					  xhttp = new XMLHttpRequest();
+					  xhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							$('#date').removeAttr('disabled');
+							document.getElementById("date").innerHTML = this.responseText; 
+
+						}
+					  };
+					  xhttp.open("GET", "getMemberDate?date="+month, true);
+					  xhttp.send();
+					}
 		
 	</script>
 	
