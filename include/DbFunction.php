@@ -367,19 +367,7 @@ class DbFunction {
     public function clearCart() {
         $this->initializeCookie();
     }
-<<<<<<< HEAD
 	
-	//report fuction
-	public function reportGetMember(){
-    $db = new DbConnect();
-    $con =$db->connect();
-	$report = array();
-    $result_member =mysqli_query($con, "SELECT * FROM member");
-        while($result = mysqli_fetch_assoc($result_member)) {
-			array_push($report, $result);
-		}
-        return $report;
-    }
 	public function getMemberByYear($year){
     $db = new DbConnect();
     $con =$db->connect();
@@ -400,7 +388,8 @@ class DbFunction {
 			array_push($year, $result['year']);
 		}
         return $year;
-=======
+	}
+		
     //report fuction
     public function reportGetMember(){
         $db = new DbConnect();
@@ -408,7 +397,6 @@ class DbFunction {
         $result_member =mysqli_query($con, "SELECT * FROM member");
         $result = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $result;
->>>>>>> 8b40022c974a43137ecd736e08d2455f954f56e5
     }
 	
 	public function getMemberMonth($year){
