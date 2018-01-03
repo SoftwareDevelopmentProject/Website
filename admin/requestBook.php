@@ -8,7 +8,16 @@
 	<title>Book Request</title>
     <?php include_once '_head.php'; ?>
 </head>
-<body>
+<body><?php if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+	$b = array();
+	foreach($_POST as $book_id => $quantity) {
+		if ($quantity > 0)
+			array_push($b, array('id' => $book_id, 'quantity' => $quantity));
+	}
+	$db->insertBookRequest($_SESSION['staff'],$b);
+}
+		
+	?>
 
     <?php include_once '_header.php';?>
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
@@ -51,7 +60,7 @@
 					<td width="">In Stock Quantity</td>
 					<td width="">Request Amount</td>
 					
-				</tr>
+				</tr><form method="post">
 				<?php
 					$books = $db->getBooks();
 					foreach($books as $book) :
@@ -64,8 +73,8 @@
 						<td><?php echo $book['book_years']; ?></td>
 						<td><?php echo $book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
-						<td><form method="post">
-								<select name="requestQuantity" required class="drop_down" style="width: 30%" onChange="">
+						<td>
+								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 30%" onChange="">
 									<option value="0">0</option>
 									<option value="10">10</option>
                                     <option value="20">20</option>
@@ -77,10 +86,11 @@
                         </td>
                     </tr>
                     <?php endforeach; ?>
-                </table>
+				</table>
                     <tr>
 						<td colspan="9" align="right" height="50px" >
-							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 0;"/></form>
+							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 0;"/>
+							</form>
 						</td>
 					</tr>
            

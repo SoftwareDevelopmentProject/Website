@@ -389,14 +389,28 @@ class DbFunction {
 		}
         return $year;
 	}
+	
+	//upload book request 
+	 public function insertBookRequest($staffid,$books){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $request= mysqli_query($con, "INSERT INTO request (staff_id) VALUES ('$staffid')");
+		 $id = mysqli_insert_id($con);
+		 foreach($books as $book) {
+			 $request= mysqli_query($con, "INSERT INTO request_detail (request_id, book_id, quantity) VALUES ($id, {$book['id']}, {$book['quantity']})");
+		 }
+    }
 		
     //report fuction
     public function reportGetMember(){
-        $db = new DbConnect();
-        $con =$db->connect();
-        $result_member =mysqli_query($con, "SELECT * FROM member");
-        $result = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
-        return $result;
+         $db = new DbConnect();
+    $con =$db->connect();
+	$report = array();
+    $result_member =mysqli_query($con, "SELECT * FROM member");
+        while($result = mysqli_fetch_assoc($result_member)) {
+			array_push($report, $result);
+		}
+        return $report;
     }
 	
 	public function getMemberMonth($year){

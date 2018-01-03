@@ -35,7 +35,7 @@
 					<option>Month</option>
 				</select>
 				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="year" onChange="loadMonth(this.value)">
-					<option value="">Year</option>
+					<option value="year">Year</option>
 					<?php  	
 						$years=$db->getMemberYear();
 						foreach ($years as $year):
@@ -80,21 +80,12 @@
 	
 	<script>
 		//filter fuction 
-			function loadMemberByYear(year){
-						var xhttp;    
-						xhttp = new XMLHttpRequest();
-						xhttp.onreadystatechange = function() {
-							if (this.readyState == 4 && this.status == 200) {
-								alert(this.resoponseText);
-								}
-						  };
-						xhttp.open("GET", "getMemberByYear?year="+year, true);
-						xhttp.send();
-				}
 			function loadMonth(year) {
 				  var xhttp;    
-				  if (year == "Year") {
+				  if (year == "year") {
 					$('#month').attr('disabled', 'disabled');
+					document.getElementById('table').innerHTML=this.responseText;
+					
 					  
 					return;
 				  }
@@ -115,8 +106,6 @@
 					xhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
 							document.getElementById('table').innerHTML=this.responseText;
-							alert(this.responseText);
-
 							}
 					  };
 					xhttp.open("GET", "getMemberByYear?year="+year, true);
