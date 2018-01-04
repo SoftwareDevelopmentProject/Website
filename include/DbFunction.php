@@ -367,29 +367,6 @@ class DbFunction {
     public function clearCart() {
         $this->initializeCookie();
     }
-	
-	public function getMemberByYear($year){
-    $db = new DbConnect();
-    $con =$db->connect();
-	$report = array();
-    $result_member =mysqli_query($con, "SELECT * FROM member where YEAR(member_created_time)=$year");
-        while($result = mysqli_fetch_assoc($result_member)) {
-			array_push($report, $result);
-		}
-        return $report;
-    }
-	
-	public function getMemberYear(){
-    $db = new DbConnect();
-    $con =$db->connect();
-	$year = array();
-    $result_year =mysqli_query($con, "SELECT  YEAR(member_created_time) AS year FROM member GROUP BY YEAR(member_created_time)");
-        while($result = mysqli_fetch_assoc($result_year)) {
-			array_push($year, $result['year']);
-		}
-        return $year;
-	}
-	
 	//upload book request 
 	 public function insertBookRequest($staffid,$books){
         $db = new DbConnect();
@@ -400,13 +377,33 @@ class DbFunction {
 			 $request= mysqli_query($con, "INSERT INTO request_detail (request_id, book_id, quantity) VALUES ($id, {$book['id']}, {$book['quantity']})");
 		 }
     }
-		
+	
     //report fuction
-    public function reportGetMember(){
-         $db = new DbConnect();
+	 public function reportGetMember(){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member =mysqli_query($con, "SELECT * FROM member");
+			while($result = mysqli_fetch_assoc($result_member)) {
+				array_push($report, $result);
+			}
+			return $report;
+		}
+	public function getMemberYear(){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$year = array();
+		$result_year =mysqli_query($con, "SELECT  YEAR(member_created_time) AS year FROM member GROUP BY YEAR(member_created_time)");
+			while($result = mysqli_fetch_assoc($result_year)) {
+				array_push($year, $result['year']);
+			}
+			return $year;
+		}
+	public function getMemberByYear($year){
+    $db = new DbConnect();
     $con =$db->connect();
 	$report = array();
-    $result_member =mysqli_query($con, "SELECT * FROM member");
+    $result_member =mysqli_query($con, "SELECT * FROM member where YEAR(member_created_time)=$year");
         while($result = mysqli_fetch_assoc($result_member)) {
 			array_push($report, $result);
 		}
@@ -423,6 +420,17 @@ class DbFunction {
 		}
         return $month;
 	}
+	public function getMemberByMonth($year,$month){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$report = array();
+    $result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time)=$month)");
+        while($result = mysqli_fetch_assoc($result_member)) {
+			array_push($report, $result);
+		}
+        return $report;
+    }
+	
 	public function getMemberDate($month){
     $db = new DbConnect();
     $con =$db->connect();
@@ -433,6 +441,16 @@ class DbFunction {
 		}
         return $date;
 	}
+	public function getMemberByDay($year,$month,$day){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time) = $month AND DAY(member_created_time)=$day)");
+				while($result = mysqli_fetch_assoc($result_member)) {
+					array_push($report, $result);
+				}
+				return $report;
+			}
 }
 
 
