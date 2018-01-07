@@ -367,7 +367,7 @@ class DbFunction {
     public function clearCart() {
         $this->initializeCookie();
     }
-	//upload book request 
+	//book request 
 	 public function insertBookRequest($staffid,$books){
         $db = new DbConnect();
         $con = $db->connect();
@@ -377,6 +377,32 @@ class DbFunction {
 			 $request= mysqli_query($con, "INSERT INTO request_detail (request_id, book_id, quantity) VALUES ($id, {$book['id']}, {$book['quantity']})");
 		 }
     }
+	 public function getRequest(){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$request = array();
+		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id ORDER BY request_created_time, status DESC");
+			while($result = mysqli_fetch_assoc($result_request)) {
+				array_push($request, $result);
+			}
+			return $request;
+		}
+	public function getRequestDetail($id){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$detail = array();
+		$result_detail =mysqli_query($con, "SELECT * FROM request INNER JOIN request_detail ON request.request_id = request_detail.request_id INNER JOIN book ON book.book_id = request_detail.book_id INNER JOIN genre ON book.genre_id = genre.genre_id WHERE request_detail.request_id =$id");
+			while($result = mysqli_fetch_assoc($result_detail)) {
+				array_push($detail, $result);
+			}
+			return $detail;
+		}
+		public function updateRequest($id,$status){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "UPDATE reuqest_detail SET status='$status' WHERE request_id = $id)");
+        return $result;
+	}
 	
     //report fuction
 	 public function reportGetMember(){

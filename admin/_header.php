@@ -132,6 +132,7 @@ if(isset($_SESSION['staff'])) {
         </li>
         <?php endif ;?>
         <li <?php if (isset($page) && ($page == 'member')) echo 'class="active"'; ?>><a href="member.php"><em class="fa fa-address-card">&nbsp;</em> Member</a></li>
+        <li <?php if (isset($page) && ($page == 'bookRequest')) echo 'class="active"'; ?>><a href="bookRequest.php"><em class="fa fa-list-ol">&nbsp;</em> Book Request</a></li>
         <li <?php if (isset($page) && ($page == 'widgets')) echo 'class="active"'; ?>><a href="widgets.php"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
         <li <?php if (isset($page) && ($page == 'charts')) echo 'class="active"'; ?>><a href="charts.php"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
         <li <?php if (isset($page) && ($page == 'elements')) echo 'class="active"'; ?>><a href="elements.php"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
