@@ -66,6 +66,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td><button type="button" class="btn btn-primary" onClick="getMemberDetail(<?php echo $member['member_id'];?>)" data-toggle="modal" data-target="#viewMember">View Profile</button></td>
                     </tr>
                     <?php endforeach; ?>
             </table>
@@ -77,6 +78,31 @@
 
 	</div>	<!--/.main-->
 	
+	<!-- start modal -->
+	<div class="modal fade" id="viewMember">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Member Profile</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" id="modalBody">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <!--//end modal -->
 	<script>
 		//filter fuction 
 			function loadAllMemberReport() {
@@ -174,7 +200,19 @@
 					xhttp.open("GET", "getMemberByDay?day="+day+"&month="+month+"&year="+year, true);
 					xhttp.send();
 			}
-		
+		//--end filter
+		//--view member js
+		function getMemberDetail(id) {
+				  var xhttp; 
+				  xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("modalBody").innerHTML = this.responseText;
+					}
+				  };
+				  xhttp.open("GET", "getMemberDetail?id="+id, true);
+				  xhttp.send();
+				}
 		
 	</script>
 	

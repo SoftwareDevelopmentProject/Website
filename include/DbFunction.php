@@ -381,7 +381,7 @@ class DbFunction {
 		$db = new DbConnect();
 		$con =$db->connect();
 		$request = array();
-		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id ORDER BY request_created_time, status DESC");
+		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id ORDER BY status DESC");
 			while($result = mysqli_fetch_assoc($result_request)) {
 				array_push($request, $result);
 			}
@@ -400,7 +400,8 @@ class DbFunction {
 		public function updateRequest($id,$status){
         $db = new DbConnect();
         $con = $db->connect();
-        $result = mysqli_query($con, "UPDATE reuqest_detail SET status='$status' WHERE request_id = $id)");
+        $result = mysqli_query($con, "UPDATE request SET status='$status' WHERE request_id = $id");
+			print_r($con);
         return $result;
 	}
 	
