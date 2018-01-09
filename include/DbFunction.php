@@ -340,20 +340,36 @@ class DbFunction {
 
     // Cart (cookie)
 
-    public function initializeCookie() {
+    public function setSession() {
         $cart = array();
         setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
     }
 
     public function addCart($product_id, $quantity) {
+	    if(!isset($_COOKIE['cart'])) $this->initializeCookie();
         $product = array();
         $product['product_id'] = $product_id;
         $product['quantity'] = $quantity;
         $cart = json_decode($_COOKIE['cart']);
         array_push($cart, $product);
         setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
-    }
 
+    }
+public function viewCart(){
+	    $db =new DbConnect();
+	    $con = $db->connect();
+	    $books = array();
+        $cart = json_decode($_COOKIE['cart']);
+        foreach($cart as $c) {
+            $result = mysqli_query($con,"SELECT book_price,book_id from book where book_id = $c[product_id]");
+            $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $product['quantity'] = $c['quantity'];
+            array_push($books, $product);
+        }
+        return $books;
+
+
+}
     public function deleteCart($product_id) {
         $cart = json_decode($_COOKIE['cart']);
         foreach ($cart as $key => $c) {
@@ -367,7 +383,10 @@ class DbFunction {
     public function clearCart() {
         $this->initializeCookie();
     }
-	
+    public function checkout(){
+
+    }
+	/*Get member*/
 	public function getMemberByYear($year){
     $db = new DbConnect();
     $con =$db->connect();
