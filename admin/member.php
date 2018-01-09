@@ -1,11 +1,11 @@
 <?php
-    $page = 'member report';
+    $page = 'member';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Member report</title>
+	<title>Member</title>
     <?php include_once '_head.php'; ?>
 </head>
 <body>
@@ -16,8 +16,7 @@
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="index.php"><em class="fa fa-home"></em></a></li>
-				<li><a href="index.php">Report</a></li>
-				<li><a href="memberReport.php">Member Report</a></li>
+				<li><a href="memberReport.php">Member</a></li>
 			</ol>
 		</div><!--/.row-->
 		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'){

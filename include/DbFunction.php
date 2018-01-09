@@ -380,9 +380,6 @@ public function viewCart(){
         setcookie("cart", json_encode($cart), time() + (86400 * 30), "/"); // one month
     }
 
-    public function clearCart() {
-        $this->initializeCookie();
-    }
     public function checkout(){
 
     }
@@ -409,7 +406,7 @@ public function viewCart(){
         return $year;
 	}
 	
-	//upload book request 
+	//upload book request
 	 public function insertBookRequest($staffid,$books){
         $db = new DbConnect();
         $con = $db->connect();
@@ -419,18 +416,44 @@ public function viewCart(){
 			 $request= mysqli_query($con, "INSERT INTO request_detail (request_id, book_id, quantity) VALUES ($id, {$book['id']}, {$book['quantity']})");
 		 }
     }
-		
-    //report fuction
-    public function reportGetMember(){
-         $db = new DbConnect();
-    $con =$db->connect();
-	$report = array();
-    $result_member =mysqli_query($con, "SELECT * FROM member");
-        while($result = mysqli_fetch_assoc($result_member)) {
-			array_push($report, $result);
+	 public function getRequest(){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$request = array();
+		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id ORDER BY request_created_time, status DESC");
+			while($result = mysqli_fetch_assoc($result_request)) {
+				array_push($request, $result);
+			}
+			return $request;
 		}
-        return $report;
-    }
+	public function getRequestDetail($id){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$detail = array();
+		$result_detail =mysqli_query($con, "SELECT * FROM request INNER JOIN request_detail ON request.request_id = request_detail.request_id INNER JOIN book ON book.book_id = request_detail.book_id INNER JOIN genre ON book.genre_id = genre.genre_id WHERE request_detail.request_id =$id");
+			while($result = mysqli_fetch_assoc($result_detail)) {
+				array_push($detail, $result);
+			}
+			return $detail;
+		}
+		public function updateRequest($id,$status){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "UPDATE reuqest_detail SET status='$status' WHERE request_id = $id)");
+        return $result;
+	}
+	
+    //report fuction
+	 public function reportGetMember(){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member =mysqli_query($con, "SELECT * FROM member");
+			while($result = mysqli_fetch_assoc($result_member)) {
+				array_push($report, $result);
+			}
+			return $report;
+		}
 	
 	public function getMemberMonth($year){
     $db = new DbConnect();
@@ -442,6 +465,17 @@ public function viewCart(){
 		}
         return $month;
 	}
+	public function getMemberByMonth($year,$month){
+    $db = new DbConnect();
+    $con =$db->connect();
+	$report = array();
+    $result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time)=$month)");
+        while($result = mysqli_fetch_assoc($result_member)) {
+			array_push($report, $result);
+		}
+        return $report;
+    }
+	
 	public function getMemberDate($month){
     $db = new DbConnect();
     $con =$db->connect();
@@ -452,6 +486,16 @@ public function viewCart(){
 		}
         return $date;
 	}
+	public function getMemberByDay($year,$month,$day){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time) = $month AND DAY(member_created_time)=$day)");
+				while($result = mysqli_fetch_assoc($result_member)) {
+					array_push($report, $result);
+				}
+				return $report;
+			}
 }
 
 
