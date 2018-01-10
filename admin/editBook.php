@@ -13,7 +13,6 @@ if(isset($_POST['id'])){
     <?php include_once '_head.php'; ?>
 </head>
 <body>
-
     <?php include_once '_header.php';
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 		$books=$db->getBook($_POST['id']);
@@ -116,7 +115,7 @@ if(isset($_POST['id'])){
 								</div>
 							</div>
 						</div>
-					</div>
+	
 	
 		<script>
 			function checkChanges(){

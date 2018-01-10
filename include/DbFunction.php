@@ -52,6 +52,8 @@ class DbFunction {
         $con = $db->connect();
         $new_book = mysqli_query($con, "INSERT INTO book (book_title, book_author, genre_id, book_description, book_publisher, book_years, book_price, book_stock) VALUES ('$title', '$author', $genre,'$description','$publisher',$years, $price ,$amount)");
         return $new_book;
+		print_r($con);
+		
 	}
 	//delete book
 	public function delBook($id){
@@ -64,8 +66,11 @@ class DbFunction {
 	public function updateBook($id,$title, $author, $genre, $description, $publisher, $years, $price, $amount){
         $db = new DbConnect();
         $con = $db->connect();
+		echo "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id";
         $result = mysqli_query($con, "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id");
         return $result;
+		
+		
 	}
 	
 	
@@ -497,6 +502,20 @@ public function viewCart(){
 				}
 				return $report;
 			}
+	
+	//sales report
+	
+	public function getSaleByYear($year){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$sale = array();
+		$result_sale =mysqli_query($con,"SELECT book.book_id,book.book_title,(SUM(order_detail.order_detail_quantity)*book.book_price) AS sale, (SUM(order_detail.order_detail_quantity)) AS sold_quantity FROM book INNER JOIN order_detail ON order_detail.book_id=book.book_id INNER JOIN `order` ON `order`.order_id=order_detail.order_id WHERE YEAR(`order`.order_created_time)= 2017 GROUP BY order_detail.book_id,book.book_title ORDER BY sale DESC");
+			while($result = mysqli_fetch_assoc($result_sale)) {
+					array_push($sale, $result);
+				}
+				return $sale;
+			}
+			
 }
 
 

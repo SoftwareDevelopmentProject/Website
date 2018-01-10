@@ -90,9 +90,7 @@
 						<td><?php echo $book['book_years']; ?></td>
 						<td><?php echo $book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
-						<td><form id="edit<?php echo $book['book_id'];?>" method="post" action="editBook.php">
-                            <input type="submit" class="btn btn-default btn-sm" id="editBtn<?php echo $book['book_id'];?>" name="edit<?php echo $book['book_id'];?>" value="Edit">
-                            <input type="hidden" value="<?php echo $book['book_id'];?>" name="id"></form>
+						<td><button type="button" class="btn btn-primary" onClick="editBook(<?php echo $book['book_id'];?>)" data-toggle="modal" data-target="#editBook">Edit</button>
 						</td>
 						<td>
 							<form id="delete<?php echo $book['book_id']; ?>" method="post">
@@ -206,6 +204,35 @@
 						</div>
 					</div>
 		</div>
+		
+			<!--modal start -->
+	<div class="modal fade" id="editBook">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Edit Book</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+		<div class="panel panel-default">
+			<div class="panel-body">
+       			 <div class="modal-body " id="modalBody">
+       			 </div>
+			</div>
+		</div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!--//modal end -->
 	
 		
 		
@@ -384,6 +411,30 @@
 				  xhttp.open("GET", "checkemail.php?email="+str, true);
 				  xhttp.send();
 				}
+		
+		// edit book
+			function editBook(id) {
+				  var xhttp;
+				$('#hidden').val(id);
+				  xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("modalBody").innerHTML = this.responseText;
+						
+					}
+				  };
+				  xhttp.open("GET", "editBook1.php?id="+id, true);
+				  xhttp.send();
+				}
+		function checkChanges(){
+			var $new=$('#title').val() + $('#author').val() + $('#publisher').val() + $('#year').val() + $('#genre').val() + $('#des').val() + $('#amount').val() + $('#price').val();
+			var $old='<?php echo $book['book_title'].$book['book_author'].$book['book_publisher'].$book['book_years'].$book['genre_name'].$book['book_description'].$book['book_stock'].$book['book_price'];?>';
+				if($new==$old){
+					$('#editBookSub').attr('disabled','disabled');
+				}else{
+					$('#editBookSub').removeAttr('disabled');
+				}
+			}
 		
 	</script>
 	
