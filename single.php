@@ -62,7 +62,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					
 		
 			</div>
-			<li class="cont1 span_2_of_a1">
+
+			<div class="cont1 span_2_of_a1">
 
                         <h3 class="m_3"><?php echo $books['book_title']; ?></h3>
 
@@ -70,21 +71,33 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							  <span class="">&dollar;<?php echo $books['book_price']; ?></span>
 
 							</div>
+
 				<ul class="options">
 					<h4 class="m_9">Select Quantity</h4>
 
+
                         <li class="quantity" onclick="quantityCtrl(0)">-</li>
-                    <li id="qty" class="quantity number">1</li>
+                        <li class="quantity" id="qty">1</li>
                         <li class="quantity" onclick="quantityCtrl(1)">+</li>
 
 
 					<div class="clear"></div>
 				</ul>
-				<div class="btn_form">
-				   <form>
-					 <input type="submit" value="Add to Cart" title="">
-				  </form>
+                    <?php
+                    if($_SERVER["REQUEST_METHOD"]=="POST"){
+                        $db->addCart(1,2);
+                    }
+                    ?>
+                <div class="btn_form">
+                    <form method="post">
+                        <input type="text" value="1">
+					 <input type="submit" value="Add to Cart" style="" title="">
+
+                </div>
+                </form>
 				</div>
+
+
 				<ul class="add-to-links">
     			   <li><img src="images/wish.png" alt=""/>book stock left: <?php echo $books['book_stock']; ?></li>
     			</ul>

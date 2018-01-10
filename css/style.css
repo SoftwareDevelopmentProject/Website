@@ -1405,7 +1405,7 @@ h4.m_9{
 .btn_form {
 	padding: 4% 0;
 }
-.btn_form form input[type="submit"] {
+.btn_form input[type="submit"] {
 	font-family: 'Open Sans', sans-serif;
 	cursor: pointer;
 	border: none;
@@ -1422,7 +1422,7 @@ h4.m_9{
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.btn_form form input[type="submit"]:hover{
+.btn_form input[type="submit"]:hover{
 	background: #FFAF02;
 	border-bottom: 4px solid #DF9A06;
 }
