@@ -61,8 +61,9 @@
 				</td>
 				
 			</tr>
+			<h2>Book Stock</h2>
 			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center" height="50px">
 					<td width="" >Book ID</td>
 					<td width="">Book Title</td>
 					<td width="">Author</td>
@@ -88,15 +89,14 @@
                         <td><?php echo $book['genre_name']; ?></td>
                         <td><?php echo $book['book_publisher']; ?></td>
 						<td><?php echo $book['book_years']; ?></td>
-						<td><?php echo $book['book_price']; ?></td>
+						<td><?php echo 'RM '.$book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
 						<td><button type="button" class="btn btn-primary" onClick="editBook(<?php echo $book['book_id'];?>)" data-toggle="modal" data-target="#editBook">Edit</button>
 						</td>
 						<td>
 							<form id="delete<?php echo $book['book_id']; ?>" method="post">
-                                <input type="button" value="Remove" onClick="removeBook(<?php echo $book['book_id']; ?> ,'<?php echo $book['book_title']; ?>')" class="btn btn-default btn-sm" id="revBtn">
-							    <input type="hidden" name="id" value="<?php echo $book['book_id']; ?>">
-                                <input type="submit" name="del" style="display:none" id="sub<?php echo $book['book_id']; ?>"></form>
+                                <input type="button" value="Remove" onClick="removeBook(<?php echo $book['book_id']; ?> ,'<?php echo $book['book_title']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteBook">
+							   </form>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -199,6 +199,7 @@
 									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="newBookSub" value="Submit" name="add_book_submit_btn">
 									<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
 									<input type="button" class="btn btn-default" value="Cancel" id="close" />
+									</form>
 								</div>
 							</div>
 						</div>
@@ -226,6 +227,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
+        	
         
         </div>
         
@@ -233,7 +235,33 @@
     </div>
   </div>
   <!--//modal end -->
-	
+	<div class="modal fade" id="deleteBook">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Delete Book</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+       	<div class="modal-body popup-body" id="modalBodyDel">
+       	</div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <form method="post">
+        	<input type="submit"class="btn btn-primary btn-md" value="Yes" name="del">
+        	<input type="hidden" id="delBookid" name="id">
+        	<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+        	</form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!--//modal end -->
 		
 		
             <?php include_once '_footer.php'; ?>
@@ -349,8 +377,8 @@
 		//delete confirmation
 	
 			function removeBook(id, title){
-				$("#confirmBox").css("display","block");
-				$("#confirmMessage").html("Are you sure to remove " + title + " ?");
+				$("#modalBodyDel").html("Are you sure to remove " + title + " ?");
+				$('#delBookid').val(id);
 				$("#yes").attr("onclick", "delBook(" + id + ")");
 			}
 	
@@ -413,28 +441,19 @@
 				}
 		
 		// edit book
-			function editBook(id) {
+			function editBook(id){
 				  var xhttp;
 				$('#hidden').val(id);
 				  xhttp = new XMLHttpRequest();
 				  xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("modalBody").innerHTML = this.responseText;
-						
 					}
 				  };
 				  xhttp.open("GET", "editBook1.php?id="+id, true);
 				  xhttp.send();
 				}
-		function checkChanges(){
-			var $new=$('#title').val() + $('#author').val() + $('#publisher').val() + $('#year').val() + $('#genre').val() + $('#des').val() + $('#amount').val() + $('#price').val();
-			var $old='<?php echo $book['book_title'].$book['book_author'].$book['book_publisher'].$book['book_years'].$book['genre_name'].$book['book_description'].$book['book_stock'].$book['book_price'];?>';
-				if($new==$old){
-					$('#editBookSub').attr('disabled','disabled');
-				}else{
-					$('#editBookSub').removeAttr('disabled');
-				}
-			}
+
 		
 	</script>
 	

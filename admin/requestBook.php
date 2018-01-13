@@ -71,7 +71,7 @@
                         <td><?php echo $book['book_author']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>
 						<td><?php echo $book['book_years']; ?></td>
-						<td><?php echo $book['book_price']; ?></td>
+						<td><?php echo 'RM '.$book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
 						<td>
 								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 30%" onChange="">
@@ -89,8 +89,10 @@
 				</table>
                     <tr>
 						<td colspan="9" align="right" height="50px" >
-							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 0;"/>
+							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 10px;"/>
 							</form>
+							<button class="btn btn- btn-md pull-right" style="float: right; margin: 10px 10px;" onClick="window.open('stock.php', '_self')">Back</button>
+							
 						</td>
 					</tr>
            

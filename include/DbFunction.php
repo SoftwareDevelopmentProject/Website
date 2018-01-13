@@ -498,7 +498,18 @@ class DbFunction {
 		$db = new DbConnect();
 		$con =$db->connect();
 		$sale = array();
-		$result_sale =mysqli_query($con,"SELECT book.book_id,book.book_title,(SUM(order_detail.order_detail_quantity)*book.book_price) AS sale, (SUM(order_detail.order_detail_quantity)) AS sold_quantity FROM book INNER JOIN order_detail ON order_detail.book_id=book.book_id INNER JOIN `order` ON `order`.order_id=order_detail.order_id WHERE YEAR(`order`.order_created_time)= 2017 GROUP BY order_detail.book_id,book.book_title ORDER BY sale DESC");
+		$result_sale =mysqli_query($con,"SELECT book.book_id,book.book_title,(SUM(order_detail.order_detail_quantity)*book.book_price) AS sale, (SUM(order_detail.order_detail_quantity)) AS sold_quantity FROM book INNER JOIN order_detail ON order_detail.book_id=book.book_id INNER JOIN `order` ON `order`.order_id=order_detail.order_id WHERE YEAR(`order`.order_created_time)= $year GROUP BY order_detail.book_id,book.book_title ORDER BY sale DESC");
+			while($result = mysqli_fetch_assoc($result_sale)) {
+					array_push($sale, $result);
+				}
+				return $sale;
+			}
+	
+	public function getSaleByMonth($year, $month){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$sale = array();
+		$result_sale =mysqli_query($con,"SELECT book.book_id,book.book_title,(SUM(order_detail.order_detail_quantity)*book.book_price) AS sale, (SUM(order_detail.order_detail_quantity)) AS sold_quantity FROM book INNER JOIN order_detail ON order_detail.book_id=book.book_id INNER JOIN `order` ON `order`.order_id=order_detail.order_id WHERE (YEAR(`order`.order_created_time)= $year AND MONTH(`order`.order_created_time)= $month) GROUP BY order_detail.book_id,book.book_title ORDER BY sale DESC");
 			while($result = mysqli_fetch_assoc($result_sale)) {
 					array_push($sale, $result);
 				}
