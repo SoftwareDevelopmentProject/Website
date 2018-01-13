@@ -71,26 +71,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							  <span class="">&dollar;<?php echo $books['book_price']; ?></span>
 
 							</div>
+                <?php
+                if($_SERVER["REQUEST_METHOD"]=="POST"){
+                    $db->addCart($_POST['book_id'],$_POST['qty']);
+                }
+                ?>
+
 
 				<ul class="options">
 					<h4 class="m_9">Select Quantity</h4>
 
 
                         <li class="quantity" onclick="quantityCtrl(0)">-</li>
-                        <li class="quantity" id="qty">1</li>
+                        <li class="quantity" id="qty" onchange="document.getElementById('hidden-qty').value = this.innerHTML;">1</li>
                         <li class="quantity" onclick="quantityCtrl(1)">+</li>
 
 
 					<div class="clear"></div>
 				</ul>
-                    <?php
-                    if($_SERVER["REQUEST_METHOD"]=="POST"){
-                        $db->addCart(1,2);
-                    }
-                    ?>
+                <form method="post">
                 <div class="btn_form">
-                    <form method="post">
-                        <input type="text" value="1">
+                    <input type="hidden" value ="1" id="hidden-qty" name="qty" />
+                 <input type="hidden" value="<?php echo $books['book_id']; ?>" name="book_id">
 					 <input type="submit" value="Add to Cart" style="" title="">
 
                 </div>

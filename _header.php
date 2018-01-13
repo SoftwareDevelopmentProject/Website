@@ -40,7 +40,7 @@ if(isset($_SESSION['user'])) {
             </ul>
         </div>
         <ul class="icon2 sub-icon2 profile_img">
-            <li><a class="active-icon c2" href="#"> </a>
+            <li><a class="active-icon c2" href="cart.php"> </a>
                 <ul class="sub-icon2 list">
                     <li><h3>Products</h3><a href="shop.php"></a></li>
                     <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
