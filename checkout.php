@@ -15,7 +15,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php include "_header.php";?>
 <?php
 if($user == null){
-    echo '<script>window.location.replace(login.php")</script>';
+    echo'<script>alert("Please login before checkout")</script>';
+    echo '<script>window.location.replace("login.php")</script>';
 }else{
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $transaction_id =rand(10000,99999);

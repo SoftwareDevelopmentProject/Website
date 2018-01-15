@@ -12,7 +12,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country']);
+        if($db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country'])){
+            echo '<script>alert("Sucessful Register")</script>';
+        } else {
+            echo '<script>alert("Failed Register, Email has been used. Please try again")</script>';
+
+        }
     }
 
 ?>

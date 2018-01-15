@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				</div>
 				<div class="col_1_of_login span_1_of_login">
 				  <div class="login-title">
-	           		<h4 class="title">Registered Customers</h4>
+	           		<h4 class="title">Login</h4>
 					 <div class="comments-area">
 						<form method="post">
 							<p>
