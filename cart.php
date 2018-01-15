@@ -10,6 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Free Adidas Website Template | Checkout :: w3layouts</title>
     <?php include"_head.php";?>
 </head>
+
 <body>
 <?php include "_header.php";?>
 <div class="login">
@@ -55,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </tr>
         </table>
         <div class="" style="margin-top: 10px;">
-            <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;">Checkout</button>
+            <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>
             <button class="btn btn-primary btn-sm" style="float: right;" onclick="">Clear</button>
         </div>
         <?php }else{

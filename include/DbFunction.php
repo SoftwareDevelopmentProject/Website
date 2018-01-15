@@ -18,7 +18,7 @@ class DbFunction {
         $db = new DbConnect();
         $con = $db->connect();
         $books = array();
-        $result_book = mysqli_query($con, "SELECT book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id");
+        $result_book = mysqli_query($con, "SELECT book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book INNER JOIN genre ON book.genre_id = genre.genre_id order by book.book_id");
         $result_feedback = mysqli_query($con, "SELECT * FROM feedback");
         $result_feedback_rating = mysqli_query($con, "SELECT * FROM feedback_rating");
         while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
@@ -373,9 +373,25 @@ class DbFunction {
         return $cart;
 
 }
+    public function insertOrderdetails($order_id,$book_id,$qty){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $detail = mysqli_query($con, "INSERT INTO order_detail(order_id,book_id,order_detail_quantity) VALUE ('$order_id','$book_id','$qty')");
+        return $detail;
+
+}
     public function delCart($book_id){
         unset ($_SESSION['cart'][$book_id]);
     }
+    /*Checkout*/
+    public function checkout($order_name,$order_phone,$order_address,$pm,$order_transaction,$member_id){
+        $db =new DbConnect();
+        $con =$db->connect();
+        mysqli_query($con,"INSERT INTO `order`(order_recipient_name,order_recipient_phone,order_recipient_address,order_payment_method,order_transaction_id,member_id)VALUES
+('$order_name','$order_phone','$order_address','$pm','$order_transaction','$member_id') ");
+        return mysqli_insert_id($con);
+    }
+
 
 	/*Get member*/
 	public function getMemberByYear($year){
