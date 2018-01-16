@@ -138,30 +138,10 @@
 			<?php endif; ?>
     	<?php endif;?>
     <?php endif; ?>
-
-	<!--confirmation message--//-->
-		<div id="confirmBox">
-						<div id="confirmContent" class="popup-content">
-							<div class="popup-header">
-								<span class="close">&times;</span>
-								<h2>Remove Confirmation</h2>
-							</div>
-							<div class="popup-body" id="confirmMessage">
-								Are you sure to remove?
-
-							</div>
-							<div class="popup-footer">
-								<button class="btn btn-primary btn-md" id="yes" >Yes</button>
-								<button class="btn btn-primary btn-md" id="no" >No</button>
-							</div>
-						</div>
-
-					</div>
-			
 				
 		<div class="padding" style="overflow: auto; height: auto;">
 					<tr>
-				<td colspan="7" align="right" height="50px" ><button style="float: right; margin: 10px 0;" id="addBtn" class="btn btn-primary btn-md">Add New Staff</button></td>
+				<td colspan="7" align="right" height="50px" ><button style="float: right; margin: 10px 10px;" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addStaff">Add New Staff</button></td>
 				
 			</tr>
 			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
@@ -195,28 +175,35 @@
                             <input type="submit" class="btn btn-default btn-sm" id="saveBtn<?php echo $staff['staff_id'];?>" name="save_staff_role" value="Save" disabled>
 						</td>
 						<td>
-							<form id="delete<?php echo $staff['staff_id']; ?>" method="post">
-                                <input type="button" value="Delete" onClick="removeStaff(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" id="revBtn">
-							    <input type="hidden" name="id" value="<?php echo $staff['staff_id']; ?>">
-                                <input type="submit" name="del" style="display:none" id="sub<?php echo $staff['staff_id']; ?>"></form>
+							<input type="button" value="Remove" onClick="removeBook(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteStaff">
                         </td>
                     </tr>
                     <?php endforeach; ?>
             </table>
 			  			
         </div>
-						
+									
+					
+
 		
-				<!-- Form  -->
-	<div id=filter>					
-	<div class="panel panel-default" id="form">
-		<div class="panel-heading" style="display: none">
-			Add Staff
-			<span class="pull-right close">&times;</span></div>
-				<div class="panel-body" id="form-body">
-					<form class="form-horizontal" method="post" id="realForm" >
+		<!--modal -->
+		
+		<div class="modal fade" id="addStaff">
+    		<div class="modal-dialog">
+      			<div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Add New Staff</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        	<div class="panel panel-default">
+				<div class="panel-body">
+        			<form class="form-horizontal" method="post">
 						<fieldset style="padding: 20px; padding-right: 60px;">
-						<h2>Add Staff </h2>
 							<!-- Name input-->
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="name">Name</label>
@@ -267,12 +254,51 @@
 								<div class="col-md-12 widget-right" style="text-align: center">
 									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="staffSub" value="Submit" name="add_staff_submit_btn">
 									<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
-									<input type="button" class="btn btn-default" value="Cancel" id="close" />
+									<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+									</form>
 								</div>
 							</div>
-						</div>
 					</div>
-		</div>
+				</div>
+      
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <!-- delete staff-->
+  <div class="modal fade" id="deleteStaff">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Delete Staff</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+       	<div class="modal-body popup-body" id="modalBodyDel">
+       	</div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+        <form method="post">
+        	<input type="submit"class="btn btn-primary btn-md" value="Yes" name="del">
+        	<input type="hidden" id="delStaffid" name="id">
+        	<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+        	</form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
 	
 		
 		
@@ -388,20 +414,12 @@
 			}
 		//delete confirmation
 	
-			function removeStaff(id, name){
-				document.getElementById("confirmBox").style.display = "block";
-				document.getElementById("confirmMessage").innerHTML = "Are you sure to remove " + name + " ?";
-				document.getElementById("yes").onclick="delStaff(id)";
-				$("#yes").attr("onclick", "delStaff(" + id + ")");
-					
+			function removeBook(id, name){
+				$("#modalBodyDel").html("Are you sure to remove " + name + " ?");
+				$('#delStaffid').val(id);
 			}
 	
-	
-		//DELETE STAFF
-			function delStaff(id){
-				
-				$("#sub" + id).click();
-			}
+
 		//registration form data validity
 			function phoneValid(){
 				var text = document.getElementById("phone").value;
