@@ -25,26 +25,6 @@
 		?>	
 			
 		<div class="padding" style="overflow: auto; height: auto;">
-			<tr><form method="post">
-				<td colspan="11" align="right" height="50px" >
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="day" id="day" onChange="loadMemberByDay(this.value)" disabled>
-					<option value="day">Day</option>
-				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="month" id="month" onChange="loadDay(this.value)" disabled>
-					<option value="month">Month</option>
-				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="year" id="year" onChange="loadMonth(this.value)">
-					<option value="year">Year</option>
-					<?php  	
-						$years=$db->getMemberYear();
-						foreach ($years as $year):
-							echo 
-	'<option value="'.$year.'">'.$year.'</option>';
-					endforeach;
-					?>
-				</select>
-				</td>
-			</tr></form>
 			<h4>Member Report</h4>
 			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white" id="table">
 				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
@@ -63,7 +43,7 @@
 						<td><?php echo $member['member_id']; ?></td>
 						<td><?php echo $member['member_name']; ?></td>
                         <td><?php echo $member['member_created_time']; ?></td>
-                        <td></td>
+                        <td><?php echo $member['member_trustfulness']; ?></td>
                         <td></td>
                         <td></td>
                         <td><button type="button" class="btn btn-primary" onClick="getMemberDetail(<?php echo $member['member_id'];?>)" data-toggle="modal" data-target="#viewMember">View Profile</button></td>

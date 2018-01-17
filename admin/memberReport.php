@@ -88,7 +88,7 @@
 						document.getElementById("table").innerHTML = this.responseText;
 					}
 				  };
-				  xhttp.open("GET", "getMemberReport?year=all", true);
+				  xhttp.open("GET", "getMemberReport?year=all&act=report", true);
 				  xhttp.send();
 				}
 		
@@ -110,7 +110,7 @@
 						loadMemberByYear(year);
 					}
 				  };
-				  xhttp.open("GET", "getMemberMonth?year="+year, true);
+				  xhttp.open("GET", "getMemberMonth?year="+year+"&act=report", true);
 				  xhttp.send();
 				}
 			function loadMemberByMonth(month){
@@ -122,7 +122,7 @@
 							document.getElementById('table').innerHTML=this.responseText;
 							}
 						};
-					xhttp.open("GET", "getMemberByMonth?month="+month+"&year="+year, true);
+					xhttp.open("GET", "getMemberByMonth?month="+month+"&year="+year+"&act=report", true);
 					xhttp.send();
 				}
 
@@ -135,7 +135,7 @@
 							document.getElementById('table').innerHTML=this.responseText;
 							}
 					  };
-					xhttp.open("GET", "getMemberByYear?year="+year, true);
+					xhttp.open("GET", "getMemberByYear?year="+year+"&act=report", true);
 					xhttp.send();
 			}
 
@@ -155,7 +155,7 @@
 							loadMemberByMonth(month);
 						}
 					  };
-					  xhttp.open("GET", "getMemberDay?day="+month, true);
+					  xhttp.open("GET", "getMemberDay?day="+month+"&act=report", true);
 					  xhttp.send();
 					}
 			function loadMemberByDay(day){
@@ -172,7 +172,7 @@
 							document.getElementById('table').innerHTML=this.responseText;
 							}
 					  };
-					xhttp.open("GET", "getMemberByDay?day="+day+"&month="+month+"&year="+year, true);
+					xhttp.open("GET", "getMemberByDay?day="+day+"&month="+month+"&year="+year+"&act=report", true);
 					xhttp.send();
 			}
 		
