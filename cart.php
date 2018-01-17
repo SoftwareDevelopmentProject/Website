@@ -15,7 +15,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php include "_header.php";?>
 <div class="login">
     <div class="wrap" style="margin-bottom: 50px;">
-        <?php if (isset($_SESSION['cart'])) {?>
+        <?php if (sizeof($_SESSION['cart']) > 0) {?>
         <table class="table">
             <tr>
                 <th class="fixed-table-header">Image</th>
