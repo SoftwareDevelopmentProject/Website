@@ -42,7 +42,7 @@ session_start();
 					foreach ($members as $member):
                 ?>
 					<tr>
-						<td><?php echo $member['member_id']; ?></td>
+						<td><?php echo 'MID'.sprintf('%04d',$member['member_id']); ?></td>
 						<td><?php echo $member['member_name']; ?></td>
                         <td><?php echo $member['member_created_time']; ?></td>
                         <td><?php 
@@ -75,7 +75,7 @@ session_start();
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Member Profile</h4>
+          <h2 class="modal-title">Member Profile</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         

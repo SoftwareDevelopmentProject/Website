@@ -489,6 +489,14 @@ class DbFunction {
 	public function reportGetMemberById($id){
 		$db = new DbConnect();
 		$con =$db->connect();
+		$result_member =mysqli_query($con, "SELECT * FROM member WHERE member_id=$id");
+		$member = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
+        return $member;
+	}
+	/*
+	public function reportGetMemberById($id){
+		$db = new DbConnect();
+		$con =$db->connect();
 		$report = array();
 		$result_member =mysqli_query($con, "SELECT * FROM feedback_rating INNER JOIN feedback ON feedback_rating.feedback_id=feedback.feedback_id INNER JOIN member ON member.member_id=feedback.member_id INNER JOIN `order` ON `order`.member_id=member.member_id INNER JOIN order_detail ON order_detail.order_id=`order`.order_id WHERE member.member_id=$id");
 			while($result = mysqli_fetch_assoc($result_member)) {
@@ -496,6 +504,7 @@ class DbFunction {
 			}
 			return $report;
 		}
+		*/
 	
 	public function getMemberMonth($year){
     $db = new DbConnect();

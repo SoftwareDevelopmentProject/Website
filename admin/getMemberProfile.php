@@ -2,15 +2,11 @@
 
 include_once '../include/DbFunction.php';
 $db = new DbFunction;
-$reports = $db->reportGetMemberById($_GET['id']);
-foreach($reports as $report) {
-	echo 'hi';
-}
-
+$member = $db->reportGetMemberById($_GET['id']);
 ?>
 <div class="panel panel-default ">
 					<div class="panel-heading">
-						Timeline
+						<?php echo $member['member_name'].' (MID'.sprintf('%04d',$member['member_id']).')';?>
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -38,46 +34,79 @@ foreach($reports as $report) {
 					<div class="panel-body timeline-container">
 						<ul class="timeline">
 							<li>
-								<div class="timeline-badge">Name</div>
-								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Lorem ipsum dolor sit amet</h4>
-									</div>
+								<div class="timeline-badge primary">Status</div>
+								<div class="timeline-panel" style="padding: 0px">
 									<div class="timeline-body">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+										<p>
+											 <div class="dropdown">
+												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+													<?php 
+														switch ($member['member_trustfulness']) {
+															case 0:
+																echo 'Non-trusted';
+																break;
+															case 1:
+																echo 'Trusted';
+														} 
+
+
+													?>
+												<span class="caret"></span></button>
+												<ul class="dropdown-menu">
+												  <li><a href="#" <?php if($member['member_trustfulness']==1)echo 'style="color: #30a5ff" disabled';?>>Trusted <?php if($member['member_trustfulness']==1)echo '<i class="fa fa-check" aria-hidden="true">';?> </i></a></li>
+												  <li class="divider"></li>
+												  <li><a href="#" <?php if($member['member_trustfulness']==0)echo 'style="color: #30a5ff" disabled';?>>Non-Trusted<?php if($member['member_trustfulness']==0)echo '<i class="fa fa-check" aria-hidden="true">';?></i></a></li>
+												</ul>
+											  </div>
+										</p>
 									</div>
 								</div>
 							</li>
 							<li>
-								<div class="timeline-badge primary"><i class="glyphicon glyphicon-link"></i></div>
+								<div class="timeline-badge primary">Email</div>
 								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Lorem ipsum dolor sit amet</h4>
-									</div>
 									<div class="timeline-body">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+										<p><?php echo $member['member_email'];?></p>
 									</div>
 								</div>
 							</li>
 							<li>
-								<div class="timeline-badge"><i class="glyphicon glyphicon-camera"></i></div>
+								<div class="timeline-badge primary">Phone</div>
 								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Lorem ipsum dolor sit amet</h4>
-									</div>
 									<div class="timeline-body">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
+										<p><?php echo $member['member_phone'];?></p>
 									</div>
 								</div>
 							</li>
 							<li>
-								<div class="timeline-badge"><i class="glyphicon glyphicon-paperclip"></i></div>
+								<div class="timeline-badge primary">Address</div>
 								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title">Lorem ipsum dolor sit amet</h4>
-									</div>
 									<div class="timeline-body">
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+										<p><?php echo $member['member_address'];?></p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Point</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										<p><?php echo $member['member_reward_points'];?></p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Card</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										<p><?php echo $member['member_credit_card'];?></p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Create At</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										<p><?php echo $member['member_created_time'];?></p>
 									</div>
 								</div>
 							</li>
