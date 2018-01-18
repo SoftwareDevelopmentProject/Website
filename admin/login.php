@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +10,7 @@
 		$result = $db->loginStaff($_POST['email'], $_POST['password']);
 			switch ($result) {
 				case LOGIN_SUCCESS:
-					header('location:index.php');		
+                    echo '<script>window.location.replace("index.php")</script>';
 			}
 			
 		

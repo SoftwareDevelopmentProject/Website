@@ -1,4 +1,5 @@
 <?php
+session_start();
   	include_once '_head.php';
 	$realCode= $db->generateCode($_POST['userEmail']);
 

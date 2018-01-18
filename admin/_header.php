@@ -1,20 +1,13 @@
 <?php
-
 include_once '../include/DbFunction.php';
 $db = new DbFunction();
-
 if(isset($_SESSION['staff'])) {
   $user = $db->getStaff();
 } else {
 	$user = null;
-	header('location:login.php');
+	echo '<script>window.location.replace("login.php")</script>';
 	die();
-	
-
-
 }
-
-
 ?>
    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container-fluid">

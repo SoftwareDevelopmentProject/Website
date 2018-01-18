@@ -1,7 +1,4 @@
-<?php
-    $page = 'dashboard';
-?>
-
+<?php session_start(); $page = 'dashboard'; ?>
 <!DOCTYPE html>
 <html>
 <head>
