@@ -66,11 +66,8 @@ class DbFunction {
 	public function updateBook($id,$title, $author, $genre, $description, $publisher, $years, $price, $amount){
         $db = new DbConnect();
         $con = $db->connect();
-		echo "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id";
         $result = mysqli_query($con, "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id");
         return $result;
-		
-		
 	}
 	
 	
@@ -224,6 +221,7 @@ class DbFunction {
             }
             if (password_verify($password, $member['member_password'])) {
                 $_SESSION['user'] = $member['member_id'];
+                $_SESSION['password'] = md5($member['member_password']);
                 $this->recordLoginAttempt($member['member_id'], true);
                 return LOGIN_SUCCESS;
             }
@@ -339,11 +337,11 @@ class DbFunction {
         $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
         return $tar_staff;
     }
-
-    //Order_History
+	//Order_History
     public function getOrder($user_id){
 	    $db = new DbConnect();
 	    $con  = $db->connect();
+	    $result_order=array();
 	    $order = mysqli_query($con,"SELECT * from `order` WHERE order.member_id = $user_id;");
 	    $result_order = mysqli_fetch_array($order);
         return $result_order;
@@ -358,6 +356,7 @@ class DbFunction {
         }
         return $result_order_detail1;
     }
+
     // Cart (session)
 
     public function setSession() {
@@ -445,7 +444,7 @@ class DbFunction {
 		$db = new DbConnect();
 		$con =$db->connect();
 		$request = array();
-		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id ORDER BY status DESC");
+		$result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id INNER JOIN request_status ON request.request_status_id = request_status.request_status_id ORDER BY request_status.request_status_id DESC");
 			while($result = mysqli_fetch_assoc($result_request)) {
 				array_push($request, $result);
 			}
@@ -464,8 +463,7 @@ class DbFunction {
 		public function updateRequest($id,$status){
         $db = new DbConnect();
         $con = $db->connect();
-        $result = mysqli_query($con, "UPDATE request SET status='$status' WHERE request_id = $id");
-			print_r($con);
+        $result = mysqli_query($con, "UPDATE request SET request_status_id=$status WHERE request_id = $id");
         return $result;
 	}
 	
@@ -474,7 +472,18 @@ class DbFunction {
 		$db = new DbConnect();
 		$con =$db->connect();
 		$report = array();
-		$result_member =mysqli_query($con, "SELECT * FROM member");
+		$result_member =mysqli_query($con, "SELECT member.member_id,member.member_name,member.member_created_time, member.member_trustfulness, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN 1 ELSE NULL END) AS negative_feedback, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN NULL ELSE 1 END) AS positive_feedback FROM member INNER JOIN feedback ON member.member_id=feedback.member_id INNER JOIN feedback_rating ON feedback_rating.feedback_id=feedback.feedback_id GROUP BY member.member_id ORDER BY member.member_trustfulness DESC");
+			while($result = mysqli_fetch_assoc($result_member)) {
+				array_push($report, $result);
+			}
+			return $report;
+		}
+	
+	public function reportGetMemberById($id){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member =mysqli_query($con, "SELECT * FROM feedback_rating INNER JOIN feedback ON feedback_rating.feedback_id=feedback.feedback_id INNER JOIN member ON member.member_id=feedback.member_id INNER JOIN `order` ON `order`.member_id=member.member_id INNER JOIN order_detail ON order_detail.order_id=`order`.order_id WHERE member.member_id=$id");
 			while($result = mysqli_fetch_assoc($result_member)) {
 				array_push($report, $result);
 			}
@@ -546,6 +555,7 @@ class DbFunction {
 				}
 				return $sale;
 			}
+	
 			
 }
 
