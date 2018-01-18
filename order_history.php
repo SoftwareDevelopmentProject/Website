@@ -1,9 +1,6 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -28,10 +25,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                 </tr>
                 <?php
+                print_r($_SESSION['user']);
                     $order = $db->getOrder($_SESSION['user']);
                 ?>
                 <tr>
-                    <td><?php echo'<a href ="order_detail?order_id='.$order['order_id'].'">'.$order['order_transaction_id'].'</a>';?></td>
+                    <td><?php echo'<a href ="order_detail.php?order_id='.$order['order_id'].'">'.$order['order_transaction_id'].'</a>';?></td>
                     <td><?php echo $order['order_recipient_name']?></td>
                     <td><?php echo $order['order_recipient_phone']?></td>
                     <td><?php echo $order['order_recipient_address']?></td>

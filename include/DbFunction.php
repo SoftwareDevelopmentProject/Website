@@ -224,7 +224,6 @@ class DbFunction {
             }
             if (password_verify($password, $member['member_password'])) {
                 $_SESSION['user'] = $member['member_id'];
-                $_SESSION['password'] = md5($member['member_password']);
                 $this->recordLoginAttempt($member['member_id'], true);
                 return LOGIN_SUCCESS;
             }
@@ -341,15 +340,24 @@ class DbFunction {
         return $tar_staff;
     }
 
-//Order_History
-public function getOrder($user_id){
+    //Order_History
+    public function getOrder($user_id){
 	    $db = new DbConnect();
 	    $con  = $db->connect();
 	    $order = mysqli_query($con,"SELECT * from `order` WHERE order.member_id = $user_id;");
 	    $result_order = mysqli_fetch_array($order);
         return $result_order;
-}
-
+    }
+    public function getOrderdetails($order_id){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result_order_detail1 =array();
+        $order_detail = mysqli_query($con,"SELECT * from `order` INNER JOIN order_detail on `order`.order_id = order_detail.order_id INNER JOIN book on order_detail.book_id = book.book_id where `order`.order_id = $order_id");
+        while($result_order_detail=mysqli_fetch_array($order_detail)){
+            array_push($result_order_detail1,$result_order_detail);
+        }
+        return $result_order_detail1;
+    }
     // Cart (session)
 
     public function setSession() {
