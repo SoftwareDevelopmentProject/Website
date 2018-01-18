@@ -22,7 +22,7 @@ session_start();
                     <th class="fixed-table-header">Payment Method</th>
                     <th class="fixed-table-header">Time</th>
                     <th class="fixed-table-header">Order Status</th>
-
+                    <th class="fixed-table-header">Receipt</th>
                 </tr>
                 <?php
                 print_r($_SESSION['user']);
@@ -36,6 +36,7 @@ session_start();
                     <td><?php echo $order['order_payment_method']?></td>
                     <td><?php echo $order['order_created_time']?></td>
                     <td><?php echo $order['order_status']?></td>
+                    <td><?php echo '<a href="invoice.php?order_id='.$order['order_id'].'">Print</a>';?></td>
                 </tr>
             </table>
 

@@ -1,4 +1,5 @@
 <?php
+
 include_once '../include/DbFunction.php';
 $db = new DbFunction;
 $reports = $db->reportGetMemberById($_GET['id']);

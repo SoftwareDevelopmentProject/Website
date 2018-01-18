@@ -338,6 +338,13 @@ class DbFunction {
         return $tar_staff;
     }
 	//Order_History
+    public  function getOrderbyorderid($order_id){
+        $db = new DbConnect();
+        $con  = $db->connect();
+        $order = mysqli_query($con,"SELECT * from `order` WHERE order.order_id = $order_id;");
+        $result_orderid = mysqli_fetch_array($order);
+        return $result_orderid;
+    }
     public function getOrder($user_id){
 	    $db = new DbConnect();
 	    $con  = $db->connect();
