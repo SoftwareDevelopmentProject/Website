@@ -1,5 +1,4 @@
 <?php
-    session_start();
     $page = 'member';
 ?>
 
@@ -35,6 +34,7 @@
 					<td width="">Status</td>
 					<td width="">Positive Feedback</td>
 					<td width="">Negative Feedback</td>
+					<td></td>
 				</tr>
 				<?php
 					$members=$db->reportGetMember();
@@ -44,9 +44,17 @@
 						<td><?php echo $member['member_id']; ?></td>
 						<td><?php echo $member['member_name']; ?></td>
                         <td><?php echo $member['member_created_time']; ?></td>
-                        <td><?php echo $member['member_trustfulness']; ?></td>
-                        <td></td>
-                        <td></td>
+                        <td><?php 
+							switch ($member['member_trustfulness']) {
+								case 0:
+									echo 'Non-trusted';
+									break;
+								case 1:
+									echo 'Trusted';
+							} 
+							?></td>
+                        <td><?php echo $member['negative_feedback']; ?></td>
+                        <td><?php echo $member['positive_feedback']; ?></td>
                         <td><button type="button" class="btn btn-primary" onClick="getMemberDetail(<?php echo $member['member_id'];?>)" data-toggle="modal" data-target="#viewMember">View Profile</button></td>
                     </tr>
                     <?php endforeach; ?>
@@ -191,7 +199,7 @@
 						document.getElementById("modalBody").innerHTML = this.responseText;
 					}
 				  };
-				  xhttp.open("GET", "getMemberDetail?id="+id, true);
+				  xhttp.open("GET", "getMemberProfile?id="+id, true);
 				  xhttp.send();
 				}
 		
