@@ -23,7 +23,7 @@ if($user == null){
 }else{
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $transaction_id =rand(10000,99999);
-        $order_id = $db->checkout($_POST['name'],$_POST['phone'],$_POST['address'],$_POST['pm'], $transaction_id,$_SESSION['user']);
+        $order_id = $db->checkout($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address'],$_POST['pm'], $transaction_id,$_SESSION['user']);
         $cart = $db->viewCart();
         foreach ($cart as $book){
             $db->insertOrderdetails($order_id,$book['book_id'],$book['quantity']);
@@ -42,6 +42,7 @@ if($user == null){
             <center>
             <div class="col_1_of_1 span_1_of_1" style="margin: auto">
                 <div><label>RecipentName</label></div><div><input type="text" name ="name" style="width: 50%;"></div>
+                <div><label>RecipentEmail</label></div><div><input type="text" name ="email" style="width: 50%;"></div>
                 <div><label>RecipentPhone</label></div><div><input type="text" name="phone" style="width: 50%; "></div>
                 <div><label>RecipentAddress</label></div><div><input type="text" name="address" style="width: 50%;"></div>
                     <div><label>PaymentMethod</label></div><div><select name="pm" style="width: 50%;" onchange="if(this.value === 'CreditCard') document.getElementById('card').style.display = 'block'; else document.getElementById('card').style.display = 'none';">
