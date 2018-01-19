@@ -20,9 +20,10 @@ session_start();
 				<li><a href="memberReport.php">Member</a></li>
 			</ol>
 		</div><!--/.row-->
-		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-				
-}
+		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitBtn'])){
+				$db->updateTrustfulness($_POST['id'],$_POST['trustfulness']);
+				echo $_POST['id'].' '.$_POST['trustfulness'];
+				}
 		?>	
 			
 		<div class="padding" style="overflow: auto; height: auto;">
@@ -33,8 +34,8 @@ session_start();
 					<td width="">Member Name</td>
 					<td width="">Created at</td>
 					<td width="">Status</td>
-					<td width="">Positive Feedback</td>
 					<td width="">Negative Feedback</td>
+					<td width="">Positive Feedback</td>
 					<td></td>
 				</tr>
 				<?php
@@ -86,6 +87,11 @@ session_start();
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <form method="post">
+         	<input type="hidden" id="tmid" name="id">
+         	<input type="hidden" id="t" name="trustfulness">
+          	<input type="submit" id="subbtn" name="submitBtn" style="display: none">
+          </form>
         </div>
 
       </div>
@@ -94,103 +100,6 @@ session_start();
   
   <!--//end modal -->
 	<script>
-		//filter fuction 
-			function loadAllMemberReport() {
-				  var xhttp; 
-				  xhttp = new XMLHttpRequest();
-				  xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("table").innerHTML = this.responseText;
-					}
-				  };
-				  xhttp.open("GET", "getMemberReport?year=all", true);
-				  xhttp.send();
-				}
-		
-			function loadMonth(year) {
-				  var xhttp;    
-				  if (year == "year") {
-					$('#month').attr('disabled', 'disabled');
-					$('#month option[value="month"]').attr('selected', 'selected');
-					$('#day').attr('disabled', 'disabled');
-					$('#day option[value="day"]').attr('selected', 'selected');
-					loadAllMemberReport();
-					return;
-				  }
-				  xhttp = new XMLHttpRequest();
-				  xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						$('#month').removeAttr('disabled');
-						document.getElementById("month").innerHTML = this.responseText;
-						loadMemberByYear(year);
-					}
-				  };
-				  xhttp.open("GET", "getMemberMonth?year="+year, true);
-				  xhttp.send();
-				}
-			function loadMemberByMonth(month){
-				var xhttp; 
-				var year = $('#year').val();
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-						};
-					xhttp.open("GET", "getMemberByMonth?month="+month+"&year="+year, true);
-					xhttp.send();
-				}
-
-		
-			function loadMemberByYear(year){
-				 	var xhttp;    
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-					  };
-					xhttp.open("GET", "getMemberByYear?year="+year, true);
-					xhttp.send();
-			}
-
-			function loadDay(month) {
-					  var xhttp;    
-					  if (month == "month") {
-						$('#day').attr('disabled', 'disabled');
-						$('#day option[value="day"]').attr('selected', 'selected');
-						loadMemberByYear($('#year').val());
-						return;
-					  }
-					  xhttp = new XMLHttpRequest();
-					  xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							$('#day').removeAttr('disabled');
-							document.getElementById("day").innerHTML = this.responseText; 
-							loadMemberByMonth(month);
-						}
-					  };
-					  xhttp.open("GET", "getMemberDay?day="+month, true);
-					  xhttp.send();
-					}
-			function loadMemberByDay(day){
-				 	var xhttp;
-					var month = $('#month').val();
-					var year = $('#year').val();
-					if (day == "day") {
-						loadMemberByMonth(month);;
-						return;
-					  }
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-					  };
-					xhttp.open("GET", "getMemberByDay?day="+day+"&month="+month+"&year="+year, true);
-					xhttp.send();
-			}
-		//--end filter
 		//--view member js
 		function getMemberDetail(id) {
 				  var xhttp; 
@@ -203,6 +112,12 @@ session_start();
 				  xhttp.open("GET", "getMemberProfile?id="+id, true);
 				  xhttp.send();
 				}
+		function submitT(id,t){
+			$('#tmid').val(id);
+			$('#t').val(t);
+			$('#subbtn').click();
+			
+		}
 		
 	</script>
 	

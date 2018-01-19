@@ -53,9 +53,9 @@ $member = $db->reportGetMemberById($_GET['id']);
 													?>
 												<span class="caret"></span></button>
 												<ul class="dropdown-menu">
-												  <li><a href="#" <?php if($member['member_trustfulness']==1)echo 'style="color: #30a5ff" disabled';?>>Trusted <?php if($member['member_trustfulness']==1)echo '<i class="fa fa-check" aria-hidden="true">';?> </i></a></li>
+												  <li><a href="#" <?php if($member['member_trustfulness']==1){echo 'style="color: #30a5ff" disabled';}else{echo 'onClick="submitT('.$member['member_id'].',1)"';}?>>Trusted <?php if($member['member_trustfulness']==1)echo '<i class="fa fa-check" aria-hidden="true">';?> </i></a></li>
 												  <li class="divider"></li>
-												  <li><a href="#" <?php if($member['member_trustfulness']==0)echo 'style="color: #30a5ff" disabled';?>>Non-Trusted<?php if($member['member_trustfulness']==0)echo '<i class="fa fa-check" aria-hidden="true">';?></i></a></li>
+												  <li><a href="#" <?php if($member['member_trustfulness']==0){echo 'style="color: #30a5ff" disabled';}else{echo 'onClick="submitT('.$member['member_id'].',0)"';}?>>Non-Trusted<?php if($member['member_trustfulness']==0)echo '<i class="fa fa-check" aria-hidden="true">';?></i></a></li>
 												</ul>
 											  </div>
 										</p>
@@ -107,6 +107,34 @@ $member = $db->reportGetMemberById($_GET['id']);
 								<div class="timeline-panel">
 									<div class="timeline-body">
 										<p><?php echo $member['member_created_time'];?></p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Ordered</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										<p> 
+											<table class="table">
+												<tr>
+													<th class="fixed-table-header">Book Name</th>
+													<th class="fixed-table-header">Quantity</th>
+													<th class="fixed-table-header">Price</th>	
+													<th class="fixed-table-header">Order Date Time</th>
+												</tr>
+										<?php 
+											$orders=$db->getMemberOrderHistory($_GET['id']);
+											foreach ($orders as $order):
+											?>
+												<tr>
+													<td><?php echo $order['book_title'];?></td>
+													<td><?php echo $order['order_detail_quantity'];?></td>
+													<td><?php echo $order['price'];?></td>
+													<td><?php echo $order['order_created_time'];?></td>
+												</tr>
+												 <?php endforeach; ?>
+											</table>
+										</p>
 									</div>
 								</div>
 							</li>

@@ -505,6 +505,13 @@ class DbFunction {
 			return $report;
 		}
 		*/
+	public function updateTrustfulness($id,$trustfulness){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "UPDATE member SET member_trustfulness=$trustfulness WHERE member_id=$id");
+        return $result;
+	}
+	
 	
 	public function getMemberMonth($year){
     $db = new DbConnect();
@@ -543,6 +550,16 @@ class DbFunction {
 		$report = array();
 		$result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time) = $month AND DAY(member_created_time)=$day)");
 				while($result = mysqli_fetch_assoc($result_member)) {
+					array_push($report, $result);
+				}
+				return $report;
+			}
+	public function getMemberOrderHistory($id){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$report = array();
+		$result_member_order =mysqli_query($con, "SELECT book.book_title,order_detail.order_detail_quantity,(order_detail.order_detail_quantity*book.book_price) AS price,`order`.`order_created_time` FROM book INNER JOIN order_detail ON book.book_id=order_detail.book_id INNER JOIN `order` ON `order`.`order_id`= order_detail.order_id WHERE `order`.`member_id`=$id");
+				while($result = mysqli_fetch_assoc($result_member_order)) {
 					array_push($report, $result);
 				}
 				return $report;

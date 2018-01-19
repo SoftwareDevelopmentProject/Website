@@ -1,4 +1,5 @@
 <?php
+session_start();
     $page = 'bookRequest';
 ?>
 
@@ -32,7 +33,8 @@
 				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
 					<td width="">Staff Name</td>
 					<td width="">Request Date</td>
-					<td width="" colspan="2">Status</td>
+					<td width="">Status</td>
+					<td></td>
 				</tr>
 				<?php
 					$requests=$db->getRequest();
