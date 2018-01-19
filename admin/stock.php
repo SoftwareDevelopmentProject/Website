@@ -90,7 +90,7 @@
 					foreach($books as $book) :
                 ?>
 					<tr>
-						<td><?php echo $book['book_id']; ?></td>
+						<td><?php echo 'BID'.sprintf('%04d',$book['book_id']); ?></td>
 						<td><?php echo $book['book_title']; ?></td>
                         <td><?php echo $book['book_author']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>
@@ -316,7 +316,7 @@
 					foreach($books as $book) :
                 ?>
 					<tr>
-						<td><?php echo $book['book_id']; ?></td>
+						<td><?php echo 'BID'.sprintf('%04d',$book['book_id']);?></td>
 						<td><?php echo $book['book_title']; ?></td>
                         <td><?php echo $book['book_author']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>

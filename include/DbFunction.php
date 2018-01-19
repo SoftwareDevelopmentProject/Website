@@ -565,6 +565,17 @@ class DbFunction {
 				return $report;
 			}
 	
+	public function getMemberFeedback($id){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$feedback = array();
+		$result_member_feedback =mysqli_query($con, "SELECT book.book_title,feedback.feedback_comment,feedback.feedback_scale,COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN 1 ELSE NULL END) AS useless, COUNT(CASE feedback_rating.rating_scale WHEN 1 THEN 1 ELSE NULL END) AS usefull, COUNT(CASE feedback_rating.rating_scale WHEN 2 THEN 1 ELSE NULL END) AS veryusefull FROM book INNER JOIN feedback ON book.book_id = feedback.feedback_id INNER JOIN feedback_rating ON feedback_rating.feedback_id=feedback.feedback_id WHERE feedback.member_id=$id GROUP BY book.book_id;");
+				while($result = mysqli_fetch_assoc($result_member_feedback)) {
+					array_push($feedback, $result);
+				}
+				return $feedback;
+			}
+	
 	//sales report
 	
 	public function getSaleByYear($year){

@@ -39,7 +39,7 @@ $member = $db->reportGetMemberById($_GET['id']);
 									<div class="timeline-body">
 										<p>
 											 <div class="dropdown">
-												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+												<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
 													<?php 
 														switch ($member['member_trustfulness']) {
 															case 0:
@@ -94,6 +94,7 @@ $member = $db->reportGetMemberById($_GET['id']);
 									</div>
 								</div>
 							</li>
+							<?php if($member['member_credit_card']!=NULL):?>
 							<li>
 								<div class="timeline-badge primary">Card</div>
 								<div class="timeline-panel">
@@ -102,6 +103,7 @@ $member = $db->reportGetMemberById($_GET['id']);
 									</div>
 								</div>
 							</li>
+							<?php endif; ?>
 							<li>
 								<div class="timeline-badge primary">Create At</div>
 								<div class="timeline-panel">
@@ -114,27 +116,92 @@ $member = $db->reportGetMemberById($_GET['id']);
 								<div class="timeline-badge primary">Ordered</div>
 								<div class="timeline-panel">
 									<div class="timeline-body">
-										<p> 
-											<table class="table">
-												<tr>
-													<th class="fixed-table-header">Book Name</th>
-													<th class="fixed-table-header">Quantity</th>
-													<th class="fixed-table-header">Price</th>	
-													<th class="fixed-table-header">Order Date Time</th>
-												</tr>
+										 <button type="button" class="btn btn-secondary pull-center" data-toggle="collapse" data-target="#orderHistory">View Order History</button>
+										  <div id="orderHistory" class="collapse">
+										  <table class="table">
+											<tr>
+												<th class="fixed-table-header">Book Name</th>
+												<th class="fixed-table-header">Quantity</th>
+												<th class="fixed-table-header">Price</th>	
+												<th class="fixed-table-header">Order Date Time</th>
+											</tr>
 										<?php 
 											$orders=$db->getMemberOrderHistory($_GET['id']);
 											foreach ($orders as $order):
 											?>
-												<tr>
-													<td><?php echo $order['book_title'];?></td>
-													<td><?php echo $order['order_detail_quantity'];?></td>
-													<td><?php echo $order['price'];?></td>
-													<td><?php echo $order['order_created_time'];?></td>
-												</tr>
-												 <?php endforeach; ?>
+											<tr>
+												<td><?php echo $order['book_title'];?></td>
+												<td><?php echo $order['order_detail_quantity'];?></td>
+												<td><?php echo 'RM '.$order['price'];?></td>
+												<td><?php echo $order['order_created_time'];?></td>
+											</tr>
+										<?php endforeach; ?>
 											</table>
-										</p>
+  										</div>
+											
+									
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Feedback</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										 <button type="button" class="btn btn-secondary pull-center" data-toggle="collapse" data-target="#feedback">View All Feedback</button>
+										  <div id="feedback" class="collapse">
+										  <table class="table">
+											<tr>
+												<th class="fixed-table-header">Book Name</th>
+												<th class="fixed-table-header">Comment</th>
+												<th class="fixed-table-header">Rating For Book</th>	
+												<th class="fixed-table-header">Useless</th>
+												<th class="fixed-table-header">Usefull</th>
+												<th class="fixed-table-header">Very Usefull</th>
+											</tr>
+										<?php 
+											$feedbacks=$db->getMemberFeedback($_GET['id']);
+											foreach ($feedbacks as $feedback):
+											?>
+											<tr>
+												<td><?php echo $feedback['book_title'];?></td>
+												<td><?php echo $feedback['feedback_comment'];?></td>
+												<td><?php
+													switch ($feedback['feedback_scale']){
+														case 0:
+															echo'<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+															break;
+														case 1:
+															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+															break;
+														case 2:
+															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+															break;
+															
+														case 3:
+															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+															break;
+														case 4:
+															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
+															break;
+														case 5:
+															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
+													}
+																									
+	
+	?>
+											
+											
+											<br><?php echo number_format($feedback['feedback_scale'],1);?>
+											</td>
+												<td><?php echo $feedback['useless'];?></td>
+												<td><?php echo $feedback['usefull'];?></td>
+												<td><?php echo $feedback['veryusefull'];?></td>
+											</tr>
+										<?php endforeach; ?>
+											</table>
+  										</div>
+											
+									
 									</div>
 								</div>
 							</li>
