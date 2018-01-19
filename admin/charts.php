@@ -64,7 +64,7 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Line Chart
+						Sales Revenue
 						<ul class="pull-right panel-settings panel-button-tab-right">
 							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
 								<em class="fa fa-cogs"></em>
@@ -294,6 +294,30 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/custom.js"></script>
 	<script>
+
+        // Sales Report
+        <?php
+                $sales_report = $db->getSalesReport();
+        ?>
+        var lineChartData = {
+            labels : [<?php foreach($sales_report as $index => $sr) {echo '"'.$sr['month'].'"'; if($index < sizeof($sales_report) - 1) echo ',';} ?>],
+            datasets : [
+                {
+                    label: "Sales Report",
+                    fillColor : "rgba(220,220,220,0.2)",
+                    strokeColor : "rgba(220,220,220,1)",
+                    pointColor : "rgba(220,220,220,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(220,220,220,1)",
+                    data : [<?php foreach($sales_report as $index => $sr) {echo '"'.$sr['revenue'].'"'; if($index < sizeof($sales_report) - 1) echo ',';} ?>]
+                },
+            ]
+
+        }
+        // End Sales Report
+
+
 	window.onload = function () {
 	var chart1 = document.getElementById("line-chart").getContext("2d");
 	window.myLine = new Chart(chart1).Line(lineChartData, {

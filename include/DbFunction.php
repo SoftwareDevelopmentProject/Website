@@ -558,11 +558,21 @@ class DbFunction {
 		$sale = array();
 		$result_sale =mysqli_query($con,"SELECT book.book_id,book.book_title,(SUM(order_detail.order_detail_quantity)*book.book_price) AS sale, (SUM(order_detail.order_detail_quantity)) AS sold_quantity FROM book INNER JOIN order_detail ON order_detail.book_id=book.book_id INNER JOIN `order` ON `order`.order_id=order_detail.order_id WHERE (YEAR(`order`.order_created_time)= $year AND MONTH(`order`.order_created_time)= $month) GROUP BY order_detail.book_id,book.book_title ORDER BY sale DESC");
 			while($result = mysqli_fetch_assoc($result_sale)) {
-					array_push($sale, $result);
-				}
-				return $sale;
+			    array_push($sale, $result);
 			}
-	
+			return $sale;
+	}
+
+	public function getSalesReport() {
+        $db = new DbConnect();
+        $con =$db->connect();
+        $report = array();
+	    $result = mysqli_query($con, "SELECT YEAR(`order`.`order_created_time`) as year, `month`.`name` as `month`, SUM(`book`.`book_price` * `order_detail`.`order_detail_quantity`) as `revenue` FROM `order_detail` INNER JOIN `order` ON `order_detail`.`order_id` = `order`.`order_id` INNER JOIN `book` ON `book`.`book_id` = `order_detail`.`book_id` INNER JOIN (SELECT 1 as `month_id`, 'Jan' as `name` UNION SELECT 2 as `month_id`, 'Feb' as `name` UNION SELECT 3 as `month_id`, 'Mar' as `name` UNION SELECT 4 as `month_id`, 'Apr' as `name` UNION SELECT 5 as `month_id`, 'May' as `name` UNION SELECT 6 as `month_id`, 'Jun' as `name` UNION SELECT 7 as `month_id`, 'Jul' as `name` UNION SELECT 8 as `month_id`, 'Aug' as `name` UNION SELECT 9 as `month_id`, 'Sept' as `name` UNION SELECT 10 as `month_id`, 'Oct' as `name` UNION SELECT 11 as `month_id`, 'Nov' as `name` UNION SELECT 12 as `month_id`, 'Dec' as `name`) as `month` ON `month`.`month_id` = MONTH(`order`.`order_created_time`) GROUP BY YEAR(`order`.`order_created_time`), `month`.`name`, `month`.`month_id` ORDER BY YEAR(`order`.`order_created_time`), `month`.`month_id` LIMIT 6");
+	    while ($row = mysqli_fetch_assoc($result)) {
+	        array_push($report, $row);
+        }
+        return $report;
+    }
 			
 }
 
