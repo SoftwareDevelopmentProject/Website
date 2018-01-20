@@ -26,7 +26,7 @@
 }
 		?>
 		<?php 
-			$num=$db->reportCountMemberByMonth(date("m"));
+			$num=$db->reportCountMemberByMonth(date("m"),date("y"));
 		?>
 		<!--progress bar-->
 		<div class="panel panel-default ">
@@ -86,7 +86,7 @@
 							<div class="col-md-12 no-padding">
 								<div class="row progress-labels">
 									<div class="col-sm-6">Janary</div>
-									<div class="col-sm-6" style="text-align: right;">80%</div>
+									<div class="col-sm-6" style="text-align: right;"></div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -119,6 +119,13 @@
 								<div class="progress">
 									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">June</div>
+									<div class="col-sm-6" style="text-align: right;">80%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -128,28 +135,42 @@
 						<div class="panel-body">
 							<div class="col-md-12 no-padding">
 								<div class="row progress-labels">
-									<div class="col-sm-6">New Orders</div>
+									<div class="col-sm-6">July</div>
 									<div class="col-sm-6" style="text-align: right;">80%</div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
-									<div class="col-sm-6">Comments</div>
+									<div class="col-sm-6">August</div>
 									<div class="col-sm-6" style="text-align: right;">60%</div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
-									<div class="col-sm-6">New Users</div>
+									<div class="col-sm-6">Septemper</div>
 									<div class="col-sm-6" style="text-align: right;">40%</div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
-									<div class="col-sm-6">Page Views</div>
+									<div class="col-sm-6">October</div>
+									<div class="col-sm-6" style="text-align: right;">20%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">November</div>
+									<div class="col-sm-6" style="text-align: right;">20%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">December</div>
 									<div class="col-sm-6" style="text-align: right;">20%</div>
 								</div>
 								<div class="progress">

@@ -475,10 +475,10 @@ class DbFunction {
 	}
 	
     //report fuction
-	public function reportCountMemberByMonth($month){
+	public function reportCountMemberByMonth($month,$year){
 		$db = new DbConnect();
 		$con =$db->connect();
-		$result_member =mysqli_query($con, "SELECT COUNT(member_id) AS all_member, COUNT(CASE MONTH(member_created_time) WHEN ($month-0) THEN 1 ELSE NULL END) AS `m0`, COUNT(CASE MONTH(member_created_time) WHEN ($month-1) THEN 1 ELSE NULL END) AS `m1`, COUNT(CASE MONTH(member_created_time) WHEN ($month-2) THEN 1 ELSE NULL END) AS `m2`, COUNT(CASE MONTH(member_created_time) WHEN ($month-3) THEN 1 ELSE NULL END) AS `m3`, COUNT(CASE MONTH(member_created_time) WHEN ($month-4) THEN 1 ELSE NULL END) AS `m4`, COUNT(CASE MONTH(member_created_time) WHEN ($month-5) THEN 1 ELSE NULL END) AS `m5`, COUNT(CASE MONTH(member_created_time) WHEN ($month-6) THEN 1 ELSE NULL END) AS `m6` FROM member");
+		$result_member =mysqli_query($con, "SELECT COUNT(member_id) AS all_member, COUNT(CASE YEAR(member_created_time) WHEN $year THEN 1 ELSE NULL END) AS `y`, COUNT(CASE MONTH(member_created_time) WHEN ($month-0) THEN 1 ELSE NULL END) AS `m0`, COUNT(CASE MONTH(member_created_time) WHEN ($month-1) THEN 1 ELSE NULL END) AS `m1`, COUNT(CASE MONTH(member_created_time) WHEN ($month-2) THEN 1 ELSE NULL END) AS `m2`, COUNT(CASE MONTH(member_created_time) WHEN ($month-3) THEN 1 ELSE NULL END) AS `m3`, COUNT(CASE MONTH(member_created_time) WHEN ($month-4) THEN 1 ELSE NULL END) AS `m4`, COUNT(CASE MONTH(member_created_time) WHEN ($month-5) THEN 1 ELSE NULL END) AS `m5`, COUNT(CASE MONTH(member_created_time) WHEN ($month-6) THEN 1 ELSE NULL END) AS `m6`,COUNT(CASE MONTH(member_created_time) WHEN ($month-7) THEN 1 ELSE NULL END) AS `m7`,COUNT(CASE MONTH(member_created_time) WHEN ($month-8) THEN 1 ELSE NULL END) AS `m8`,COUNT(CASE MONTH(member_created_time) WHEN ($month-9) THEN 1 ELSE NULL END) AS `m9`,COUNT(CASE MONTH(member_created_time) WHEN ($month-10) THEN 1 ELSE NULL END) AS `m10`,COUNT(CASE MONTH(member_created_time) WHEN ($month-11) THEN 1 ELSE NULL END) AS `m11`,COUNT(CASE MONTH(member_created_time) WHEN ($month-12) THEN 1 ELSE NULL END) AS `m12` FROM member");
 		$member = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $member;
 	}
