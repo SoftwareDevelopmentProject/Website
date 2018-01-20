@@ -142,34 +142,12 @@ $member = $db->reportGetMemberById($_GET['id']);
 											<tr>
 												<td><?php echo $feedback['book_title'];?></td>
 												<td><?php echo $feedback['feedback_comment'];?></td>
-												<td><?php
-													switch ($feedback['feedback_scale']){
-														case 0:
-															echo'<i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
-															break;
-														case 1:
-															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
-															break;
-														case 2:
-															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
-															break;
-															
-														case 3:
-															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
-															break;
-														case 4:
-															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>';
-															break;
-														case 5:
-															echo'<i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i>';
-													}
-																									
-	
-	?>
-											
-											
-											<br><?php echo number_format($feedback['feedback_scale'],1);?>
-											</td>
+												<td>
+                                                    <?php for($count = 0; $count < 5; $count++): ?>
+                                                        <i class="fa <?php echo ($count < $feedback['feedback_scale']) ? 'fa-star' : 'fa-star-o'; ?>" aria-hidden="true"></i>
+                                                    <?php endfor; ?>
+											        <br><?php echo number_format($feedback['feedback_scale'],1);?>
+											    </td>
 												<td><?php echo $feedback['useless'];?></td>
 												<td><?php echo $feedback['usefull'];?></td>
 												<td><?php echo $feedback['veryusefull'];?></td>
