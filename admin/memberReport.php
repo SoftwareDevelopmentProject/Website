@@ -26,39 +26,9 @@
 }
 		?>
 		<?php 
-			$num=$db->reportCountMemberByMonth(date("m"),date("y"));
+			$num=$db->reportCountMemberByMonth(date("m"),date("o"));
 		?>
-		<!--progress bar-->
-		<div class="panel panel-default ">
-					<div class="panel-heading">
-						Progress bars
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					
-				</div>
-				<!--//progress bar-->
+
 		<!--dash board-->
 		<div class="panel panel-container">
 			<div class="row">
@@ -72,10 +42,10 @@
 				</div>
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding" style="width: 20%">
 					<div class="panel panel-blue panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-							<div class="large" style="font-size: 20px"><?php echo date("Y").'<br>December';?></div>
+						<div class="row no-padding">
+							<div class="large" style="font-size: 20px"><?php echo date("Y").'<br>Total New Member';?></div>
 							<div class="large">
-								<?php echo $num['m0'];?>
+								<?php echo $num['y'];?>
 							</div>
 						</div>
 					</div>
@@ -86,45 +56,45 @@
 							<div class="col-md-12 no-padding">
 								<div class="row progress-labels">
 									<div class="col-sm-6">Janary</div>
-									<div class="col-sm-6" style="text-align: right;"></div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m0'].' ('.($num['m0']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m0']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">Febuary</div>
-									<div class="col-sm-6" style="text-align: right;">60%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m1'].' ('.($num['m1']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m1']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">March</div>
-									<div class="col-sm-6" style="text-align: right;">40%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m2'].' ('.($num['m2']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m2']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">April</div>
-									<div class="col-sm-6" style="text-align: right;">20%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m3'].' ('.($num['m3']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m3']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">May</div>
-									<div class="col-sm-6" style="text-align: right;">20%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m4'].' ('.($num['m4']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m4']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">June</div>
-									<div class="col-sm-6" style="text-align: right;">80%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m5'].' ('.($num['m5']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m5']/$num['y']*100).'%';?>%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 						</div>
@@ -136,45 +106,45 @@
 							<div class="col-md-12 no-padding">
 								<div class="row progress-labels">
 									<div class="col-sm-6">July</div>
-									<div class="col-sm-6" style="text-align: right;">80%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m6'].' ('.($num['m6']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m6']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">August</div>
-									<div class="col-sm-6" style="text-align: right;">60%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m7'].' ('.($num['m7']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m7']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">Septemper</div>
-									<div class="col-sm-6" style="text-align: right;">40%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m8'].' ('.($num['m8']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m8']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">October</div>
-									<div class="col-sm-6" style="text-align: right;">20%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m9'].' ('.($num['m9']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m9']/$num['y']*100).'%';?>%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">November</div>
-									<div class="col-sm-6" style="text-align: right;">20%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m10'].' ('.($num['m10']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m10']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">December</div>
-									<div class="col-sm-6" style="text-align: right;">20%</div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m11'].' ('.($num['m11']/$num['y']*100).'%)';?></div>
 								</div>
 								<div class="progress">
-									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+									<div data-percentage="0%" style="width: <?php echo ($num['m11']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 						</div>
