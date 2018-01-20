@@ -475,11 +475,20 @@ class DbFunction {
 	}
 	
     //report fuction
+	public function reportCountMemberByMonth($month){
+		$db = new DbConnect();
+		$con =$db->connect();
+		$result_member =mysqli_query($con, "SELECT COUNT(member_id) AS all_member, COUNT(CASE MONTH(member_created_time) WHEN ($month-0) THEN 1 ELSE NULL END) AS `m0`, COUNT(CASE MONTH(member_created_time) WHEN ($month-1) THEN 1 ELSE NULL END) AS `m1`, COUNT(CASE MONTH(member_created_time) WHEN ($month-2) THEN 1 ELSE NULL END) AS `m2`, COUNT(CASE MONTH(member_created_time) WHEN ($month-3) THEN 1 ELSE NULL END) AS `m3`, COUNT(CASE MONTH(member_created_time) WHEN ($month-4) THEN 1 ELSE NULL END) AS `m4`, COUNT(CASE MONTH(member_created_time) WHEN ($month-5) THEN 1 ELSE NULL END) AS `m5`, COUNT(CASE MONTH(member_created_time) WHEN ($month-6) THEN 1 ELSE NULL END) AS `m6` FROM member");
+		$member = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
+        return $member;
+	}
+	
+	
 	 public function reportGetMember(){
 		$db = new DbConnect();
 		$con =$db->connect();
 		$report = array();
-		$result_member =mysqli_query($con, "SELECT member.member_id,member.member_name,member.member_created_time, member.member_trustfulness, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN 1 ELSE NULL END) AS negative_feedback, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN NULL ELSE 1 END) AS positive_feedback FROM member INNER JOIN feedback ON member.member_id=feedback.member_id INNER JOIN feedback_rating ON feedback_rating.feedback_id=feedback.feedback_id GROUP BY member.member_id ORDER BY member.member_trustfulness DESC");
+		$result_member =mysqli_query($con, "SELECT member.member_id,member.member_name,member.member_created_time, member.member_trustfulness, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN 1 ELSE NULL END) AS negative_feedback, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN NULL ELSE 1 END) AS positive_feedback FROM member RIGHT JOIN feedback ON member.member_id=feedback.member_id INNER JOIN feedback_rating ON feedback_rating.feedback_id=feedback.feedback_id GROUP BY member.member_id ORDER BY member.member_trustfulness DESC");
 			while($result = mysqli_fetch_assoc($result_member)) {
 				array_push($report, $result);
 			}
