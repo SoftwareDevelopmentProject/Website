@@ -22,7 +22,6 @@ session_start();
 		</div><!--/.row-->
 		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitBtn'])){
 				$db->updateTrustfulness($_POST['id'],$_POST['trustfulness']);
-				echo $_POST['id'].' '.$_POST['trustfulness'];
 				}
 		?>	
 			

@@ -28,51 +28,134 @@
 		<?php 
 			$num=$db->reportCountMemberByMonth(date("m"));
 		?>
+		<!--progress bar-->
+		<div class="panel panel-default ">
+					<div class="panel-heading">
+						Progress bars
+						<ul class="pull-right panel-settings panel-button-tab-right">
+							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
+								<em class="fa fa-cogs"></em>
+							</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li>
+										<ul class="dropdown-settings">
+											<li><a href="#">
+												<em class="fa fa-cog"></em> Settings 1
+											</a></li>
+											<li class="divider"></li>
+											<li><a href="#">
+												<em class="fa fa-cog"></em> Settings 2
+											</a></li>
+											<li class="divider"></li>
+											<li><a href="#">
+												<em class="fa fa-cog"></em> Settings 3
+											</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+					
+				</div>
+				<!--//progress bar-->
 		<!--dash board-->
 		<div class="panel panel-container">
 			<div class="row">
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding" style="width: 100%">
 					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
+						<div class="row no-padding"><em class="fa fa-xl fa-user-o color-blue"></em>
+							<div class="large">Total Registered Member</div>
 							<div class="large"><?php echo $num['all_member'];?></div>
-							<div class="text-muted">Total Registered Member</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding" style="width: 20%">
 					<div class="panel panel-blue panel-widget border-right">
 						<div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-							<div class="large">52</div>
-							<div class="text-muted">
-								<?php 
-									$d=strtotime("-1 Months");
-									echo date("M",$d);
-								?>
+							<div class="large" style="font-size: 20px"><?php echo date("Y").'<br>December';?></div>
+							<div class="large">
+								<?php echo $num['m0'];?>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-							<div class="large">24</div>
-							<div class="text-muted">New Users</div>
+				<div class="col-xs-6 col-md-3 col-lg-3 no-paddin" style="width: 40%">
+					<div class="panel panel-red panel-widget ">
+						<div class="panel-body">
+							<div class="col-md-12 no-padding">
+								<div class="row progress-labels">
+									<div class="col-sm-6">Janary</div>
+									<div class="col-sm-6" style="text-align: right;">80%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">Febuary</div>
+									<div class="col-sm-6" style="text-align: right;">60%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">March</div>
+									<div class="col-sm-6" style="text-align: right;">40%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">April</div>
+									<div class="col-sm-6" style="text-align: right;">20%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">May</div>
+									<div class="col-sm-6" style="text-align: right;">20%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+				<div class="col-xs-6 col-md-3 col-lg-3 no-paddin" style="width: 40%">
 					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">25.2k</div>
-							<div class="text-muted">Page Views</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-							<div class="large">25.2k</div>
-							<div class="text-muted">Page Views</div>
+						<div class="panel-body">
+							<div class="col-md-12 no-padding">
+								<div class="row progress-labels">
+									<div class="col-sm-6">New Orders</div>
+									<div class="col-sm-6" style="text-align: right;">80%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 80%;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">Comments</div>
+									<div class="col-sm-6" style="text-align: right;">60%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-orange" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">New Users</div>
+									<div class="col-sm-6" style="text-align: right;">40%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 40%;" class="progress-bar progress-bar-teal" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+								<div class="row progress-labels">
+									<div class="col-sm-6">Page Views</div>
+									<div class="col-sm-6" style="text-align: right;">20%</div>
+								</div>
+								<div class="progress">
+									<div data-percentage="0%" style="width: 20%;" class="progress-bar progress-bar-red" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

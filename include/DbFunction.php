@@ -488,7 +488,7 @@ class DbFunction {
 		$db = new DbConnect();
 		$con =$db->connect();
 		$report = array();
-		$result_member =mysqli_query($con, "SELECT member.member_id,member.member_name,member.member_created_time, member.member_trustfulness, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN 1 ELSE NULL END) AS negative_feedback, COUNT(CASE feedback_rating.rating_scale WHEN 0 THEN NULL ELSE 1 END) AS positive_feedback FROM member RIGHT JOIN feedback ON member.member_id=feedback.member_id INNER JOIN feedback_rating ON feedback_rating.feedback_id=feedback.feedback_id GROUP BY member.member_id ORDER BY member.member_trustfulness DESC");
+		$result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` GROUP BY `member`.`member_id`");
 			while($result = mysqli_fetch_assoc($result_member)) {
 				array_push($report, $result);
 			}
