@@ -81,7 +81,7 @@ if(isset($_SESSION['user'])) {
             <li class="active grid"><a class="color4" href="new-arrival.php">New Arrivals</a>
 
             </li>
-            <li><a class="color5" href="ratings.php">Top Ratings</a>
+            <li><a class="color5" href="ratings.php">Top Seller</a>
 
             </li>
             <li><a class="color6" href="about.php">About</a>

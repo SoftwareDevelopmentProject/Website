@@ -1,14 +1,13 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+<?php
+session_start();
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
     <title>Technology BookStore:Order Details</title>
     <?php include"_head.php";?>
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
@@ -19,13 +18,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <table class="table">
             <tr>
                 <th class="fixed-table-header">Transaction Number</th>
+                <th></th>
                 <th class="fixed-table-header">Book Title</th>
                 <th class="fixed-table-header">Book Price</th>
                 <th class="fixed-table-header">Quantity</th>
+                <th class="fixed-table-header">Subtotal</th>
+
             </tr>
             <?php
             $order_detail = $db->getOrderdetails($_GET['order_id']);
+
             foreach($order_detail as $o){
+                $subtotal = $o['book_price']*$o['order_detail_quantity'];
+                $total = 0;
+                $total +=$subtotal;
+
             ?>
             <tr>
                 <td><?php echo $o['order_transaction_id'];?></td>
@@ -33,8 +40,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <td><?php echo $o['book_title'];?></td>
                 <td><?php echo $o['book_price'];?></td>
                 <td><?php echo $o['order_detail_quantity'];?></td>
+                <td><?php echo $subtotal?></td>
             </tr>
             <?php  }?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><?php echo $total; ?></td>
+            </tr>
         </table>
 
 

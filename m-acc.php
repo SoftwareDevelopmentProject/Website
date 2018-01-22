@@ -37,7 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		   			 <div><input type="text" name ="name" value="<?php echo $user['member_name']?>"></div>
                      <div><label>My Email</label></div>
-                     <div><input type="text" name="email" value="<?php echo $user['member_email']?>"> <input type="text" name ="member" value="<?php echo $user['member_id']?>"/></div>
+                     <div><input type="text" name="email" value="<?php echo $user['member_email']?>"></div>
                      <div><a href="change_password.php" style="text-decoration: underline;font-size: 14px;">change password</a> </div>
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
