@@ -60,21 +60,21 @@ if($user == null){
         <form method="post" style="width: 100%" >
             <center>
             <div class="col_1_of_1 span_1_of_1" style="margin: auto">
-                <div><label>RecipentName</label></div><div><input type="text" name ="name" style="width: 50%;"></div>
-                <div><label>RecipentEmail</label></div><div><input type="text" name ="email" style="width: 50%;"></div>
-                <div><label>RecipentPhone</label></div><div><input type="text" name="phone" style="width: 50%; "></div>
-                <div><label>RecipentAddress</label></div><div><input type="text" name="address" style="width: 50%;"></div>
+                <div><label>RecipentName</label></div><div><input type="text" name ="name" style="width: 50%;" required></div>
+                <div><label>RecipentEmail</label></div><div><input type="text" name ="email" style="width: 50%;" required></div>
+                <div><label>RecipentPhone</label></div><div><input type="text" name="phone" style="width: 50%; " required></div>
+                <div><label>RecipentAddress</label></div><div><input type="text" name="address" style="width: 50%;" required></div>
                     <div><label>PaymentMethod</label></div><div><select name="pm" style="width: 50%;" onchange="if(this.value === 'CreditCard') document.getElementById('card').style.display = 'block'; else document.getElementById('card').style.display = 'none';">
-                        <option>Please Select</option>
-                        <option value="Cash">Delivery on Cash</option>
+                        <option value="" disabled selected>Please Select</option>
+                        <option value="Cash">Cash on Delivery</option>
                         <option value="CreditCard">Credit Card</option>
                     </select></div>
                <div style="display: none" id="card">
                    <div><label>CreditCard Number</label></div>
                    <div>
-                       <input type="text" name ="creditcard" placeholder="16DigitNumber" style="width: 31%;margin-right: 10px;">
-                       <input type="text" placeholder="CVV" style="width: 7%;margin-right: 10px;">
-                       <input type="text" placeholder="MM/YY" style="width: 10%;">
+                       <input type="text" name ="creditcard" placeholder="16DigitNumber" style="width: 31%;margin-right: 10px;" required>
+                       <input type="text" placeholder="CVV" style="width: 7%;margin-right: 10px;" required>
+                       <input type="text" placeholder="MM/YY" style="width: 10%;" required>
                    </div>
                </div>
             </div>
