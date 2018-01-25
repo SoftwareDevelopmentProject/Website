@@ -70,19 +70,20 @@
 				</td>
 				
 			</tr>
+			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
 			<h2>Book Stock</h2>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center" height="50px">
-					<td width="" >Book ID</td>
-					<td width="">Book Title</td>
-					<td width="">Author</td>
-					<td width="">Genre</td>
-					<td width="">Publisher</td>
-					<td width="">Years</td>
-					<td width="">Price</td>
-					<td width="">In stock amount</td>
-					<td width=""></td>
-					<td width=""></td>
+			<table class="table table-hover">
+				<tr>
+					<th width="" >Book ID</th>
+					<th width="">Book Title</th>
+					<th width="">Author</th>
+					<th width="">Genre</th>
+					<th width="">Publisher</th>
+					<th width="">Years</th>
+					<th width="">Price</th>
+					<th width="">In stock amount</th>
+					<th width=""></th>
+					<th width=""></th>
 					
 				</tr>
 				<?php
@@ -118,7 +119,8 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Edit Book</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Edit Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -145,6 +147,7 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
+         <img src="../images/logo.png" style="border-radius: 99px;">
           <h2 class="modal-title">Delete Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -172,7 +175,8 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Add Book</h2>
+          <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Add Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -291,16 +295,16 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Request Book</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Request Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body" id="modalBodyRequest">
        		<div class="padding" style="overflow: auto; height: auto;">
-			<h4>Place Book Request</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<table class="table table-hover">
+				<tr>
 					<td width="" >Book ID</td>
 					<td width="">Book Title</td>
 					<td width="">Author</td>

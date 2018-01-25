@@ -52,9 +52,6 @@ session_start();
 								
 							</div>
 							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">Remember Me
-								</label>
 								<a href="forgot_password.php" style="float: right">Forgot password?</a>
 							</div>
 							<input type="submit" class="btn btn-primary" value="Login">

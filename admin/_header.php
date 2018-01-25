@@ -16,7 +16,7 @@ if(isset($_SESSION['staff'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span></button>
-            <a class="navbar-brand" href="#"><span>TP Bookstore </span>
+            <a class="navbar-brand" href="index.php"><span><img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75" width="250px" height="28px"> TP Bookstore </span>
 				<?php if(isset($user)){
 					switch ($user['staff_role']) {
 						case 0:
@@ -38,7 +38,7 @@ if(isset($_SESSION['staff'])) {
                     <ul class="dropdown-menu dropdown-messages">
                         <li>
                             <div class="dropdown-messages-box"><a href="profile.php" class="pull-left">
-                                    <img alt="image" class="img-circle" src="http://placehold.it/40/30a5ff/fff">
+                                    <img alt="image" class="img-circle" src="../images/9780545162074_p0_v2_s550x406.jpg">
                                 </a>
                                 <div class="message-body"><small class="pull-right">3 mins ago</small>
                                     <a href="#"><strong>John Doe</strong> commented on <strong>your photo</strong>.</a>
@@ -90,18 +90,30 @@ if(isset($_SESSION['staff'])) {
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
-            <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+            <img src="../images/9780545162074_p0_v2_s550x406.jpg" class="img-responsive" alt="">
         </div>
         <div class="profile-usertitle">
             <div class="profile-usertitle-name"><?php if(isset($user)) echo $user['staff_name']; ?></div>
-            <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+            <div class="profile-usertitle-status"><i class="fa fa-bookmark" aria-hidden="true" style="color:#30a5ff"></i><h4><?php if(isset($user)){
+					switch ($user['staff_role']) {
+						case 0:
+							echo 'Staff';
+							break;
+						case 1:
+							echo 'Admin';
+							break;
+						case 2:
+							echo 'Manager';				
+					}		
+				} 
+				?></h4></div>
         </div>
         <div class="clear"></div>
     </div>
     <div class="divider"></div>
     <form role="search">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" placeholder="Search" style="border-radius: 99px">
         </div>
     </form>
     <ul class="nav menu">
@@ -140,7 +152,8 @@ if(isset($_SESSION['staff'])) {
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Log out</h4>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Log out</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         

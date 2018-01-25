@@ -26,9 +26,10 @@ session_start();
 		?>	
 			
 		<div class="padding" style="overflow: auto; height: auto;">
-			<h4>Member Report</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white" id="table">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
+			<h2>Member List</h2>
+			<table class="table table-hover">
+				<tr>
 					<td width="">Member ID</td>
 					<td width="">Member Name</td>
 					<td width="">Created at</td>
@@ -75,7 +76,8 @@ session_start();
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Member Profile</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Member Profile</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         

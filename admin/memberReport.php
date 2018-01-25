@@ -30,7 +30,9 @@
 		?>
 
 		<!--dash board-->
-		<div class="panel panel-container">
+		<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
+		<h2>Member Report</h2>
+		<div class="panel panel-container" style="margin-top: 30px;text-shadow: 2px 2px white;font-weight: 500">
 			<div class="row">
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding" style="width: 100%">
 					<div class="panel panel-teal panel-widget border-right">
@@ -175,9 +177,9 @@
 				</select>
 				</td>
 			</tr></form>
-			<h4>Member Report</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white" id="table">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<h2>Member Report</h2>
+			<table class="table table-hover">
+				<tr>
 					<td width="">Member ID</td>
 					<td width="">Member Name</td>
 					<td width="">Created at</td>

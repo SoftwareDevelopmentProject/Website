@@ -27,10 +27,12 @@ session_start();
 					$db->updateRequest($_POST['id'],1);
 				}
 			}
-		?>	
-			<h4>Member Report</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white" id="table">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+		?>
+	<div class="padding" style="overflow: auto; height: auto;">
+		<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
+			<h2>Book Request</h2>
+			<table class="table table-hover">
+				<tr>
 					<td width="">Staff Name</td>
 					<td width="">Request Date</td>
 					<td width="">Status</td>
@@ -48,6 +50,7 @@ session_start();
                     </tr>
                     <?php endforeach; ?>
             </table>
+		</div>
 			  			
         </div>
 						
@@ -62,7 +65,8 @@ session_start();
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Request Detail</h4>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Request Detail</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         

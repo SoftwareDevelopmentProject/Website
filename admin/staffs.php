@@ -154,8 +154,10 @@ $page = 'staff';
 				</td>
 
 			</tr>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
+			<h2>Staff List</h2>
+			<table class="table table-hover">
+				<tr>
 					<td width="20%" class="staff_td">Name</td>
 					<td width="10%" class="staff_td">Phone</td>
 					<td width="20%" class="staff_td">Email</td>
@@ -214,7 +216,8 @@ $page = 'staff';
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h2 class="modal-title">Add New Staff</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Add New Staff</h2>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -334,7 +337,8 @@ $page = 'staff';
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h2 class="modal-title">Delete Staff</h2>
+					<img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Delete Staff</h2>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -364,101 +368,6 @@ $page = 'staff';
 	<!--/.main-->
 
 	<script>
-		var form = document.getElementById( "form" );
-		var box = document.getElementById( "popupBox" );
-		var boxBody = document.getElementById( "popupcontent" );
-		var span = document.getElementsByClassName( "close" )[ 0 ];
-		var addBtn = document.getElementById( "addBtn" );
-		var cancel = document.getElementById( "close" );
-		var ok = document.getElementById( "ok" );
-		var formBody = document.getElementById( "form-body" );
-		var no = document.getElementById( "no" );
-		var confirBox = document.getElementById( "confirmBox" );
-		var confirmContent = document.getElementById( "confirmContent" );
-
-
-		addBtn.onclick = function () {
-			form.style.display = "block";
-
-		}
-
-
-
-
-
-		cancel.onclick = function () {
-			formBody.style.animationName = "animateback";
-			formBody.style.animationDuration = "0.4s";
-			formBody.style.webkitAnimationDuration = "0.4s";
-			formBody.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				form.style.display = "none";
-				formBody.style.animationName = formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		window.onclick = function ( event ) {
-			if ( event.target == form ) {
-
-				formBody.style.animationName = "animateback";
-				formBody.style.animationDuration = "0.4s";
-				formBody.style.webkitAnimationDuration = "0.4s";
-				formBody.style.webkitAnimationName = "animateback";
-				setTimeout( function () {
-					form.style.display = "none";
-					formBody.style.animationName = formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-
-				}, 400 );
-
-			}
-		}
-
-		span.onclick = ok.onclick = function () {
-			boxBody.style.animationName = "animateback";
-			boxBody.style.animationDuration = "0.4s";
-			boxBody.style.webkitAnimationDuration = "0.4s";
-			boxBody.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				box.style.display = "none";
-				boxBody.style.animationName = boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		no.onclick = function () {
-			confirmContent.style.animationName = "animateback";
-			confirmContent.style.animationDuration = "0.4s";
-			confirmContent.style.webkitAnimationDuration = "0.4s";
-			confirmContent.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				confirBox.style.display = "none";
-				confirmContent.style.animationName = confirmContent.style.webkitAnimationDuration = confirmContent.style.webkitAnimationName = confirmContent.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		window.onclick = function ( event ) {
-				if ( event.target == box ) {
-
-					boxBody.style.animationName = "animateback";
-					boxBody.style.animationDuration = "0.4s";
-					boxBody.style.webkitAnimationDuration = "0.4s";
-					boxBody.style.webkitAnimationName = "animateback";
-					setTimeout( function () {
-						box.style.display = "none";
-						boxBody.style.animationName = boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-
-					}, 400 );
-
-				}
-			}
 			//disabling save button
 
 		function changeRole( changedVal, oriVal, id ) {
