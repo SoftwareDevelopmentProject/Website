@@ -4,6 +4,7 @@ include_once '../include/DbFunction.php';
 $db = new DbFunction;
 $member = $db->reportGetMemberById($_GET['id']);
 ?>
+<center><h2 class="modal-title" style="color: black;">Member Profile</h2></center>
 <div class="panel panel-default ">
 					<div class="panel-heading">
 						<?php echo $member['member_name'].' (MID'.sprintf('%04d',$member['member_id']).')';?>

@@ -1,3 +1,4 @@
+<center><h2 class="modal-title" style="color: black;">Request Details</h2></center>
 <?php
 include_once '../include/DbFunction.php';
 $db = new DbFunction;

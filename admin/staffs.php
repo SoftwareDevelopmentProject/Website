@@ -197,7 +197,7 @@ $page = 'staff';
 						<input type="submit" class="btn btn-default btn-sm" id="saveBtn<?php echo $staff['staff_id'];?>" name="save_staff_role" value="Save" disabled>
 					</td>
 					<td>
-						<input type="button" value="Remove" onClick="removeBook(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteStaff">
+						<input type="button" value="Remove" onClick="removeStaff(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteStaff">
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -211,115 +211,79 @@ $page = 'staff';
 		<!--modal -->
 
 		<div class="modal fade" id="addStaff">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-         <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Add New Staff</h2>
+					 <img src="../images/logo.png" style="border-radius: 99px;">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
 					<!-- Modal body -->
 					<div class="modal-body">
-						       		<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" method="post">
-						<fieldset style="padding: 20px; padding-right: 60px;">
-							<!-- Book Title input-->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="booktitle">Book Title</label>
-									<div class="col-md-9">
-										<input id="bookTitle" name="bookTitle" type="text" placeholder="Book Title" class="form-control" required>
-									</div>
-							</div>
+						<center><h2 class="modal-title" style="color: black;">Add New Staff</h2></center>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form class="form-horizontal" method="post">
+									<fieldset style="padding: 20px; padding-right: 60px;">
+										<!-- Book Title input-->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="name">Name</label>
+												<div class="col-md-9">
+													<input id="name" name="name" type="text" placeholder="Name" class="form-control margin_fix" required>
+												</div>
+										</div>
 
-							<!-- Author input-->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="author">Author</label>
-									<div class="col-md-9">
-										<input id="author" name="author" type="text" placeholder="Author" class="form-control" required>
-									</div>
-							</div>
+										<!-- Author input-->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="email">Email</label>
+												<div class="col-md-9">
+													<input id="email" name="emailr" type="email" placeholder="Email" class="form-control margin_fix" onKeyUp="checkEmail(this.value)" required>
+													<p class=err id="email_err"></p>
+												</div>
+										</div>
 
-							<!-- publisher body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="publisher">Publisher</label>
-									<div class="col-md-9">
-										<input id="publisher" name="publisher" type="text" placeholder="Publisher" class="form-control" required>
-									</div>
-							</div>
-							<!-- years body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="years">Years</label>
-									<div class="col-md-9">
-										<select class="form-control" style="width: 30%" name="year" id="year">
-										<?php for($i=date("Y");$i>=date("Y")-50;$i--){
-												echo '<option value="'.$i.'">'.$i.'</option>';
-											}
-											?>
-										</select>
-									</div>
-								</div>
-							<!-- genre body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="genre">Genre</label>
-									<div class="col-md-9">
-										<select class="form-control" style="width: 30%" name="genre" id="genre">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">4</option>
-										</select>
-										
-									</div>
-							</div>
-							
-							<!-- des body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="description">Description</label>
-									<div class="col-md-9">
-										<textarea class="form-control" id="des" name="description" placeholder="Description" rows="5"></textarea>
-									</div>
-							</div>
-							<!-- amount body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="amount">Amount</label>
-									<div class="col-md-9">
-										<input id="amount" name="amount" type="text" placeholder="Amount" class="form-control" onKeyUp="amountValid(this.value)" required>
-										<p class="err" id="err">Only number allowed !</p>
-									</div>
-							</div>
-							
-								<!-- price body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="price">Price (RM) </label>
-									<div class="col-md-9">
-										<input id="price" name="price" type="text" placeholder="Price(RM)" class="form-control" onKeyUp="priceValid(this.value)" required>
-										<p class="err" id="priceErr">Invalid currency</p>
-									</div>
-							</div>
-							
+										<!-- publisher body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="phone">Phone Number</label>
+												<div class="col-md-9">
+													<input id="phone" name="phone" type="text" placeholder="Phone Number" class="form-control margin_fix" onKeyUp="phoneValid()" required>
+													<p class="err" id="err">Invalid Phone Number format. Eg. 0123456789</p>
+												</div>
+										</div>
+										<!-- address body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="address">Address</label>
+												<div class="col-md-9">
+													<textarea class="form-control margin_fix" id="address" name="address" placeholder="Address" rows="5"></textarea>
+												</div>
+										</div>
 
-							<!-- Form actions -->
-							<div class="form-group">
-								<div class="col-md-12 widget-right" style="text-align: center">
-									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="newBookSub" value="Submit" name="add_book_submit_btn">
-									<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
-									<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+										<!-- role body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="genre">Role</label>
+												<div class="col-md-9">
+													<select class="form-control margin_fix" style="width: 30%" name="role" id="role">
+														<option value="1">Staff</option>
+														<option value="2">Admin</option>
+													</select>
+
+												</div>
+										</div>
+
+
+										<!-- Form actions -->
+										<div class="form-group">
+											<div class="col-md-12 widget-right" style="text-align: center">
+												<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="staffSub" value="Submit" name="add_staff_submit_btn" >
+												<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
+												<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+											</div>
+										</div>
 									</form>
+									</div>
 								</div>
-							</div>
-						</div>
-										</div>	
-
 					</div>
 
 					<!-- Modal footer -->
@@ -338,7 +302,7 @@ $page = 'staff';
 					<!-- Modal Header -->
 					<div class="modal-header">
 					<img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Delete Staff</h2>
+					<center><h2 class="modal-title" style="color: black;">Delete Staff</h2></center>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -379,7 +343,7 @@ $page = 'staff';
 		}
 		//delete confirmation
 
-		function removeBook( id, name ) {
+		function removeStaff( id, name ) {
 			$( "#modalBodyDel" ).html( "Are you sure to remove " + name + " ?" );
 			$( '#delStaffid' ).val( id );
 		}
@@ -396,6 +360,7 @@ $page = 'staff';
 			} else {
 				document.getElementById( "err" ).style.display = "block";
 				document.getElementById( "staffSub" ).disabled = true;
+				
 
 
 			}

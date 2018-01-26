@@ -1182,3 +1182,6 @@ table td .staff_td {
 .hide {
 	display: none;
 }
+.margin_fix {
+	margin-bottom: 20px;
+}

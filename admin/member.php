@@ -77,7 +77,6 @@ session_start();
         <!-- Modal Header -->
         <div class="modal-header">
          <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Member Profile</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         

@@ -35,7 +35,7 @@ session_start();
 				<tr>
 					<td width="">Staff Name</td>
 					<td width="">Request Date</td>
-					<td width="">Status</td>
+					<td width="" id="status">Status</td>
 					<td></td>
 				</tr>
 				<?php
@@ -45,7 +45,7 @@ session_start();
 					<tr>
 						<td><?php echo $request['staff_name'];?></td>
 						<td><?php echo $request['request_created_time'];?></td>
-                        <td><?php echo $request['status_name'];?></td>
+                        <td id="status<?php echo $request['request_id'];?>"><?php echo $request['status_name'];?></td>
                         <td> <button type="button" class="btn btn-primary" onClick="getDetail(<?php echo $request['request_id'];?>)" data-toggle="modal" data-target="#viewRequest">View</button></td>
                     </tr>
                     <?php endforeach; ?>
@@ -66,7 +66,6 @@ session_start();
         <!-- Modal Header -->
         <div class="modal-header">
          <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Request Detail</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -76,8 +75,8 @@ session_start();
         
         <!-- Modal footer -->
         <div class="modal-footer"><form method="post">
-         <input type="submit" class="btn btn-primary" value="Approve" name="approve">
-         <input type="submit" class="btn btn-primary" value="Deny" name="deny">
+         <input type="submit" class="btn btn-primary" value="Approve" name="approve" id="approve">
+         <input type="submit" class="btn btn-primary" value="Deny" name="deny" id="deny">
          <input type="hidden" name="id" id="r_id" >
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
         </div></form>
@@ -94,8 +93,10 @@ session_start();
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("modalBody").innerHTML = this.responseText;
 						$('#r_id').val(id);
-						
-						
+						if(document.getElementById('status'+id).innerHTML !='Proccessing'){
+							$('#approve').css('display','none');
+							$('#deny').css('display','none');
+						}
 					}
 				  };
 				  xhttp.open("GET", "requestDetail?id="+id, true);

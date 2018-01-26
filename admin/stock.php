@@ -31,12 +31,15 @@
 				$db->updateBook($_POST['id'],$_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount']);
 			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['request'])){
 				$b = array();
+				$wantsubmit = false;
 				foreach($_POST as $book_id => $quantity) {
 					if ($quantity > 0)
+						$wantsubmit = true;
 						array_push($b, array('id' => $book_id, 'quantity' => $quantity));
 				}
-			$db->insertBookRequest($_SESSION['staff'],$b);
-		}
+				if ($wantsubmit)
+						$db->insertBookRequest($_SESSION['staff'],$b);
+					}
 		
 		
 		
@@ -148,12 +151,12 @@
         <!-- Modal Header -->
         <div class="modal-header">
          <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title">Delete Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body popup-body" id="modalBodyDel">
+       	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        	</div>
         
         <!-- Modal footer -->
@@ -176,12 +179,12 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Add Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body">
+       	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        		<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" method="post">
@@ -296,12 +299,12 @@
         <!-- Modal Header -->
         <div class="modal-header">
          <img src="../images/logo.png" style="border-radius: 99px;">
-          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Request Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body" id="modalBodyRequest">
+       	<center><h2 class="modal-title" style="color: black;">Request Book </h2></center>
        		<div class="padding" style="overflow: auto; height: auto;">
 			<table class="table table-hover">
 				<tr>
@@ -328,7 +331,7 @@
 						<td><?php echo 'RM '.$book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
 						<td>
-								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 80%">
+								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 80%" onChange="requestOnChage()">
 									<option value="0">0</option>
 									<option value="10">10</option>
                                     <option value="20">20</option>
@@ -343,7 +346,7 @@
 				</table>
                     <tr>
 						<td colspan="9" align="right" height="50px" >
-							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 10px;" name="request"/>
+							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 10px;" name="request" id="btn" disabled/>
 							</form>
 							<button class="btn btn- btn-md pull-right" style="float: right; margin: 10px 10px;" data-dismiss="modal">Back</button>
 							
@@ -461,6 +464,11 @@
 					$('#editBookSub').removeAttr('disabled');
 				}
 			}
+		//check onchange reqeust 
+		
+		function requestOnChage(){
+			$('#btn').removeAttr('disabled');
+		}
 
 
 		
