@@ -410,14 +410,14 @@ p.m_2{
 .list{
 	float: left;
 	background: #08080B;
-	width: 50%;
+	width: 100%;
 	padding: 0.5% 0;
 	text-align: center;
 }
 ul.list li img{
 	vertical-align:middle;
 	float: left;
-	margin: 0 0px 0 18%;
+	margin: 0 0px 0 26%;
 } 
 .top_box .css3 img {
 	-webkit-transition-duration: 0.5s;
