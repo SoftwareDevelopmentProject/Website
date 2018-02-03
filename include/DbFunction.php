@@ -3,6 +3,7 @@
 include_once 'DbConnect.php';
 
 class DbFunction {
+    //-------------Customer--------------
     public function getGenre(){
         $db = new DbConnect();
         $con = $db->connect();
@@ -69,15 +70,7 @@ class DbFunction {
         $result = mysqli_query($con, "UPDATE book SET book_title='$title', book_author='$author', genre_id=$genre, book_description='$description', book_publisher='$publisher', book_years=$years, book_price=$price, book_stock=$amount WHERE book_id=$id");
         return $result;
 	}
-	
-	
-	
-	public function checkEmailExists($email) {
-		$db = new DbConnect();
-		$con = $db->connect();
-		$result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email = '$email'");
-		return (mysqli_num_rows($result) > 0);
-	}
+
 
     public function getBooksByGenre($genre_id) {
         $db = new DbConnect();
@@ -263,80 +256,7 @@ class DbFunction {
         return !(mysqli_num_rows($result) < SECURITY_MAX_LOGIN_ATTEMPT);
     }
 	
-	 public function loginStaff($email, $password) {
-        $db = new DbConnect();
-        $con = $db->connect();
-        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email = '$email'");
-        if (mysqli_num_rows($result) > 0) {
-            $staff = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            if (md5($password) == $staff['staff_password']) {
-                $_SESSION['staff'] = $staff['staff_id'];
-                $_SESSION['staff_password'] = md5($staff['staff_password']);
-                return LOGIN_SUCCESS;
-            }
-            return LOGIN_PASSWORD_INCORRECT;
-        }
-        return LOGIN_USER_NOT_FOUND;
-    }
-	
-	//staff set new password 
-	    public function resetPsStaff($code,$ps){
-    $db = new DbConnect();
-    $con =$db->connect();
-	$id = substr($code,32);
-	$ps = md5($ps);	
-    $result_staff =mysqli_query($con, "UPDATE staff SET staff_password = '$ps' WHERE staff_id = $id ");
-        return mysqli_affected_rows($con) > 0;
- 
-    }
-	
-	
-	
-	    public function getStaff(){
-			$db = new DbConnect();
-			$con =$db->connect();
-			$result_staff =mysqli_query($con, "SELECT * from staff where staff_id = '$_SESSION[staff]'");
-			return mysqli_fetch_assoc($result_staff);
-    }
 
-	public function up_staff($id, $role){
-        $db = new DbConnect();
-        $con = $db->connect();
-        $up_staff= mysqli_query($con, "UPDATE staff SET staff_role = $role WHERE staff_id = $id ");
-        return mysqli_affected_rows($con) > 0;
-	}
-	
-	 public function getAllStaff() {
-        $db = new DbConnect();
-        $con = $db->connect();
-		$staffs= array();
-        $result = mysqli_query($con, "SELECT * FROM staff");
-		while ($staff = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
-            array_push($staffs, $staff);
-        }
-        return $staffs;
-    }
-	 public function generateCode($email) {
-        $db = new DbConnect();
-        $con = $db->connect();
-        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email='$email'");
-		$staff_inf = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        return $code = (md5($staff_inf['staff_password']).$staff_inf['staff_id']);
-    }
-	
-	  public function add_staff($name, $email, $phone, $address, $role){
-        $db = new DbConnect();
-        $con = $db->connect();
-		$ps = md5($phone);
-        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$ps',$phone,'$address',$role)");
-        return $new_staff;
-    }
-	public function del_staff($id){
-        $db = new DbConnect();
-        $con = $db->connect();
-        $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
-        return $tar_staff;
-    }
 	//Order_History
     public  function getOrderbyorderid($order_id){
         $db = new DbConnect();
@@ -350,7 +270,9 @@ class DbFunction {
 	    $con  = $db->connect();
 	    $result_order=array();
 	    $order = mysqli_query($con,"SELECT * from `order` WHERE order.member_id = $user_id;");
-	    $result_order = mysqli_fetch_array($order);
+	    while($result_order1 = mysqli_fetch_array($order)){
+	        array_push($result_order,$result_order1);
+        }
         return $result_order;
     }
     public function getOrderdetails($order_id){
@@ -394,16 +316,10 @@ class DbFunction {
         return $cart;
 
 }
-    public function insertOrderdetails($order_id,$book_id,$qty){
-        $db = new DbConnect();
-        $con =$db->connect();
-        $detail = mysqli_query($con, "INSERT INTO order_detail(order_id,book_id,order_detail_quantity) VALUE ('$order_id','$book_id','$qty')");
-        return $detail;
-
-}
     public function delCart($book_id){
         unset ($_SESSION['cart'][$book_id]);
     }
+
     /*Checkout*/
     public function checkout($order_name,$order_email,$order_phone,$order_address,$pm,$order_transaction,$member_id){
         $db =new DbConnect();
@@ -412,8 +328,30 @@ class DbFunction {
 ('$order_name','$order_email','$order_phone','$order_address','$pm','$order_transaction','$member_id') ");
         return mysqli_insert_id($con);
     }
+    public function insertOrderdetails($order_id,$book_id,$qty){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $detail = mysqli_query($con, "INSERT INTO order_detail(order_id,book_id,order_detail_quantity) VALUE ('$order_id','$book_id','$qty')");
+        return $detail;
+
+    }
 
 
+
+
+
+//--------------------------------------------------------Admin-----------------------------------------------------------------------------------
+
+
+
+
+
+    public function checkEmailExists($email) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email = '$email'");
+        return (mysqli_num_rows($result) > 0);
+    }
 	/*Get member*/
 	public function getMemberByYear($year){
     $db = new DbConnect();
@@ -571,9 +509,83 @@ class DbFunction {
 				}
 				return $sale;
 			}
-	
-			
+
+    public function loginStaff($email, $password) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email = '$email'");
+        if (mysqli_num_rows($result) > 0) {
+            $staff = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            if (md5($password) == $staff['staff_password']) {
+                $_SESSION['staff'] = $staff['staff_id'];
+                $_SESSION['staff_password'] = md5($staff['staff_password']);
+                return LOGIN_SUCCESS;
+            }
+            return LOGIN_PASSWORD_INCORRECT;
+        }
+        return LOGIN_USER_NOT_FOUND;
+    }
+
+    //staff set new password
+    public function resetPsStaff($code,$ps){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $id = substr($code,32);
+        $ps = md5($ps);
+        $result_staff =mysqli_query($con, "UPDATE staff SET staff_password = '$ps' WHERE staff_id = $id ");
+        return mysqli_affected_rows($con) > 0;
+
+    }
+
+    //Staff
+
+    public function getStaff(){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $result_staff =mysqli_query($con, "SELECT * from staff where staff_id = '$_SESSION[staff]'");
+        return mysqli_fetch_assoc($result_staff);
+    }
+
+    public function up_staff($id, $role){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $up_staff= mysqli_query($con, "UPDATE staff SET staff_role = $role WHERE staff_id = $id ");
+        return mysqli_affected_rows($con) > 0;
+    }
+
+    public function getAllStaff() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $staffs= array();
+        $result = mysqli_query($con, "SELECT * FROM staff");
+        while ($staff = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+            array_push($staffs, $staff);
+        }
+        return $staffs;
+    }
+    public function generateCode($email) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result = mysqli_query($con, "SELECT * FROM staff WHERE staff_email='$email'");
+        $staff_inf = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $code = (md5($staff_inf['staff_password']).$staff_inf['staff_id']);
+    }
+
+    public function add_staff($name, $email, $phone, $address, $role){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $ps = md5($phone);
+        $new_staff = mysqli_query($con, "INSERT INTO staff (staff_name, staff_email, staff_password, staff_phone, staff_address, staff_role) VALUES ('$name','$email','$ps',$phone,'$address',$role)");
+        return $new_staff;
+    }
+    public function del_staff($id){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $tar_staff = mysqli_query($con, "DELETE FROM staff WHERE staff_id=$id");
+        return $tar_staff;
+    }
 }
+
 
 
 

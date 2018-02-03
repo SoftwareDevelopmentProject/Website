@@ -25,8 +25,8 @@ session_start();
                     <th class="fixed-table-header">Receipt</th>
                 </tr>
                 <?php
-                print_r($_SESSION['user']);
-                    $order = $db->getOrder($_SESSION['user']);
+                    $o = $db->getOrder($_SESSION['user']);
+                    foreach ($o as $order){
                 ?>
                 <tr>
                     <td><?php echo'<a href ="order_detail.php?order_id='.$order['order_id'].'">'.$order['order_transaction_id'].'</a>';?></td>
@@ -38,6 +38,7 @@ session_start();
                     <td><?php echo $order['order_status']?></td>
                     <td><?php echo '<a href="invoice.php?order_id='.$order['order_id'].'">Print</a>';?></td>
                 </tr>
+                <?php } ?>
             </table>
 
 

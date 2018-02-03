@@ -6,7 +6,7 @@ $db = new DbFunction();
 <html>
 <head>
     <meta charset="utf-8">
-    <title>A simple, clean, and responsive HTML invoice template</title>
+    <title>Invoice Technology Park Bookstore</title>
 
     <style>
         .invoice-box {
@@ -138,7 +138,7 @@ $db = new DbFunction();
                         <td>
                             <?php echo $user_order['order_recipient_name'];?><br>
                             <?php echo $user_order['order_recipient_address'];?><br>
-                            john@example.com
+                            <?php echo $user_order['order_recipient_email'];?>
                         </td>
                     </tr>
                 </table>
