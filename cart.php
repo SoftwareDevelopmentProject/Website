@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <!--A Design by W3layouts
 Author: W3layout
@@ -12,8 +13,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
     <title>Free Adidas Website Template | Checkout :: w3layouts</title>
     <?php include"_head.php";?>
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-
+<?php if(isset($_POST['clear'])){
+    $db->setSession();
+    header("Refresh:0");
+}?>
 <body>
 <?php include "_header.php";?>
 <div class="login">
@@ -23,7 +29,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <tr>
                 <th class="fixed-table-header">Image</th>
                 <th class="fixed-table-header">Book Name</th>
-                <th class="fixed-table-header">Price</th>
+                <th class="fixed-table-header">Price(RM)</th>
                 <th class="fixed-table-header">Quantity</th>
                 <th class="fixed-table-header">Subtotal</th>
 
@@ -59,9 +65,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
             </tr>
         </table>
+
         <div class="" style="margin-top: 10px;">
             <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>
-            <button class="btn btn-primary btn-sm" style="float: right;" onclick="">Clear</button>
+            <form method="post">
+            <button name="clear" class="btn btn-primary btn-sm" style="float: right;">Clear</button>
+            </form>
         </div>
         <?php }else{
             echo'<h4 class="title">Shopping cart is empty</h4>

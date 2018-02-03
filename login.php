@@ -6,12 +6,25 @@ session_start();
 <head>
     <title>Free Adidas Website Template | Login :: w3layouts</title>
     <?php include "_head.php"; ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $db->login($_POST['email'], $_POST['password']);
-    header("location: index.php");
+   if( $db->login($_POST['email'], $_POST['password'])){
+       header("location: index.php");
+   }elseif ($_POST['email'] =="" || $_POST['password']==""){
+    echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+  <strong>Info!</strong>Please enter your email or password.
+</div>';
+   }else{
+       echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+  <strong>Info!</strong>Wrong Email or Password.
+</div>';
+   }
+
 
 }
 ?>

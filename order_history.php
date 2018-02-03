@@ -6,6 +6,8 @@ session_start();
 <head>
     <title>Free Adidas Website Template | Checkout :: w3layouts</title>
     <?php include"_head.php";?>
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>

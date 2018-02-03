@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+if(isset($_POST['oldpassword'],$_POST['newpassword'])){
+    $db->changepassword($_SESSION['user'],$_POST['oldpassword'],$_POST['newpassword']);
+}
 ?>
     <!--A Design by W3layouts
     Author: W3layout
@@ -12,6 +16,8 @@ session_start();
 <head>
     <title>Register</title>
     <?php include "_head.php";?>
+    <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>

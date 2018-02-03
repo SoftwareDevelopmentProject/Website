@@ -6,9 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
@@ -49,14 +46,6 @@
 <!-- end menu -->
 <!-- top scrolling -->
 <script type="text/javascript" src="js/move-top.js"></script>
-<script src="admin/js/jquery-1.11.1.min.js"></script>
-<script src="admin/js/bootstrap.min.js"></script>
-<script src="admin/js/chart.min.js"></script>
-<script src="admin/js/chart-data.js"></script>
-<script src="admin/js/easypiechart.js"></script>
-<script src="admin/js/easypiechart-data.js"></script>
-<script src="admin/js/bootstrap-datepicker.js"></script>
-<script src="admin/js/custom.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {

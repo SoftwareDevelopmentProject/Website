@@ -17,6 +17,6 @@ function  quantityCtrl(x) {
         }
     }
 
-
+    document.getElementById('hidden-qty').value = y;
 
 }

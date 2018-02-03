@@ -78,6 +78,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 if($_SERVER["REQUEST_METHOD"]=="POST"){
                     $db->addCart($_POST['book_id'],$_POST['qty']);
                 }
+
+
                 ?>
 
 
@@ -86,7 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
                         <li class="quantity" onclick="quantityCtrl(0)">-</li>
-                        <li class="quantity" id="qty" onchange="document.getElementById('hidden-qty').value = this.innerHTML;">1</li>
+                        <li class="quantity" id="qty">1</li>
                         <li class="quantity" onclick="quantityCtrl(1)">+</li>
 
 
@@ -108,14 +110,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     			</ul>
     			<p class="m_desc" style="text-align: justify;"><?php echo $books['book_description']; ?></p>
 
-                <div class="social_single">
-				   <ul>
-					  <li class="fb"><a href="#"><span> </span></a></li>
-					  <li class="tw"><a href="#"><span> </span></a></li>
-					  <li class="g_plus"><a href="#"><span> </span></a></li>
-					  <li class="rss"><a href="#"><span> </span></a></li>
-				   </ul>
-			    </div>
+
 			</div>
 			<div class="clear"></div>
      
