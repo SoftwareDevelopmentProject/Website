@@ -48,6 +48,14 @@
 <!-- end menu -->
 <!-- top scrolling -->
 <script type="text/javascript" src="js/move-top.js"></script>
+<script src="admin/js/jquery-1.11.1.min.js"></script>
+<script src="admin/js/bootstrap.min.js"></script>
+<script src="admin/js/chart.min.js"></script>
+<script src="admin/js/chart-data.js"></script>
+<script src="admin/js/easypiechart.js"></script>
+<script src="admin/js/easypiechart-data.js"></script>
+<script src="admin/js/bootstrap-datepicker.js"></script>
+<script src="admin/js/custom.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function($) {

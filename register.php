@@ -14,9 +14,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php include "_head.php";?>
 </head>
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         if($db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country'])){
-            echo '<script>alert("Sucessful Register")</script>';
+           echo '<script type="text/javascript">
+		   function click(){
+		   document.getElementById("click").click();
+		   }</script>';
         } else {
             echo '<script>alert("Failed Register, Email has been used. Please try again")</script>';
 
@@ -24,8 +27,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     }
 
 ?>
-<body>
+<body onLoad="click()">
     <?php include "_header.php";?>
+     <!--//modal-->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#success" id="click" style="display: none">Click</button>
+      <div class="modal fade" id="success">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+         <img src="images/logo.png" style="border-radius: 99px;">
+          <center><h2 class="modal-title" style="color: black;">Register successful</h2></center>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body popup-body">
+          Congratulation! You have been register as TP BookStore member. Let's try to <a href="login.php" style="color: white">login now!</a>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+         <button type="button" class="btn btn-primary grey" onClick="window.open('login.php','_self')">Go Login</button>
+          <button type="button" class="btn btn-primary grey" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+      <!--//end modal -->
        <div class="register_account" style="margin-bottom: 50px;">
           	<div class="wrap">
     	      <h4 class="title">Create an Account</h4>
@@ -239,7 +269,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		          </div>
 
 		         <div class="clear"></div>
-                   <input type="submit" class="grey" value="Submit" />
+                   <input type="submit" class="grey" value="Submit"  name="submit"/>
                    <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
 		    </form>
     	  </div> 

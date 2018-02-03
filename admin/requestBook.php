@@ -75,7 +75,7 @@
 						<td><?php echo 'RM '.$book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
 						<td>
-								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 30%" onChange="">
+								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 30%" onChange="requestOnChage()">
 									<option value="0">0</option>
 									<option value="10">10</option>
                                     <option value="20">20</option>

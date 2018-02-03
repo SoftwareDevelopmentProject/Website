@@ -154,8 +154,10 @@ $page = 'staff';
 				</td>
 
 			</tr>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
+			<h2>Staff List</h2>
+			<table class="table table-hover">
+				<tr>
 					<td width="20%" class="staff_td">Name</td>
 					<td width="10%" class="staff_td">Phone</td>
 					<td width="20%" class="staff_td">Email</td>
@@ -195,7 +197,7 @@ $page = 'staff';
 						<input type="submit" class="btn btn-default btn-sm" id="saveBtn<?php echo $staff['staff_id'];?>" name="save_staff_role" value="Save" disabled>
 					</td>
 					<td>
-						<input type="button" value="Remove" onClick="removeBook(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteStaff">
+						<input type="button" value="Remove" onClick="removeStaff(<?php echo $staff['staff_id']; ?> ,'<?php echo $staff['staff_name']; ?>')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteStaff">
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -209,114 +211,79 @@ $page = 'staff';
 		<!--modal -->
 
 		<div class="modal fade" id="addStaff">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h2 class="modal-title">Add New Staff</h2>
+					 <img src="../images/logo.png" style="border-radius: 99px;">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
 					<!-- Modal body -->
 					<div class="modal-body">
-						       		<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" method="post">
-						<fieldset style="padding: 20px; padding-right: 60px;">
-							<!-- Book Title input-->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="booktitle">Book Title</label>
-									<div class="col-md-9">
-										<input id="bookTitle" name="bookTitle" type="text" placeholder="Book Title" class="form-control" required>
-									</div>
-							</div>
+						<center><h2 class="modal-title" style="color: black;">Add New Staff</h2></center>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form class="form-horizontal" method="post">
+									<fieldset style="padding: 20px; padding-right: 60px;">
+										<!-- Book Title input-->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="name">Name</label>
+												<div class="col-md-9">
+													<input id="name" name="name" type="text" placeholder="Name" class="form-control margin_fix" required>
+												</div>
+										</div>
 
-							<!-- Author input-->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="author">Author</label>
-									<div class="col-md-9">
-										<input id="author" name="author" type="text" placeholder="Author" class="form-control" required>
-									</div>
-							</div>
+										<!-- Author input-->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="email">Email</label>
+												<div class="col-md-9">
+													<input id="email" name="emailr" type="email" placeholder="Email" class="form-control margin_fix" onKeyUp="checkEmail(this.value)" required>
+													<p class=err id="email_err"></p>
+												</div>
+										</div>
 
-							<!-- publisher body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="publisher">Publisher</label>
-									<div class="col-md-9">
-										<input id="publisher" name="publisher" type="text" placeholder="Publisher" class="form-control" required>
-									</div>
-							</div>
-							<!-- years body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="years">Years</label>
-									<div class="col-md-9">
-										<select class="form-control" style="width: 30%" name="year" id="year">
-										<?php for($i=date("Y");$i>=date("Y")-50;$i--){
-												echo '<option value="'.$i.'">'.$i.'</option>';
-											}
-											?>
-										</select>
-									</div>
-								</div>
-							<!-- genre body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="genre">Genre</label>
-									<div class="col-md-9">
-										<select class="form-control" style="width: 30%" name="genre" id="genre">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">4</option>
-										</select>
-										
-									</div>
-							</div>
-							
-							<!-- des body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="description">Description</label>
-									<div class="col-md-9">
-										<textarea class="form-control" id="des" name="description" placeholder="Description" rows="5"></textarea>
-									</div>
-							</div>
-							<!-- amount body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="amount">Amount</label>
-									<div class="col-md-9">
-										<input id="amount" name="amount" type="text" placeholder="Amount" class="form-control" onKeyUp="amountValid(this.value)" required>
-										<p class="err" id="err">Only number allowed !</p>
-									</div>
-							</div>
-							
-								<!-- price body -->
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="price">Price (RM) </label>
-									<div class="col-md-9">
-										<input id="price" name="price" type="text" placeholder="Price(RM)" class="form-control" onKeyUp="priceValid(this.value)" required>
-										<p class="err" id="priceErr">Invalid currency</p>
-									</div>
-							</div>
-							
+										<!-- publisher body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="phone">Phone Number</label>
+												<div class="col-md-9">
+													<input id="phone" name="phone" type="text" placeholder="Phone Number" class="form-control margin_fix" onKeyUp="phoneValid()" required>
+													<p class="err" id="err">Invalid Phone Number format. Eg. 0123456789</p>
+												</div>
+										</div>
+										<!-- address body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="address">Address</label>
+												<div class="col-md-9">
+													<textarea class="form-control margin_fix" id="address" name="address" placeholder="Address" rows="5"></textarea>
+												</div>
+										</div>
 
-							<!-- Form actions -->
-							<div class="form-group">
-								<div class="col-md-12 widget-right" style="text-align: center">
-									<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="newBookSub" value="Submit" name="add_book_submit_btn">
-									<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
-									<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+										<!-- role body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="genre">Role</label>
+												<div class="col-md-9">
+													<select class="form-control margin_fix" style="width: 30%" name="role" id="role">
+														<option value="1">Staff</option>
+														<option value="2">Admin</option>
+													</select>
+
+												</div>
+										</div>
+
+
+										<!-- Form actions -->
+										<div class="form-group">
+											<div class="col-md-12 widget-right" style="text-align: center">
+												<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="staffSub" value="Submit" name="add_staff_submit_btn" >
+												<button type="reset" class="btn btn-default" style="margin-right: 20px;">Reset</button>
+												<input type="button" class="btn btn-default" value="Cancel" data-dismiss="modal">
+											</div>
+										</div>
 									</form>
+									</div>
 								</div>
-							</div>
-						</div>
-										</div>	
-
 					</div>
 
 					<!-- Modal footer -->
@@ -334,7 +301,8 @@ $page = 'staff';
 
 					<!-- Modal Header -->
 					<div class="modal-header">
-						<h2 class="modal-title">Delete Staff</h2>
+					<img src="../images/logo.png" style="border-radius: 99px;">
+					<center><h2 class="modal-title" style="color: black;">Delete Staff</h2></center>
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>
 
@@ -364,101 +332,6 @@ $page = 'staff';
 	<!--/.main-->
 
 	<script>
-		var form = document.getElementById( "form" );
-		var box = document.getElementById( "popupBox" );
-		var boxBody = document.getElementById( "popupcontent" );
-		var span = document.getElementsByClassName( "close" )[ 0 ];
-		var addBtn = document.getElementById( "addBtn" );
-		var cancel = document.getElementById( "close" );
-		var ok = document.getElementById( "ok" );
-		var formBody = document.getElementById( "form-body" );
-		var no = document.getElementById( "no" );
-		var confirBox = document.getElementById( "confirmBox" );
-		var confirmContent = document.getElementById( "confirmContent" );
-
-
-		addBtn.onclick = function () {
-			form.style.display = "block";
-
-		}
-
-
-
-
-
-		cancel.onclick = function () {
-			formBody.style.animationName = "animateback";
-			formBody.style.animationDuration = "0.4s";
-			formBody.style.webkitAnimationDuration = "0.4s";
-			formBody.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				form.style.display = "none";
-				formBody.style.animationName = formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		window.onclick = function ( event ) {
-			if ( event.target == form ) {
-
-				formBody.style.animationName = "animateback";
-				formBody.style.animationDuration = "0.4s";
-				formBody.style.webkitAnimationDuration = "0.4s";
-				formBody.style.webkitAnimationName = "animateback";
-				setTimeout( function () {
-					form.style.display = "none";
-					formBody.style.animationName = formBody.style.webkitAnimationDuration = formBody.style.webkitAnimationName = formBody.style.animationDuration = "";
-
-				}, 400 );
-
-			}
-		}
-
-		span.onclick = ok.onclick = function () {
-			boxBody.style.animationName = "animateback";
-			boxBody.style.animationDuration = "0.4s";
-			boxBody.style.webkitAnimationDuration = "0.4s";
-			boxBody.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				box.style.display = "none";
-				boxBody.style.animationName = boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		no.onclick = function () {
-			confirmContent.style.animationName = "animateback";
-			confirmContent.style.animationDuration = "0.4s";
-			confirmContent.style.webkitAnimationDuration = "0.4s";
-			confirmContent.style.webkitAnimationName = "animateback";
-			setTimeout( function () {
-				confirBox.style.display = "none";
-				confirmContent.style.animationName = confirmContent.style.webkitAnimationDuration = confirmContent.style.webkitAnimationName = confirmContent.style.animationDuration = "";
-
-			}, 400 );
-
-
-		}
-
-		window.onclick = function ( event ) {
-				if ( event.target == box ) {
-
-					boxBody.style.animationName = "animateback";
-					boxBody.style.animationDuration = "0.4s";
-					boxBody.style.webkitAnimationDuration = "0.4s";
-					boxBody.style.webkitAnimationName = "animateback";
-					setTimeout( function () {
-						box.style.display = "none";
-						boxBody.style.animationName = boxBody.style.webkitAnimationDuration = boxBody.style.webkitAnimationName = boxBody.style.animationDuration = "";
-
-					}, 400 );
-
-				}
-			}
 			//disabling save button
 
 		function changeRole( changedVal, oriVal, id ) {
@@ -470,7 +343,7 @@ $page = 'staff';
 		}
 		//delete confirmation
 
-		function removeBook( id, name ) {
+		function removeStaff( id, name ) {
 			$( "#modalBodyDel" ).html( "Are you sure to remove " + name + " ?" );
 			$( '#delStaffid' ).val( id );
 		}
@@ -487,6 +360,7 @@ $page = 'staff';
 			} else {
 				document.getElementById( "err" ).style.display = "block";
 				document.getElementById( "staffSub" ).disabled = true;
+				
 
 
 			}

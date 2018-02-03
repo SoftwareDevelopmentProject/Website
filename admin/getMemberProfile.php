@@ -4,33 +4,11 @@ include_once '../include/DbFunction.php';
 $db = new DbFunction;
 $member = $db->reportGetMemberById($_GET['id']);
 ?>
+<center><h2 class="modal-title" style="color: black;">Member Profile</h2></center>
 <div class="panel panel-default ">
 					<div class="panel-heading">
 						<?php echo $member['member_name'].' (MID'.sprintf('%04d',$member['member_id']).')';?>
-						<ul class="pull-right panel-settings panel-button-tab-right">
-							<li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-								<em class="fa fa-cogs"></em>
-							</a>
-								<ul class="dropdown-menu dropdown-menu-right">
-									<li>
-										<ul class="dropdown-settings">
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 1
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 2
-											</a></li>
-											<li class="divider"></li>
-											<li><a href="#">
-												<em class="fa fa-cog"></em> Settings 3
-											</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+						</div>
 					<div class="panel-body timeline-container">
 						<ul class="timeline">
 							<li>
@@ -39,7 +17,7 @@ $member = $db->reportGetMemberById($_GET['id']);
 									<div class="timeline-body">
 										<p>
 											 <div class="dropdown">
-												<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+												<button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
 													<?php 
 														switch ($member['member_trustfulness']) {
 															case 0:
@@ -53,9 +31,9 @@ $member = $db->reportGetMemberById($_GET['id']);
 													?>
 												<span class="caret"></span></button>
 												<ul class="dropdown-menu">
-												  <li><a href="#" <?php if($member['member_trustfulness']==1)echo 'style="color: #30a5ff" disabled';?>>Trusted <?php if($member['member_trustfulness']==1)echo '<i class="fa fa-check" aria-hidden="true">';?> </i></a></li>
+												  <li><a href="#" <?php if($member['member_trustfulness']==1){echo 'style="color: #30a5ff" disabled';}else{echo 'onClick="submitT('.$member['member_id'].',1)"';}?>>Trusted <?php if($member['member_trustfulness']==1)echo '<i class="fa fa-check" aria-hidden="true">';?> </i></a></li>
 												  <li class="divider"></li>
-												  <li><a href="#" <?php if($member['member_trustfulness']==0)echo 'style="color: #30a5ff" disabled';?>>Non-Trusted<?php if($member['member_trustfulness']==0)echo '<i class="fa fa-check" aria-hidden="true">';?></i></a></li>
+												  <li><a href="#" <?php if($member['member_trustfulness']==0){echo 'style="color: #30a5ff" disabled';}else{echo 'onClick="submitT('.$member['member_id'].',0)"';}?>>Non-Trusted<?php if($member['member_trustfulness']==0)echo '<i class="fa fa-check" aria-hidden="true">';?></i></a></li>
 												</ul>
 											  </div>
 										</p>
@@ -94,6 +72,7 @@ $member = $db->reportGetMemberById($_GET['id']);
 									</div>
 								</div>
 							</li>
+							<?php if($member['member_credit_card']!=NULL):?>
 							<li>
 								<div class="timeline-badge primary">Card</div>
 								<div class="timeline-panel">
@@ -102,11 +81,83 @@ $member = $db->reportGetMemberById($_GET['id']);
 									</div>
 								</div>
 							</li>
+							<?php endif; ?>
 							<li>
 								<div class="timeline-badge primary">Create At</div>
 								<div class="timeline-panel">
 									<div class="timeline-body">
 										<p><?php echo $member['member_created_time'];?></p>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Ordered</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										 <button type="button" class="btn btn-secondary pull-center" data-toggle="collapse" data-target="#orderHistory">View Order History</button>
+										  <div id="orderHistory" class="collapse">
+										  <table class="table">
+											<tr>
+												<th class="fixed-table-header">Book Name</th>
+												<th class="fixed-table-header">Quantity</th>
+												<th class="fixed-table-header">Price</th>	
+												<th class="fixed-table-header">Order Date Time</th>
+											</tr>
+										<?php 
+											$orders=$db->getMemberOrderHistory($_GET['id']);
+											foreach ($orders as $order):
+											?>
+											<tr>
+												<td><?php echo $order['book_title'];?></td>
+												<td><?php echo $order['order_detail_quantity'];?></td>
+												<td><?php echo 'RM '.$order['price'];?></td>
+												<td><?php echo $order['order_created_time'];?></td>
+											</tr>
+										<?php endforeach; ?>
+											</table>
+  										</div>
+											
+									
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-badge primary">Feedback</div>
+								<div class="timeline-panel">
+									<div class="timeline-body">
+										 <button type="button" class="btn btn-secondary pull-center" data-toggle="collapse" data-target="#feedback">View All Feedback</button>
+										  <div id="feedback" class="collapse">
+										  <table class="table">
+											<tr>
+												<th class="fixed-table-header">Book Name</th>
+												<th class="fixed-table-header">Comment</th>
+												<th class="fixed-table-header">Rating For Book</th>	
+												<th class="fixed-table-header">Useless</th>
+												<th class="fixed-table-header">Usefull</th>
+												<th class="fixed-table-header">Very Usefull</th>
+											</tr>
+										<?php 
+											$feedbacks=$db->getMemberFeedback($_GET['id']);
+											foreach ($feedbacks as $feedback):
+											?>
+											<tr>
+												<td><?php echo $feedback['book_title'];?></td>
+												<td><?php echo $feedback['feedback_comment'];?></td>
+												<td>
+                                                    <?php for($count = 0; $count < 5; $count++): ?>
+                                                        <i class="fa <?php echo ($count < $feedback['feedback_scale']) ? 'fa-star' : 'fa-star-o'; ?>" aria-hidden="true"></i>
+                                                    <?php endfor; ?>
+											        <br><?php echo number_format($feedback['feedback_scale'],1);?>
+											    </td>
+												<td><?php echo $feedback['useless'];?></td>
+												<td><?php echo $feedback['usefull'];?></td>
+												<td><?php echo $feedback['veryusefull'];?></td>
+											</tr>
+										<?php endforeach; ?>
+											</table>
+  										</div>
+											
+									
 									</div>
 								</div>
 							</li>

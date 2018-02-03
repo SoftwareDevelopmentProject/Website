@@ -31,12 +31,15 @@
 				$db->updateBook($_POST['id'],$_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount']);
 			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['request'])){
 				$b = array();
+				$wantsubmit = false;
 				foreach($_POST as $book_id => $quantity) {
 					if ($quantity > 0)
+						$wantsubmit = true;
 						array_push($b, array('id' => $book_id, 'quantity' => $quantity));
 				}
-			$db->insertBookRequest($_SESSION['staff'],$b);
-		}
+				if ($wantsubmit)
+						$db->insertBookRequest($_SESSION['staff'],$b);
+					}
 		
 		
 		
@@ -70,19 +73,20 @@
 				</td>
 				
 			</tr>
+			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
 			<h2>Book Stock</h2>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center" height="50px">
-					<td width="" >Book ID</td>
-					<td width="">Book Title</td>
-					<td width="">Author</td>
-					<td width="">Genre</td>
-					<td width="">Publisher</td>
-					<td width="">Years</td>
-					<td width="">Price</td>
-					<td width="">In stock amount</td>
-					<td width=""></td>
-					<td width=""></td>
+			<table class="table table-hover">
+				<tr>
+					<th width="" >Book ID</th>
+					<th width="">Book Title</th>
+					<th width="">Author</th>
+					<th width="">Genre</th>
+					<th width="">Publisher</th>
+					<th width="">Years</th>
+					<th width="">Price</th>
+					<th width="">In stock amount</th>
+					<th width=""></th>
+					<th width=""></th>
 					
 				</tr>
 				<?php
@@ -90,7 +94,7 @@
 					foreach($books as $book) :
                 ?>
 					<tr>
-						<td><?php echo $book['book_id']; ?></td>
+						<td><?php echo 'BID'.sprintf('%04d',$book['book_id']); ?></td>
 						<td><?php echo $book['book_title']; ?></td>
                         <td><?php echo $book['book_author']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>
@@ -118,7 +122,8 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Edit Book</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
+          <h2 class="modal-title" style="color: rgba(235,165,64,1.00);">Edit Book</h2>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
@@ -145,12 +150,13 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Delete Book</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body popup-body" id="modalBodyDel">
+       	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        	</div>
         
         <!-- Modal footer -->
@@ -172,12 +178,13 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Add Book</h2>
+          <img src="../images/logo.png" style="border-radius: 99px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body">
+       	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        		<div class="panel panel-default">
 				<div class="panel-body">
 					<form class="form-horizontal" method="post">
@@ -291,16 +298,16 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h2 class="modal-title">Request Book</h2>
+         <img src="../images/logo.png" style="border-radius: 99px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         
         <!-- Modal body -->
        	<div class="modal-body" id="modalBodyRequest">
+       	<center><h2 class="modal-title" style="color: black;">Request Book </h2></center>
        		<div class="padding" style="overflow: auto; height: auto;">
-			<h4>Place Book Request</h4>
-			<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white">
-				<tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+			<table class="table table-hover">
+				<tr>
 					<td width="" >Book ID</td>
 					<td width="">Book Title</td>
 					<td width="">Author</td>
@@ -316,7 +323,7 @@
 					foreach($books as $book) :
                 ?>
 					<tr>
-						<td><?php echo $book['book_id']; ?></td>
+						<td><?php echo 'BID'.sprintf('%04d',$book['book_id']);?></td>
 						<td><?php echo $book['book_title']; ?></td>
                         <td><?php echo $book['book_author']; ?></td>
                         <td><?php echo $book['genre_name']; ?></td>
@@ -324,7 +331,7 @@
 						<td><?php echo 'RM '.$book['book_price']; ?></td>
 						<td><?php echo $book['book_stock']; ?></td>
 						<td>
-								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 80%">
+								<select name="<?php echo $book['book_id'];?>" required class="drop_down" style="width: 80%" onChange="requestOnChage()">
 									<option value="0">0</option>
 									<option value="10">10</option>
                                     <option value="20">20</option>
@@ -339,7 +346,7 @@
 				</table>
                     <tr>
 						<td colspan="9" align="right" height="50px" >
-							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 10px;" name="request"/>
+							<input type="submit" class="btn btn-primary btn-md pull-right" style="float: right; margin: 10px 10px;" name="request" id="btn" disabled/>
 							</form>
 							<button class="btn btn- btn-md pull-right" style="float: right; margin: 10px 10px;" data-dismiss="modal">Back</button>
 							
@@ -457,6 +464,11 @@
 					$('#editBookSub').removeAttr('disabled');
 				}
 			}
+		//check onchange reqeust 
+		
+		function requestOnChage(){
+			$('#btn').removeAttr('disabled');
+		}
 
 
 		

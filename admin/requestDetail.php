@@ -1,8 +1,10 @@
+<center><h2 class="modal-title" style="color: black;">Request Details</h2></center>
 <?php
 include_once '../include/DbFunction.php';
 $db = new DbFunction;
 $details = $db->getRequestDetail($_GET['id']);
-echo'<table class="padding table-striped" style="text-align:center" width="100%" border=1 bordercolor="white"><tr class="staff_tr" style="color: #fff; background-color: #30a5ff; text-align: center " height="50px">
+echo'<table class="table table-hover">
+				<tr>
 					<td width="">Book ID</td>
 					<td width="">Book Title</td>
 					<td width="">Author</td>

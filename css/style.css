@@ -2951,7 +2951,7 @@ p.cart a:hover {
 	.span_1_of_a1 {
 		width:100%;
 	}	
-	.register_account form input[type="text"].number {
+	.register_account form input[type="text"].number, input[type="password"]{
 		width:69.8%;
 	}
 	.mens-toolbar .pager {
@@ -3144,4 +3144,8 @@ p.cart a:hover {
 .dropdown-content a:hover {background-color: #f1f1f1}
 .dropbox:hover .dropdown-content {
 	display: block;
+}
+.popup-body{
+	background-color: #333;
+	color:aliceblue;
 }

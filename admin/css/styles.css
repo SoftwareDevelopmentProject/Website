@@ -1,5 +1,5 @@
 body {
-  background: #f1f4f7;
+	background-image: url("../../images/bg.jpg");
   padding-top: 60px;
   font-size: 14px;
   color: #444444;
@@ -23,12 +23,15 @@ h1 {
   font-size: 40px; }
 
 h2 {
+	color:antiquewhite;
   font-weight: 300;
   margin-bottom: 20px; }
 
 h3, h4 {
   font-weight: 300; }
-
+.modal-header h2{
+	color: rgba(235,165,64,1.00);
+}
 .large {
   font-size: 2em; }
 
@@ -406,8 +409,6 @@ a.label:hover, a.label:focus {
   line-height: 38px; }
 
 .panel-default .panel-heading {
-  background: #fff;
-  border-bottom: 1px solid #e9ecf2;
   color: #444444; }
 
 .panel-footer {
@@ -773,6 +774,7 @@ a.label:hover, a.label:focus {
 
 @media (min-width: 768px) {
   .sidebar {
+	background: rgba(255, 255, 255, 0.7);
     display: block;
     position: fixed;
     top: 60px;
@@ -1004,7 +1006,11 @@ h1.page-header {
   margin-left: 5px; }
 
 .table {
-  background: #fff; }
+  background: rgba(255,255,255,.70);
+	font-weight: bold;
+	text-shadow: 2px 2px white;
+
+}
 
 .fixed-table-container {
   border: 1px solid #e9ecf2; }
@@ -1175,4 +1181,7 @@ table td .staff_td {
 }
 .hide {
 	display: none;
+}
+.margin_fix {
+	margin-bottom: 20px;
 }
