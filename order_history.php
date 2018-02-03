@@ -19,6 +19,7 @@ session_start();
                     <th class="fixed-table-header">Recipient Name</th>
                     <th class="fixed-table-header">Recipient Phone</th>
                     <th class="fixed-table-header">Recipient Address</th>
+                    <th class="fixed-table-header">Reward Point</th>
                     <th class="fixed-table-header">Payment Method</th>
                     <th class="fixed-table-header">Time</th>
                     <th class="fixed-table-header">Order Status</th>
@@ -33,12 +34,14 @@ session_start();
                     <td><?php echo $order['order_recipient_name']?></td>
                     <td><?php echo $order['order_recipient_phone']?></td>
                     <td><?php echo $order['order_recipient_address']?></td>
+                    <td><?php echo $order['reward']?></td>
                     <td><?php echo $order['order_payment_method']?></td>
                     <td><?php echo $order['order_created_time']?></td>
                     <td><?php echo $order['order_status']?></td>
                     <td><?php echo '<a href="invoice.php?order_id='.$order['order_id'].'">Print</a>';?></td>
                 </tr>
                 <?php } ?>
+
             </table>
 
 

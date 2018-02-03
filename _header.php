@@ -28,9 +28,8 @@ if(isset($_SESSION['user'])) {
                 <?php else:?>
     <li class="dropbox"><a href="#"><?php echo $user['member_name'];?></a>
         <div class="dropdown-content">
-            <a href="m-acc.php">My Account</a>
-            <a href="order_history.php">My Order</a>
-            <a href="#">Reward &amp; Point</a>
+            <a href="m-acc.php"><i class="fa fa-user" style="margin-right: 5px;"></i>My Account</a>
+            <a href="order_history.php"><i class="fa fa-th-list" style="margin-right: 5px;"></i>My Order</a>
         </div></li>
 
     <li class="active"><a href="logout.php">Logout</a></li>

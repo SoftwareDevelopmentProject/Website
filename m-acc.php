@@ -23,15 +23,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php include "_header.php";?>
        <div class="register_account" style="margin-bottom: 50px;">
           	<div class="wrap">
-    	      <h4 class="title">My Account</h4>
+    	      <h4 class="title" style="width:50%;" >My Account</h4>
+                <div style="width: 100%;float:right;"><i class="fa fa-gift" aria-hidden="false" style="margin-right: 5px;"></i><label>Reward Point</label> <label style="color:#ffaf02;">
+                        <?php $reward = $db->getRewardPoint($_SESSION['user']);
+                        echo $reward['reward'];?>
+                    </label></div>
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
-		   			 <div><input type="text" name ="name" value="<?php echo $user['member_name']?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<?php echo $user['member_name']?>';}"></div>
-		    			<div><input type="text" name="email" value="<?php echo $user['member_email']?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<?php echo $user['member_email']?>';}"></div>
+                     <div><label>My Name</label></div>
+		   			 <div><input type="text" name ="name" value="<?php echo $user['member_name']?>"></div>
+                     <div><label>My Email</label></div>
+                     <div><input type="text" name="email" value="<?php echo $user['member_email']?>""></div>
                      <div><a href="" style="text-decoration: underline;font-size: 14px;">change password</a> </div>
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
-                      <div><input type="text" name="phone" value="<?php echo $user['member_phone']?>" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '<?php echo $user['member_phone']?>';}"></div>
+                      <div><label>My Phone</label></div>
+                      <div><input type="text" name="phone" value="<?php echo $user['member_phone']?>"></div>
+                      <div><label>My Country</label></div>
 		    		<div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
 		            <option value="null">Select a Country</option>
 		            <option value="AX" <?php if($user['member_country'] == "AX") echo "selected"; ?>>Åland Islands</option>
@@ -232,7 +240,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		          </div>
 
 		         <div class="clear"></div>
-                   <input type="submit" class="grey" value="Save" />
+                   <input type="submit" class="grey" value="Update & Save" />
 
 		    </form>
     	  </div> 

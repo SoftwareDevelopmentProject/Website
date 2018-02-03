@@ -341,7 +341,7 @@ class DbFunction {
     public  function getOrderbyorderid($order_id){
         $db = new DbConnect();
         $con  = $db->connect();
-        $order = mysqli_query($con,"SELECT * from `order` WHERE order.order_id = $order_id;");
+        $order = mysqli_query($con,"SELECT * from `order` WHERE order.order_id = $order_id");
         $result_orderid = mysqli_fetch_array($order);
         return $result_orderid;
     }
@@ -349,9 +349,18 @@ class DbFunction {
         $db = new DbConnect();
         $con  = $db->connect();
         $result_order=array();
-        $order = mysqli_query($con,"SELECT * from `order` WHERE order.member_id = $user_id;");
-        $result_order = mysqli_fetch_array($order);
+        $order = mysqli_query($con,"SELECT FLOOR(SUM(order_detail.order_detail_quantity*book.book_price)) as reward, `order`.order_id,`order`.order_recipient_name,`order`.order_recipient_phone,`order`.order_recipient_address,`order`.order_transaction_id,`order`.order_payment_method,`order`.order_created_time, `order`.order_status FROM `order_detail` INNER JOIN `order` ON order_detail.order_id = `order`.`order_id` INNER JOIN book ON book.book_id = order_detail.book_id where `order`.`member_id`= $user_id group by  `order`.order_id ");
+        while($result_order1= mysqli_fetch_array($order)){
+            array_push($result_order,$result_order1);
+        }
         return $result_order;
+    }
+    public function getRewardPoint($member_id){
+        $db = new DbConnect();
+        $con  = $db->connect();
+        $reward = mysqli_query($con,"SELECT FLOOR(SUM(order_detail.order_detail_quantity*book.book_price)) as reward FROM `order_detail` INNER JOIN `order` ON order_detail.order_id = `order`.`order_id` INNER JOIN book ON book.book_id = order_detail.book_id where `order`.`member_id` = $member_id");
+        $result_reward = mysqli_fetch_array($reward);
+        return $result_reward;
     }
     public function getOrderdetails($order_id){
         $db = new DbConnect();

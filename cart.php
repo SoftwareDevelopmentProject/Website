@@ -26,6 +26,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <th class="fixed-table-header">Price</th>
                 <th class="fixed-table-header">Quantity</th>
                 <th class="fixed-table-header">Subtotal</th>
+
             </tr>
             <?php
 
