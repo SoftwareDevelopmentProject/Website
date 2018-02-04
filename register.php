@@ -61,15 +61,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     	      <h4 class="title">Create an Account</h4>
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
-		   			 <div><input type="text" name ="name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
-		    			<div><input type="text" name="email" value="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}"></div>
-		    			<div><input type="text" name="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
-                     <div><input type="text" name="confirmpassword" value="confirmpassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'confirmpassword';}"></div>
+                     <div><label>Name</label></div>
+		   			 <div><input type="text" name ="name" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
+                     <div><label>Email</label></div>
+                     <div><input type="email" name="email" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}"></div>
+                     <div><label>Password</label></div>
+                     <div><input type="password" name="password" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
+                     <div><label>Confirm Password</label></div>
+                     <div><input type="password" name="confirmpassword" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'confirmpassword';}"></div>
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
-                      <div><input type="text" name="phone" value="phone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone';}"></div>
+                      <div><label>Phone</label></div>
+                      <div><input type="text" name="phone" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone';}"></div>
+                      <div><label>Address</label></div>
                       <div><input type="text" name="address" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>
-		    		<div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
+                      <div><label>Country</label></div>
+                      <div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
 		            <option value="null">Select a Country</option>         
 		            <option value="AX">Åland Islands</option>
 		            <option value="AF">Afghanistan</option>

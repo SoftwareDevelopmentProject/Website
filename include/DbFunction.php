@@ -236,7 +236,8 @@ class DbFunction {
     public function changepassword($member_id,$oldpassword,$newpassword){
         $db = new DbConnect();
         $con = $db->connect();
-        $result_password = mysqli_query($con,"SELECT member_password from member where member_id = $member_id");
+        $r_password = mysqli_query($con,"SELECT member_password from member where member_id = $member_id");
+        $result_password =mysqli_fetch_array($r_password);
         $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
         if(password_verify($oldpassword,$result_password['member_password'])){
             $newpw = mysqli_query($con,"UPDATE member set member_password='$newpassword'");

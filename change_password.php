@@ -1,9 +1,7 @@
 <?php
 session_start();
 
-if(isset($_POST['oldpassword'],$_POST['newpassword'])){
-    $db->changepassword($_SESSION['user'],$_POST['oldpassword'],$_POST['newpassword']);
-}
+
 ?>
     <!--A Design by W3layouts
     Author: W3layout
@@ -19,7 +17,9 @@ if(isset($_POST['oldpassword'],$_POST['newpassword'])){
     <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
-
+<?php if(isset($_POST['oldpassword'],$_POST['newpassword'])){
+    $db->changepassword($_SESSION['user'],$_POST['oldpassword'],$_POST['newpassword']);
+} ?>
 <body>
 <?php include "_header.php";?>
 

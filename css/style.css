@@ -1215,7 +1215,33 @@ p#login-form-remember label a:hover{
 	margin: 10px 0;
 	width: 95%;
 	font-family: 'Open Sans', sans-serif;
-	border:1px solid #f0f0f0;
+	border:1px solid #55555559;
+}
+.register_account form input[type="email"]:hover, .register_account form select:hover{
+	border:1px solid #DBDADA;
+}
+.register_account form input[type="email"], .register_account form select {
+	font-size: 0.8125em;
+	color: #999;
+	padding: 8px;
+	outline: none;
+	margin: 10px 0;
+	width: 95%;
+	font-family: 'Open Sans', sans-serif;
+	border:1px solid #55555559;
+}
+.register_account form input[type="password"]:hover, .register_account form select:hover{
+	border:1px solid #DBDADA;
+}
+.register_account form input[type="password"], .register_account form select {
+	font-size: 0.8125em;
+	color: #999;
+	padding: 8px;
+	outline: none;
+	margin: 10px 0;
+	width: 95%;
+	font-family: 'Open Sans', sans-serif;
+	border:1px solid #55555559;
 }
 .register_account form input[type="text"]:hover, .register_account form select:hover{
 	border:1px solid #DBDADA;
