@@ -30,6 +30,7 @@ if(isset($_POST['delete'])){
 <div class="login">
     <div class="wrap" style="margin-bottom: 50px;">
         <?php if (sizeof($_SESSION['cart']) > 0  ){?>
+            <form method="post">
         <table class="table">
             <thead style="text-align: center;">
             <tr style="font-weight: bold;">
@@ -44,26 +45,26 @@ if(isset($_POST['delete'])){
             </tr>
             </thead>
             <?php
-
                 $cart = $db->viewCart();
                 $total = 0;
                 foreach ($cart as $book) {
                     $subtotal = $book['book_price'] * $book['quantity'] ;
                     $total+=$subtotal;
-                    echo '<tr>
-                  <td style="text-align: center"><input type="checkbox"/></td>
-                  <td style="width: 220px;text-align: center"><img src="images/products/' . $book['book_id'] . '.jpg" alt=""/></td>
-                  <td style="text-align: center">' . $book['book_title'] . '</td>
-                  <td style="text-align: center">' . $book['book_price'] . '</td>
-                  <td style="text-align: center">' . $book['quantity'] . '</td>
-                  <td style="text-align: center">'.$subtotal.'</td>
-                  <td style="text-align: center"><form method="post" onclick="this.submit();"> <input type="hidden" name="delete" value="' . $book['book_id'] . '"><i class="fa fa-trash"></i></form></td>
-              </tr> '
-                    ;
+                    ?>
 
+                <tr>
+                  <td style="text-align: center"><input type="checkbox" name="book[<?php echo $book['book_id'];?>]" value="<?php echo $book['quantity'];?>"/></td>
+                  <td style="width: 220px;text-align: center"><img src="images/products/<?php echo $book['book_id'];?>.jpg" alt=""/></td>
+                  <td style="text-align: center"><?php echo $book['book_title'];?></td>
+                  <td style="text-align: center"><?php echo $book['book_price'];?></td>
+                  <td style="text-align: center"><?php echo $book['quantity'];?></td>
+                  <td style="text-align: center"><?php echo $subtotal;?></td>
+                  <td style="text-align: center"><i onclick="document.getElementById('deleteItemId').value = '<?php echo $book['book_id'];?>'; document.getElementById('deleteItem').submit();" class="fa fa-trash"></i></td>
+              </tr>
+
+
+<?php
                 }
-
-
 
             ?>
             <tr style="font-weight: bold;">
@@ -80,7 +81,7 @@ if(isset($_POST['delete'])){
 
         <div class="" style="margin-top: 10px;">
             <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>
-            <form method="post">
+
             <button name="clear" class="btn btn-primary btn-sm" style="float: right;">Clear</button>
             </form>
         </div>
@@ -93,6 +94,9 @@ if(isset($_POST['delete'])){
         }?>
     </div>
 </div>
+<form id="deleteItem" method="post">
+    <input id="deleteItemId" name="delete" value="" type="hidden" />
+</form>
 <?php include "_footer.php"?>
 </body>
 </html>
