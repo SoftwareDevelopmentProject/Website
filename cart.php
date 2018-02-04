@@ -68,16 +68,25 @@ if(isset($_POST['delete'])){
 
             ?>
             <tr style="font-weight: bold;">
-                <td ></td>
-                <td></td>
+                <td style="text-align: right">Apply Discount</td>
+                <td>
+                    <select onchange="document.getElementById('cartTotal').innerHTML = (<?php echo $total; ?> - parseInt(this.value)).toFixed(2)">
+                        <option value="0">No discount</option>
+                        <option value="5" <?php if(($user['member_reward_points'] < 100) || ($total < 5)) echo 'disabled'; ?>>RM 5 (100 points)</option>
+                        <option value="20" <?php if(($user['member_reward_points'] < 300) || ($total < 20)) echo 'disabled'; ?>>RM 20 (300 points)</option>
+                        <option value="50" <?php if(($user['member_reward_points'] < 500) || ($total < 50)) echo 'disabled'; ?>>RM 50 (500 points)</option>
+                    </select>
+                </td>
                 <td></td>
                 <td></td>
                 <td style="text-align: center">Total</td>
-                <td style="text-align: center"><?php echo $total; ?></td>
+                <td style="text-align: center" id="cartTotal"><?php echo $total; ?></td>
                 <td></td>
 
             </tr>
         </table>
+
+
 
         <div class="" style="margin-top: 10px;">
             <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>

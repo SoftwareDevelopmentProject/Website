@@ -417,6 +417,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $detail = mysqli_query($con, "INSERT INTO order_detail(order_id,book_id,order_detail_quantity) VALUE ('$order_id','$book_id','$qty')");
+        mysqli_query($con, "UPDATE member SET member_reward_points = member_reward_points + ((SELECT book_price FROM book WHERE book_id = $book_id) * $qty) WHERE member_id = (SELECT member_id FROM `order` WHERE order_id = $order_id)");
         return $detail;
 
     }
