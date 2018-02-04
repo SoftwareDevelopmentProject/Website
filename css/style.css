@@ -1343,14 +1343,14 @@ ul.dc_pagination li a {
 .list2{
 	float: left;
 	background: #08080B;
-	width: 53.5%;
+	width: 100%;
 	padding: 0.2% 0;
 	text-align: center;
 }
 ul.list2 li img {
 	vertical-align: middle;
 	float: left;
-	margin:0 0px 0 12%;
+	margin:0 0px 0 31%;
 }
 h3.m_s{
 	color: #555;
@@ -1756,7 +1756,7 @@ p.cart a:hover {
 		width:22.5%;
 	}
 	ul.list2 li img {
-		margin: 0 0px 0 2%;
+		margin: 0 0px 0 31%;
 	}
 	.rating1 {
 		width: 49.5%;
@@ -1764,7 +1764,7 @@ p.cart a:hover {
 		font-size: 0.8125em;
 	}
 	.list2 {
-		width: 48.5%;
+		width: 100%;
 	}
 	.rating {
 		padding: 2.2% 5%;
