@@ -59,7 +59,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                   <?php
                   if (isset($_GET['book_id'])) {
-                      $books = $db->getBookid($_GET['book_id']);}?>
+                      $books = $db->getBook($_GET['book_id']);}?>
                       <img src="images/Products/<?php echo $books['book_id']; ?>.jpg" alt="" style="width:330px"/>
 					
 					
@@ -190,7 +190,32 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      </div>					
 	 <div class="toogle">
      	<h3 class="m_3">Product Reviews</h3>
-     	<p class="m_text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+         <form>
+             <select name="scale">
+                 <option selected disabled>Rating scale</option>
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option>
+                 <option value="4">4</option>
+                 <option value="5">5</option>
+                 <option value="6">6</option>
+                 <option value="7">7</option>
+                 <option value="8">8</option>
+                 <option value="9">9</option>
+                 <option value="10">10</option>
+             </select>
+             <textarea name="review" style="width: 100%; height: 80px" placeholder="Write a review..."></textarea>
+             <input type="submit" value="Submit" />
+         </form>
+         <div class="review-container" style="margin-top: 30px;">
+             <?php foreach($books['feedback'] as $feedback) : ?>
+            <p style="margin: 15px 0; padding: 5px;">
+                <span style="font-weight: bold"><?php echo $feedback['member_name']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp; &#9733; <?php echo $feedback['feedback_scale']; ?> / 10<br/>
+                <?php echo $feedback['feedback_comment']; ?><br/>
+                <span style="font-size: 12px">Rate as:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Very Useful | Useful | Not Useful</span>
+            </p>
+             <?php endforeach; ?>
+         </div>
      </div>
      </div>
      <div class="clear"></div>

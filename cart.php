@@ -70,7 +70,7 @@ if(isset($_POST['delete'])){
             <tr style="font-weight: bold;">
                 <td style="text-align: right">Apply Discount</td>
                 <td>
-                    <select onchange="document.getElementById('cartTotal').innerHTML = (<?php echo $total; ?> - parseInt(this.value)).toFixed(2)">
+                    <select name="discount" onchange="document.getElementById('cartTotal').innerHTML = (<?php echo $total; ?> - parseInt(this.value)).toFixed(2)">
                         <option value="0">No discount</option>
                         <option value="5" <?php if(($user['member_reward_points'] < 100) || ($total < 5)) echo 'disabled'; ?>>RM 5 (100 points)</option>
                         <option value="20" <?php if(($user['member_reward_points'] < 300) || ($total < 20)) echo 'disabled'; ?>>RM 20 (300 points)</option>
@@ -92,8 +92,9 @@ if(isset($_POST['delete'])){
             <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>
 
             <button name="clear" class="btn btn-primary btn-sm" style="float: right;">Clear</button>
-            </form>
+
         </div>
+            </form>
         <?php }else if(!isset($_SESSION['cart'])){
             echo'<h4 class="title">Shopping cart is empty</h4>
     	     <p class="cart">You have no items in your shopping cart.<br>Click<a href="index.php"> here</a> to continue shopping</p>';
