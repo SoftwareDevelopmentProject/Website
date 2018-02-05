@@ -117,7 +117,7 @@ class DbFunction {
         $con = $db->connect();
         $books = array();
         $result_book = mysqli_query($con, "SELECT book.genre_id, book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id AND book.book_id = $book_id");
-        $result_feedback = mysqli_query($con, "SELECT * FROM feedback");
+        $result_feedback = mysqli_query($con, "SELECT feedback.*, member_name FROM feedback INNER JOIN member ON member.member_id = feedback.member_id");
         $result_feedback_rating = mysqli_query($con, "SELECT * FROM feedback_rating");
         while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
             $book['feedback'] = array();
@@ -142,7 +142,7 @@ class DbFunction {
                 }
             }
         }
-        return $books;
+        return $books[0];
     }
     /*show limit 5 books*/
     public function get5book(){
