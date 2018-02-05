@@ -213,21 +213,22 @@ class DbFunction {
     public function login($email, $password) {
         $db = new DbConnect();
         $con = $db->connect();
-        $result = mysqli_query($con, "SELECT * FROM member WHERE member_email = '$email'");
-        if (mysqli_num_rows($result) > 0) {
-            $member = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            if ($this->isAccountLocked($member['member_id'])) {
-                return LOGIN_ACCOUNT_LOCKED;
+        if($email != '' && $password != '') {
+            $result = mysqli_query($con, "SELECT * FROM member WHERE member_email = '$email'");
+            if (mysqli_num_rows($result) > 0) {
+                $member = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                if (password_verify($password, $member['member_password'])) {
+                    $_SESSION['user'] = $member['member_id'];
+                    $this->recordLoginAttempt($member['member_id'], true);
+                    return LOGIN_SUCCESS;
+                }
+                $this->recordLoginAttempt($member['member_id'], false);
+                return LOGIN_PASSWORD_INCORRECT;
             }
-            if (password_verify($password, $member['member_password'])) {
-                $_SESSION['user'] = $member['member_id'];
-                $this->recordLoginAttempt($member['member_id'], true);
-                return LOGIN_SUCCESS;
-            }
-            $this->recordLoginAttempt($member['member_id'], false);
-            return LOGIN_PASSWORD_INCORRECT;
+            return LOGIN_USER_NOT_FOUND;
+        } else {
+            return LOGIN_NULL;
         }
-        return LOGIN_USER_NOT_FOUND;
     }
     /*
      Member functions
@@ -426,6 +427,9 @@ class DbFunction {
         unset ($_SESSION['cart'][$book_id]);
     }
     /*Checkout*/
+    public function cartgetQuantity($book_id){
+        return $_SESSION['cart'][$book_id];
+    }
     public function checkout($order_name,$order_email,$order_phone,$order_address,$pm,$order_transaction,$member_id){
         $db =new DbConnect();
         $con =$db->connect();

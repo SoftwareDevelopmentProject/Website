@@ -3168,6 +3168,7 @@ p.cart a:hover {
 
 }
 .dropdown-content a:hover {background-color: #f1f1f1}
+
 .dropbox:hover .dropdown-content {
 	display: block;
 }

@@ -25,8 +25,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
           	<div class="wrap">
     	      <h4 class="title" style="width:50%;" >My Account</h4>
                 <div style="width: 100%;float:right;"><i class="fa fa-gift" aria-hidden="false" style="margin-right: 5px;"></i><label>Reward Point</label> <label style="color:#ffaf02;">
-                        <?php $reward = $db->getRewardPoint($_SESSION['user']);
-                        echo $reward['reward'];?>
+                        <?php echo $user['member_reward_points'];?>
                     </label></div>
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">

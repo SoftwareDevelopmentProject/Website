@@ -15,5 +15,6 @@ define('LOGIN_USER_NOT_FOUND', 0);
 define('LOGIN_SUCCESS', 1);
 define('LOGIN_PASSWORD_INCORRECT', 2);
 define('LOGIN_ACCOUNT_LOCKED', 3);
+define('LOGIN_NULL',4);
 
 ?>

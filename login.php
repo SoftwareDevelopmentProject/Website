@@ -13,7 +13,24 @@ session_start();
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-   if( $db->login($_POST['email'], $_POST['password'])){
+
+    $login = $db->login($_POST['email'], $_POST['password']);
+    switch($login){
+        case LOGIN_SUCCESS:
+            //after loginsuccess
+
+            break;
+        case LOGIN_USER_NOT_FOUND:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+  <strong>Info!</strong>Email not found.
+</div>';
+            break;
+        case LOGIN_PASSWORD_INCORRECT:
+            break;
+    }
+
+
+   /*if( $db->login($_POST['email'], $_POST['password'])){
        header("location: index.php");
    }elseif ($_POST['email'] =="" || $_POST['password']==""){
     echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
@@ -24,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <strong>Info!</strong>Wrong Email or Password.
 </div>';
    }
+   */
 
 
 }

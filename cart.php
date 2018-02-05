@@ -24,13 +24,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 if(isset($_POST['delete'])){
     $db->delCart($_POST['delete']);
     header("Refresh:0");
-}?>
+}
+
+
+?>
 <body>
 <?php include "_header.php";?>
 <div class="login">
     <div class="wrap" style="margin-bottom: 50px;">
-        <?php if (sizeof($_SESSION['cart']) > 0  ){?>
-            <form method="post">
+        <?php if (isset($_SESSION['cart'])&& (sizeof($_SESSION['cart']) > 0  )){?>
+            <form method="post" action="checkout.php">
         <table class="table">
             <thead style="text-align: center;">
             <tr style="font-weight: bold;">
@@ -46,14 +49,23 @@ if(isset($_POST['delete'])){
             </thead>
             <?php
                 $cart = $db->viewCart();
-                $total = 0;
                 foreach ($cart as $book) {
-                    $subtotal = $book['book_price'] * $book['quantity'] ;
-                    $total+=$subtotal;
-                    ?>
 
+                    $subtotal = $book['book_price'] * $book['quantity'];
+
+                    ?>
+                    <script type="text/javascript">
+
+                            function check(x,price) {
+                                if (x.checked) {
+                                   document.getElementById("cartTotal").innerHTML = (parseFloat(document.getElementById("cartTotal").innerHTML) + price).toFixed(2);
+                                } else {
+                                    document.getElementById("cartTotal").innerHTML = (parseFloat(document.getElementById("cartTotal").innerHTML) - price).toFixed(2);
+                                }
+                            }
+                    </script>
                 <tr>
-                  <td style="text-align: center"><input type="checkbox" name="book[<?php echo $book['book_id'];?>]" value="<?php echo $book['quantity'];?>"/></td>
+                  <td style="text-align: center"><input type="checkbox" name="book[]" onchange="check(this, <?php echo $subtotal;?>)" value="<?php echo $book['book_id'];?>"/></td>
                   <td style="width: 220px;text-align: center"><img src="images/products/<?php echo $book['book_id'];?>.jpg" alt=""/></td>
                   <td style="text-align: center"><?php echo $book['book_title'];?></td>
                   <td style="text-align: center"><?php echo $book['book_price'];?></td>
@@ -70,17 +82,19 @@ if(isset($_POST['delete'])){
             <tr style="font-weight: bold;">
                 <td style="text-align: right">Apply Discount</td>
                 <td>
+                    <!--
                     <select onchange="document.getElementById('cartTotal').innerHTML = (<?php echo $total; ?> - parseInt(this.value)).toFixed(2)">
                         <option value="0">No discount</option>
                         <option value="5" <?php if(($user['member_reward_points'] < 100) || ($total < 5)) echo 'disabled'; ?>>RM 5 (100 points)</option>
                         <option value="20" <?php if(($user['member_reward_points'] < 300) || ($total < 20)) echo 'disabled'; ?>>RM 20 (300 points)</option>
                         <option value="50" <?php if(($user['member_reward_points'] < 500) || ($total < 50)) echo 'disabled'; ?>>RM 50 (500 points)</option>
                     </select>
+                    -->
                 </td>
                 <td></td>
                 <td></td>
                 <td style="text-align: center">Total</td>
-                <td style="text-align: center" id="cartTotal"><?php echo $total; ?></td>
+                <td style="text-align: center" id="cartTotal">0</td>
                 <td></td>
 
             </tr>
@@ -89,10 +103,11 @@ if(isset($_POST['delete'])){
 
 
         <div class="" style="margin-top: 10px;">
-            <button class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;" onclick="window.location.replace('checkout.php')">Checkout</button>
-
-            <button name="clear" class="btn btn-primary btn-sm" style="float: right;">Clear</button>
+            <button name="checkout" class="btn btn-primary btn-sm" style="float: right;margin-left: 20px;">Checkout</button>
             </form>
+        <form method="post">
+            <button name="clear" class="btn btn-primary btn-sm" style="float: right;">Clear</button>
+        </form>
         </div>
         <?php }else if(!isset($_SESSION['cart'])){
             echo'<h4 class="title">Shopping cart is empty</h4>
@@ -106,6 +121,7 @@ if(isset($_POST['delete'])){
 <form id="deleteItem" method="post">
     <input id="deleteItemId" name="delete" value="" type="hidden" />
 </form>
+
 <?php include "_footer.php"?>
 </body>
 </html>
