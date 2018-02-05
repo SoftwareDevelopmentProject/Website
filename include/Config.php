@@ -17,4 +17,8 @@ define('LOGIN_PASSWORD_INCORRECT', 2);
 define('LOGIN_ACCOUNT_LOCKED', 3);
 define('LOGIN_NULL',4);
 
+//Change Password
+define('PASSWORD_UPDATED',0);
+define('PASSWORD_INCORRECT',1);
+define('PASSWORD_NULL',2);
 ?>

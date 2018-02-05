@@ -234,16 +234,22 @@ class DbFunction {
      Member functions
      */
     /*member change password*/
-    public function changepassword($member_id,$oldpassword,$newpassword){
+    public function changepassword($member_id,$oldpassword,$newpassword)
+    {
         $db = new DbConnect();
         $con = $db->connect();
-        $r_password = mysqli_query($con,"SELECT member_password from member where member_id = $member_id");
-        $result_password =mysqli_fetch_array($r_password);
-        $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
-        if(password_verify($oldpassword,$result_password['member_password'])){
-            $newpw = mysqli_query($con,"UPDATE member set member_password='$newpassword'");
+        if ($oldpassword != '' && $newpassword != '') {
+            $r_password = mysqli_query($con, "SELECT member_password from member where member_id = $member_id");
+            $result_password = mysqli_fetch_array($r_password);
+            $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+            if (password_verify($oldpassword, $result_password['member_password'])) {
+                mysqli_query($con, "UPDATE member set member_password='$newpassword'");
+                return PASSWORD_UPDATED;
+            }
+            return PASSWORD_INCORRECT;
+        }else{
+            return PASSWORD_NULL;
         }
-        return $newpw;
     }
     /*get member information*/
     public function getmember(){

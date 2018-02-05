@@ -18,7 +18,21 @@ session_start();
     <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <?php if(isset($_POST['oldpassword'],$_POST['newpassword'])){
-    $db->changepassword($_SESSION['user'],$_POST['oldpassword'],$_POST['newpassword']);
+    $changepassword =$db->changepassword($_SESSION['user'],$_POST['oldpassword'],$_POST['newpassword']);
+    switch ($changepassword){
+        case PASSWORD_UPDATED:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Password Updated</div>';
+            break;
+        case PASSWORD_INCORRECT:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Old Password are not correct.</div>';
+            break;
+        case PASSWORD_NULL:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Please enter your old password or new password</div>';
+            break;
+    }
 } ?>
 <body>
 <?php include "_header.php";?>

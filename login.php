@@ -18,14 +18,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch($login){
         case LOGIN_SUCCESS:
             //after loginsuccess
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Login Successfully</div>';
+            header("location:index.php");
 
             break;
         case LOGIN_USER_NOT_FOUND:
             echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
-  <strong>Info!</strong>Email not found.
-</div>';
+                <strong>Info!</strong>Email not found.</div>';
             break;
         case LOGIN_PASSWORD_INCORRECT:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Password Incorrect</div>';
+            break;
+        case LOGIN_NULL:
+            echo'<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Please enter your email or password</div>';
             break;
     }
 
