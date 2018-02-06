@@ -10,35 +10,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Free Adidas Website Template | Shop :: w3layouts</title>
-
-<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
-<?php include"_head.php";?>
+    <title>New-Arrival</title>
+    <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <?php include"_head.php";?>
 </head>
 <body>
- <?php include"_header.php";?>
+    <?php include"_header.php";?>
+    <?php
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        $db->addCart($_POST['book_id'],$_POST['quantity']);
+    }
+    ?>
        <div class="login">
-         <div class="wrap">
-
-		<div class="cont span_2_of_3" style="width: 98.1%;">
-		  <div class="mens-toolbar">
-              <div class="sort">
-               	<div class="sort-by">
-		            <label>Sort By</label>
-		            <select>
-		                            <option value="">
-		                    Popularity               </option>
-		                            <option value="">
-		                    Price : High to Low               </option>
-		                            <option value="">
-		                    Price : Low to High               </option>
-		            </select>
-		            <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
-               </div>
-    		</div>
-	          <div class="pager">   
-	           <div class="limiter visible-desktop">
-	            <label>Show</label>
+           <div class="wrap">
+		        <div class="cont span_2_of_3" style="width: 98.1%;">
+		            <div class="mens-toolbar">
+                        <div class="sort">
+                            <div class="sort-by">
+		                        <label>Sort By</label>
+		                                <select>
+                                            <option value="">Popularity</option>
+                                            <option value="">Price : High to Low</option>
+                                            <option value="">Price : Low to High</option>
+		                                </select>
+		                                <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
+                            </div>
+    		            </div>
+	                    <div class="pager">
+	                        <div class="limiter visible-desktop">
+	                            <label>Show</label>
 	            <select>
 	                            <option value="" selected="selected">
 	                    9                </option>
@@ -60,7 +60,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <?php
             $books9 = $db->get9book();
             foreach ($books9 as $book9){
-                echo '   
+                echo '
+                <form method="post">
+                <input type="hidden" name="book_id" value="'.$book9['book_id'].'"/>
+                <input type="hidden" name="quantity" value="1" />
 				   <div class="col_1_of_single1 span_1_of_single1"><a href="singles/'.$book9['book_id'].'">
 				     <div class="view1 view-fifth1">
 				  	  <div class="top_box">
@@ -71,32 +74,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	                       		<div class="info">Quick View</div>
 			                  </div>
 	                    </div>
-                       <div class="price">&dollar;'.$book9['book_price'].'</div>
+                       <div class="price">RM&nbsp;'.$book9['book_price'].'</div>
 					   </div>
 					    </div>
 						 <ul class="list2">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Cart </a>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
+							<button style="background-color: transparent;color: white;border: none; width: 100%;">Add To Cart</button>	  
 					     </ul>
 			    	    <div class="clear"></div>
 			    	</a></div>
-
-
-
-
-
-
-
-				 
+                </form>				 
 			';
             }
             ?>
