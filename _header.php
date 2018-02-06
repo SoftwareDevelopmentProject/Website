@@ -97,7 +97,7 @@ if(isset($_SESSION['user'])) {
             </li>
             <li><a class="color7" href="contact.php">Contact</a>
             </li>
-            <li><a class="color8" href="#">Reward</a>
+            <li><a class="color8" href="reward.php">Reward</a>
 
             </li>
 

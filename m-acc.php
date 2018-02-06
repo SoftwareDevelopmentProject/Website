@@ -15,9 +15,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $db->myaccount($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['country']);
-    }
+        $db->myaccount($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['country'],$_POST['member']);
 
+    }
+print_r($_POST['member']);
 ?>
 <body>
     <?php include "_header.php";?>
@@ -30,9 +31,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
                      <div><label>My Name</label></div>
+
+
 		   			 <div><input type="text" name ="name" value="<?php echo $user['member_name']?>"></div>
                      <div><label>My Email</label></div>
-                     <div><input type="text" name="email" value="<?php echo $user['member_email']?>""></div>
+                     <div><input type="text" name="email" value="<?php echo $user['member_email']?>"> <input type="text" name ="member" value="<?php echo $user['member_id']?>"/></div>
                      <div><a href="change_password.php" style="text-decoration: underline;font-size: 14px;">change password</a> </div>
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
