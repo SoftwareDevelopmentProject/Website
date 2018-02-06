@@ -75,8 +75,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 							</div>
                 <?php
-                if($_SERVER["REQUEST_METHOD"]=="POST"){
+                if(isset($_POST['book_id'], $_POST['qty'])){
                     $db->addCart($_POST['book_id'],$_POST['qty']);
+                }
+                if (isset($_POST['scale'])) {
+                    $db->addFeedback($user['member_id'], $_GET['book_id'], $_POST['scale'], $_POST['review']);
+                    echo '<script>window.location.replace("singles/' . $_GET['book_id'] . '");</script>';
                 }
 
 
@@ -190,7 +194,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
      </div>					
 	 <div class="toogle">
      	<h3 class="m_3">Product Reviews</h3>
-         <form>
+         <?php if ($user != null) : ?>
+         <form method="post">
              <select name="scale">
                  <option selected disabled>Rating scale</option>
                  <option value="1">1</option>
@@ -207,12 +212,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
              <textarea name="review" style="width: 100%; height: 80px" placeholder="Write a review..."></textarea>
              <input type="submit" value="Submit" />
          </form>
+         <?php endif; ?>
          <div class="review-container" style="margin-top: 30px;">
              <?php foreach($books['feedback'] as $feedback) : ?>
             <p style="margin: 15px 0; padding: 5px;">
                 <span style="font-weight: bold"><?php echo $feedback['member_name']; ?></span>&nbsp;&nbsp;&nbsp;&nbsp; &#9733; <?php echo $feedback['feedback_scale']; ?> / 10<br/>
                 <?php echo $feedback['feedback_comment']; ?><br/>
-                <span style="font-size: 12px">Rate as:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Very Useful | Useful | Not Useful</span>
+                <span style="font-size: 12px">Rate as:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:#FFAF02;" href="rate_feedback.php?id=<?php echo $feedback['feedback_id']; ?>&scale=2&book_id=<?php echo $_GET['book_id']; ?>">Very Useful</a> | <a style="color:#FFAF02;" href="rate_feedback.php?id=<?php echo $feedback['feedback_id']; ?>&scale=1&book_id=<?php echo $_GET['book_id']; ?>">Useful</a> | <a style="color:#FFAF02;" href="rate_feedback.php?id=<?php echo $feedback['feedback_id']; ?>&scale=0&book_id=<?php echo $_GET['book_id']; ?>">Not Useful</a></span>
             </p>
              <?php endforeach; ?>
          </div>

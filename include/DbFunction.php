@@ -70,6 +70,16 @@ class DbFunction {
         return $result;
     }
 
+    public function addFeedback($user_id, $book_id, $scale, $feedback) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        mysqli_query($con, "INSERT INTO feedback(feedback_scale, feedback_comment, member_id, book_id) VALUES($scale, '$feedback', $user_id, $book_id)");
+    }
+    public function rateFeedback($user_id, $feedback_id, $scale) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        mysqli_query($con, "INSERT INTO feedback_rating(feedback_id, member_id, rating_scale) VALUES($feedback_id, $user_id, $scale)");
+    }
 
 
     public function checkEmailExists($email) {
