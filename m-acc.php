@@ -13,15 +13,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Register</title>
     <?php include "_head.php";?>
 </head>
-<?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $db->myaccount($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['country'],$_POST['member']);
 
-    }
-print_r($_POST['member']);
-?>
 <body>
     <?php include "_header.php";?>
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $db->myaccount($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['country'],$user['member_id']);
+        echo'<script>window.location.replace("m-acc.php");</script>';
+
+    }
+
+    ?>
        <div class="register_account" style="margin-bottom: 50px;">
           	<div class="wrap">
     	      <h4 class="title" style="width:50%;" >My Account</h4>
@@ -40,7 +42,7 @@ print_r($_POST['member']);
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
                       <div><label>My Phone</label></div>
-                      <div><input type="text" name="phone" value="<?php echo $user['member_phone']?>"></div>
+                      <div><input type="text" name ="phone" value="<?php echo $user['member_phone']?>"></div>
                       <div><label>My Country</label></div>
 		    		<div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
 		            <option value="null">Select a Country</option>
