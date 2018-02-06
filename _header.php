@@ -20,32 +20,23 @@ if(isset($_SESSION['user'])) {
             <a href="index.php"><img src="images/logo.png" alt=""/></a>
         </div>
         <div class="cssmenu">
-            <ul>
-
-
-<?php if($user == null) :?>
-    <li class="active"><a href="login.php">Sign up & Login</a></li>
+            <ul><?php if($user == null) :?>
+                    <li class="active"><a href="login.php">Sign up & Login</a></li>
                 <?php else:?>
-    <li class="dropbox"><a href="#"><?php echo $user['member_name'];?></a>
-        <div class="dropdown-content">
-            <a href="m-acc.php"><i class="fa fa-user" style="margin-right: 5px;"></i>My Account</a>
-            <a href="order_history.php"><i class="fa fa-th-list" style="margin-right: 5px;"></i>My Order</a>
-        </div></li>
-
-    <li class="active"><a href="logout.php">Logout</a></li>
+                    <li class="dropbox"><a href="#"><?php echo $user['member_name'];?></a>
+                            <div class="dropdown-content">
+                                 <a href="m-acc.php"><i class="fa fa-user" style="margin-right: 5px;"></i>My Account</a>
+                                <a href="order_history.php"><i class="fa fa-th-list" style="margin-right: 5px;"></i>My Order</a>
+                             </div>
+                    </li>
+                    <li class="active"><a href="logout.php">Logout</a></li>
                 <?php endif;?>
-
-
+                    <li>
+                        <a class="fa fa-shopping-cart" aria-hidden="true" href="cart.php" style="text-decoration: none;color: black;font-size: 20px;"></a>
+                    </li>
             </ul>
         </div>
-        <ul class="icon2 sub-icon2 profile_img">
-            <li><a class="active-icon c2" href="cart.php"> </a>
-                <ul class="sub-icon2 list">
-                    <li><h3>Products</h3><a href="shop.php"></a></li>
-                    <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                </ul>
-            </li>
-        </ul>
+
         <div class="clear"></div>
     </div>
 </div>

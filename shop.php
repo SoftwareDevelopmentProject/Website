@@ -11,13 +11,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <base href="../" />
-<title>Free Adidas Website Template | Shop :: w3layouts</title>
-
-<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+    <title>Technology Bookstore Shop Now</title>
+    <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
 <?php include"_head.php";?>
 </head>
 <body>
- <?php include"_header.php";?>
+    <?php include"_header.php";?>
+    <?php
+        if($_SERVER["REQUEST_METHOD"]=="POST"){
+            $db->addCart($_POST['book_id'],$_POST['quantity']);
+        }
+ ?>
 
        <div class="login">
          <div class="wrap">
@@ -164,7 +168,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
                         foreach ($books as $book) {
-                            echo '<div class="col_1_of_single1 span_1_of_single1"><a href="singles/'.$book['book_id'].'">
+                            echo '<form method="post"><div class="col_1_of_single1 span_1_of_single1"><a href="singles/'.$book['book_id'].'">
+                    <input type="hidden" name="book_id" value="' . $book['book_id'] . '"/>
+                    <input type="hidden" name="quantity" value="1"/>
 				     <div class="view1 view-fifth1">
                        
 				  	  <div class="top_box">
@@ -175,7 +181,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	                       		<div class="info">Quick View</div>
 			                  </div>
 	                    </div>
-                       <div class="price">&dollar; ' . $book['book_price'] . '</div>
+                       <div class="price">RM&nbsp; ' . $book['book_price'] . '</div>
 					   </div>
 					    </div>
 					 
@@ -183,7 +189,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						  <li>
 						  	<img src="images/plus.png" alt=""/>
 						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Bag </a>
+							  <li><button style="background-color: transparent;border: none;color: white;"> Add To Cart</button>
 								<ul class="sub-icon1 list">
 									<li><h3>sed diam nonummy</h3><a href=""></a></li>
 									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -193,7 +199,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						   </li>
 					     </ul>
 			    	    <div class="clear"></div>
-			    	</a></div>';
+			    	</a></div></form>';
 
                         }
                     }
