@@ -436,12 +436,17 @@ class DbFunction {
     public function cartgetQuantity($book_id){
         return $_SESSION['cart'][$book_id];
     }
-    public function checkout($order_name,$order_email,$order_phone,$order_address,$pm,$order_transaction,$member_id){
+    public function checkout($order_name,$order_email,$order_phone,$order_address,$pm,$discount,$order_transaction,$member_id){
         $db =new DbConnect();
         $con =$db->connect();
-        mysqli_query($con,"INSERT INTO `order`(order_recipient_name,order_recipient_email,order_recipient_phone,order_recipient_address,order_payment_method,order_transaction_id,member_id)VALUES
-('$order_name','$order_email','$order_phone','$order_address','$pm','$order_transaction','$member_id') ");
+        mysqli_query($con,"INSERT INTO `order`(order_recipient_name,order_recipient_email,order_recipient_phone,order_recipient_address,order_payment_method,order_discount,order_transaction_id,member_id)VALUES
+('$order_name','$order_email','$order_phone','$order_address','$pm',$discount,'$order_transaction','$member_id') ");
         return mysqli_insert_id($con);
+    }
+    public function deductPoint($user_id, $points) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        mysqli_query($con, "UPDATE member SET member_reward_points = member_reward_points - $points WHERE member_id = $user_id");
     }
 
 
