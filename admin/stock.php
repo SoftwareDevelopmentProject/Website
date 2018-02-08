@@ -186,15 +186,23 @@
        	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        		<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" method="post" enctype="multipart/form-data">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data" runat="server" id="form1">
 						<fieldset style="padding: 20px; padding-right: 60px;">
-							<!--Image upload-->
+							<!--preview-->
+							<div class="form-group" style="display: none" id="div_img">
+								<label class="col-md-3 control-label" for="image">Privew</label>
+									<div class="col-md-9">
+										<div><img alt="/" id="img" class="myImg" data-toggle="modal" data-target="#previewModal">
+										</div>
+										<strong><p id="image_name" style="display: none"></p></strong>
+									</div>
+							</div>	
+							<!--Image upload-->						
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="image">Book Imange</label>
 									<div class="col-md-9">
-										<input type="file" name="fileToUpload" id="fileToUpload" class="btn">
-										<div style="width: 50px;height: 80px;display: none" id="div_img"><img src="" alt="" id="img"/></div>
 										<input type="button" class="btn btn-primary" id="selectIMG" value="Select Image" onClick="trigger()">
+										<input type="file" name="fileToUpload" id="fileToUpload" onChange="readURL(this)"  accept=".jpg,.jpeg">
 									</div>
 							</div>
 							<!-- Book Title input-->
@@ -370,6 +378,19 @@
       </div>
     </div>
   </div>
+  <!-- Preview modal-->
+  <div class="modal fade" id="previewModal" style="background-color: rgba(0,0,0,0.5) ">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none">
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="box-shadow: none">
+        <center><img id="largePreview"></center>
+        </div>
+        
+      </div>
+    </div>
+  </div>
   
   
   <!--//modal end -->
@@ -459,7 +480,7 @@
 						document.getElementById("modalBody").innerHTML = this.responseText;
 					}
 				  };
-				  xhttp.open("GET", "editBook1.php?id="+id, true);
+				  xhttp.open("GET", "editBook.php?id="+id, true);
 				  xhttp.send();
 				}
 		// check changes edit
@@ -480,11 +501,25 @@
 		function trigger(){
 			$('#fileToUpload').click();
 		}
-		document.getElementById('fileToUpload').onchange = function(e) { 
-			var url = $('#fileToUpload').val();
-		  $('#div_img').css('display','block');
-			$('#img').attr("src",url);
-		};
+		
+        function readURL(input) {
+			
+			$('#div_img').attr('style','display:block;');
+			$('#selectIMG').val('Change Image');
+			$('#image_name').attr('style','display:block;');
+			var x = document.getElementById('fileToUpload').value;
+			$('#image_name').html(x.substring(12));
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img').attr('src', e.target.result);
+					$('#largePreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
 
 
 		
