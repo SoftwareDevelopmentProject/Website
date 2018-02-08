@@ -23,7 +23,7 @@
 			</ol>
 		</div><!--/.row-->
 		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'&& isset($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount'],$_POST['add_book_submit_btn'])){
-				$db->add_book($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount']);
+				$db->add_book($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount'], $_FILES['fileToUpload']);
 	
 			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['del'])){
 				$db->delBook($_POST['id']);
@@ -41,8 +41,7 @@
 						$db->insertBookRequest($_SESSION['staff'],$b);
 					}
 		
-		
-		
+
 		?>
 		
 
@@ -187,8 +186,17 @@
        	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        		<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" method="post">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data">
 						<fieldset style="padding: 20px; padding-right: 60px;">
+							<!--Image upload-->
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="image">Book Imange</label>
+									<div class="col-md-9">
+										<input type="file" name="fileToUpload" id="fileToUpload" class="btn">
+										<div style="width: 50px;height: 80px;display: none" id="div_img"><img src="" alt="" id="img"/></div>
+										<input type="button" class="btn btn-primary" id="selectIMG" value="Select Image" onClick="trigger()">
+									</div>
+							</div>
 							<!-- Book Title input-->
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="booktitle">Book Title</label>
@@ -469,6 +477,14 @@
 		function requestOnChage(){
 			$('#btn').removeAttr('disabled');
 		}
+		function trigger(){
+			$('#fileToUpload').click();
+		}
+		document.getElementById('fileToUpload').onchange = function(e) { 
+			var url = $('#fileToUpload').val();
+		  $('#div_img').css('display','block');
+			$('#img').attr("src",url);
+		};
 
 
 		

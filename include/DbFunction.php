@@ -47,14 +47,22 @@ class DbFunction {
         return $books;
     }
     //add new book
-    public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount){
+    public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount,$file){
         $db = new DbConnect();
         $con = $db->connect();
         $new_book = mysqli_query($con, "INSERT INTO book (book_title, book_author, genre_id, book_description, book_publisher, book_years, book_price, book_stock) VALUES ('$title', '$author', $genre,'$description','$publisher',$years, $price ,$amount)");
+		$id = mysqli_insert_id($con);
+		$target_dir = "../images/Products/temp";
+		$target_file = $target_dir . basename($file["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				rename($target_file, "../images/Products/$id.jpg");
+			}
         return $new_book;
-        print_r($con);
+        //print_r($con);
 
-    }
+	}	
     //delete book
     public function delBook($id){
         $db = new DbConnect();
