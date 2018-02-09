@@ -5,6 +5,23 @@ $db = new DbFunction;
 $books=$db->getBookToEdit($_GET['id']);
 		foreach($books as $book){
 				echo'
+						<div class="form-group">
+								<label class="col-md-3 control-label" for="image">Privew</label>
+									<div class="col-md-9">
+										<div>
+										<img src="../images/Products/'.$book['book_id'].'.jpg" alt="/" id="imgToRemove" class="myImg" data-toggle="modal" data-target="#previewModal2" onClick="showLarge(\'../images/Products/'.$book['book_id'].'.jpg\')">
+										</div>
+										<strong><p id="image_name2">'.$book['book_title'].'.jpg</p></strong>
+									</div>
+							</div>						
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="image">Book Imange</label>
+									<div class="col-md-9">
+										<input type="button" class="btn btn-primary" id="selectIMG" value="Change Image" onClick="trigger2()">
+										<input type="file" name="fileToUpload" id="fileToUpload2" onChange="readURL2(this)"  accept=".jpg,.jpeg">
+									</div>
+							</div>
+				
 					<form class="form-horizontal" method="post" action="stock.php">
 						<fieldset style="padding: 20px; padding-right: 60px;">
 							<!-- Book Title input-->

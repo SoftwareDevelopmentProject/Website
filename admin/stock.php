@@ -379,13 +379,26 @@
     </div>
   </div>
   <!-- Preview modal-->
-  <div class="modal fade" id="previewModal" style="background-color: rgba(0,0,0,0.5) ">
+  <div class="modal fade" id="previewModal" style="background-color: rgba(0,0,0,0.5);border: none">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none">
+      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none;border: none">
         
         <!-- Modal body -->
-        <div class="modal-body" style="box-shadow: none">
+        <div class="modal-body" style="box-shadow: none;border: none">
         <center><img id="largePreview"></center>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    <!-- Preview modal2-->
+  <div class="modal fade" id="previewModal2" style="background-color: rgba(0,0,0,0.5);border: none ">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none;border: none">
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="box-shadow: none;border: none">
+        <center><img id="largePreview2"></center>
         </div>
         
       </div>
@@ -501,6 +514,9 @@
 		function trigger(){
 			$('#fileToUpload').click();
 		}
+		function trigger2(){
+			$('#fileToUpload2').click();
+		}
 		
         function readURL(input) {
 			
@@ -519,6 +535,25 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+		
+        function readURL2(input) {
+			var x = document.getElementById('fileToUpload2').value;
+			$('#image_name2').html(x.substring(12));
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgToRemove').attr('src', e.target.result);
+					$('#largePreview2').removeAttr('src');
+					alert('hi');
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+		function showLarge(src){
+			$('#largePreview2').attr('src', src);
+		}
+
 
 
 
