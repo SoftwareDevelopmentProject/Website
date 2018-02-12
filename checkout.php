@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Free Adidas Website Template | Checkout :: w3layouts</title>
+    <title>Checkout</title>
     <?php include"_head.php";?>
     <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />
