@@ -23,7 +23,7 @@
 			</ol>
 		</div><!--/.row-->
 		<?php if ($_SERVER['REQUEST_METHOD'] == 'POST'&& isset($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount'],$_POST['add_book_submit_btn'])){
-				$db->add_book($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount']);
+				$db->add_book($_POST['bookTitle'], $_POST['author'], $_POST['genre'],$_POST['description'], $_POST['publisher'], $_POST['year'], $_POST['price'], $_POST['amount'], $_FILES['fileToUpload']);
 	
 			} else if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['del'])){
 				$db->delBook($_POST['id']);
@@ -41,8 +41,7 @@
 						$db->insertBookRequest($_SESSION['staff'],$b);
 					}
 		
-		
-		
+
 		?>
 		
 
@@ -187,8 +186,25 @@
        	<center><h2 class="modal-title" style="color: black;">Add Book</h2></center>
        		<div class="panel panel-default">
 				<div class="panel-body">
-					<form class="form-horizontal" method="post">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data" runat="server" id="form1">
 						<fieldset style="padding: 20px; padding-right: 60px;">
+							<!--preview-->
+							<div class="form-group" style="display: none" id="div_img">
+								<label class="col-md-3 control-label" for="image">Privew</label>
+									<div class="col-md-9">
+										<div><img alt="/" id="img" class="myImg" data-toggle="modal" data-target="#previewModal">
+										</div>
+										<strong><p id="image_name" style="display: none"></p></strong>
+									</div>
+							</div>	
+							<!--Image upload-->						
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="image">Book Imange</label>
+									<div class="col-md-9">
+										<input type="button" class="btn btn-primary" id="selectIMG" value="Select Image" onClick="trigger()">
+										<input type="file" name="fileToUpload" id="fileToUpload" onChange="readURL(this)"  accept=".jpg,.jpeg">
+									</div>
+							</div>
 							<!-- Book Title input-->
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="booktitle">Book Title</label>
@@ -362,6 +378,32 @@
       </div>
     </div>
   </div>
+  <!-- Preview modal-->
+  <div class="modal fade" id="previewModal" style="background-color: rgba(0,0,0,0.5);border: none">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none;border: none">
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="box-shadow: none;border: none">
+        <center><img id="largePreview"></center>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    <!-- Preview modal2-->
+  <div class="modal fade" id="previewModal2" style="background-color: rgba(0,0,0,0.5);border: none ">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background-color: rgba(0,0,0,00);box-shadow: none;border: none">
+        
+        <!-- Modal body -->
+        <div class="modal-body" style="box-shadow: none;border: none">
+        <center><img id="largePreview2"></center>
+        </div>
+        
+      </div>
+    </div>
+  </div>
   
   
   <!--//modal end -->
@@ -451,7 +493,7 @@
 						document.getElementById("modalBody").innerHTML = this.responseText;
 					}
 				  };
-				  xhttp.open("GET", "editBook1.php?id="+id, true);
+				  xhttp.open("GET", "editBook.php?id="+id, true);
 				  xhttp.send();
 				}
 		// check changes edit
@@ -469,6 +511,50 @@
 		function requestOnChage(){
 			$('#btn').removeAttr('disabled');
 		}
+		function trigger(){
+			$('#fileToUpload').click();
+		}
+		function trigger2(){
+			$('#fileToUpload2').click();
+		}
+		
+        function readURL(input) {
+			
+			$('#div_img').attr('style','display:block;');
+			$('#selectIMG').val('Change Image');
+			$('#image_name').attr('style','display:block;');
+			var x = document.getElementById('fileToUpload').value;
+			$('#image_name').html(x.substring(12));
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#img').attr('src', e.target.result);
+					$('#largePreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+		
+        function readURL2(input) {
+			var x = document.getElementById('fileToUpload2').value;
+			$('#image_name2').html(x.substring(12));
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgToRemove').attr('src', e.target.result);
+					$('#largePreview2').removeAttr('src');
+					alert('hi');
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+		function showLarge(src){
+			$('#largePreview2').attr('src', src);
+		}
+
+
 
 
 		

@@ -1160,6 +1160,9 @@ table td .staff_td {
 	background-color: #30a5ff;
 	color: white;
 }
+.myPop {
+	background-color: rgba(65,138,195,0);
+}
 
 .popup-footer {
     padding: 10px 16px;
@@ -1184,4 +1187,15 @@ table td .staff_td {
 }
 .margin_fix {
 	margin-bottom: 20px;
+}
+.myImg {
+	max-width:130px; 
+	height:auto;
+	border-radius: 0.8em;
+}
+.myImg:hover {
+	opacity: 0.7;
+	cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
 }

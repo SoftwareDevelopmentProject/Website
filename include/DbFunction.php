@@ -47,14 +47,35 @@ class DbFunction {
         return $books;
     }
     //add new book
-    public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount){
+    public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount,$file){
         $db = new DbConnect();
         $con = $db->connect();
         $new_book = mysqli_query($con, "INSERT INTO book (book_title, book_author, genre_id, book_description, book_publisher, book_years, book_price, book_stock) VALUES ('$title', '$author', $genre,'$description','$publisher',$years, $price ,$amount)");
+		$id = mysqli_insert_id($con);
+		$target_dir = "../images/Products/temp";
+		$target_file = $target_dir . basename($file["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				rename($target_file, "../images/Products/$id.jpg");
+			}
         return $new_book;
-        print_r($con);
+        //print_r($con);
 
-    }
+	}	
+	
+	public function previewImage($file){
+		if (file_exists("../images/Products/preview.jpg")){
+			unlink("../images/Products/preview.jpg");
+		}
+		$target_dir = "../images/Products/temp";
+		$target_file = $target_dir . basename($file["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+				rename($target_file, "../images/Products/preview.jpg");
+			}
+	}
     //delete book
     public function delBook($id){
         $db = new DbConnect();
@@ -665,6 +686,17 @@ class DbFunction {
         }
         return $report;
     }
+	 public function getBookToEdit($book_id) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $books = array();
+        $result_book = mysqli_query($con, "SELECT book.genre_id, book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book, genre WHERE book.genre_id = genre.genre_id AND book.book_id = $book_id");
+		 while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
+            $book['feedback'] = array();
+            array_push($books, $book);
+		 }
+		 return $books;
+	 }
 
 }
 
