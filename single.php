@@ -80,7 +80,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 }
                 if (isset($_POST['scale'])) {
                     $db->addFeedback($user['member_id'], $_GET['book_id'], $_POST['scale'], $_POST['review']);
-                    echo '<script>window.location.replace("singles/' . $_GET['book_id'] . '");</script>';
+                    echo '<script>window.location.replace("' . $_GET['book_id'] . '");</script>';
                 }
 
 
@@ -122,7 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
          <ul id="flexiselDemo3">
              <?php $books5 = $db->get5book();
              foreach($books5 as $book5){
-                 echo'	<li><img src="images/Products/'.$book5['book_id'].'.jpg" /><div class="grid-flex"><a href="#">'.$book5['book_title'].'</a><p>&dollar;'.$book5['book_price'].'</p></div></li>';
+                 echo'	<li><a href="singles/'.$book5['book_id'].'"><img src="images/Products/'.$book5['book_id'].'.jpg" /></a><div class="grid-flex"><a href="singles/'.$book5['book_id'].'">'.$book5['book_title'].'</a><p>&dollar;'.$book5['book_price'].'</p></div></li>';
              }?>
 
 		 </ul>
