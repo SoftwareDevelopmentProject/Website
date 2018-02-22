@@ -29,17 +29,6 @@
                         }
                     </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                 </div>
-                <div class="col_1_of_middle span_1_of_middle">
-                    <ul class="f_list1">
-                        <li><span class="m_8">Sign up for email and Get 15% off</span>
-                            <div class="search">
-                                <input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-                                <input type="submit" value="Subscribe" id="submit" name="submit">
-                                <div id="response"> </div>
-                            </div><div class="clear"></div>
-                        </li>
-                    </ul>
-                </div>
                 <div class="clear"></div>
             </div>
         </div>
