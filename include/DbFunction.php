@@ -62,7 +62,13 @@ class DbFunction {
         return $new_book;
         //print_r($con);
 
-	}	
+	}
+
+	public function contact($name, $email, $description) {
+        $db = new DbConnect();
+        $con = $db->connect();
+        return mysqli_query($con, "INSERT INTO message (`name`, email, description) VALUES ('$name', '$email', '$description')");
+    }
 	
 	public function previewImage($file){
 		if (file_exists("../images/Products/preview.jpg")){
