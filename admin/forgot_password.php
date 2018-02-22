@@ -18,7 +18,7 @@ session_start();
 	<div class="row"  <?php if(isset($sucess)&&$sucess==true)echo 'style="display:none"';?>>
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
-				<div class="panel-heading">Forgor Password</div>
+				<div class="panel-heading">Forgot Password</div>
 				<div class="panel-body">
 					<form role="form" method="post">
 						<fieldset>
@@ -40,7 +40,7 @@ session_start();
 	<div class="row"  style="display:none<?php if(isset($sucess)&&$sucess==true)echo ';display:block';?>">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
 			<div class="login-panel panel panel-default">
-				<div class="panel-heading">Forgor Password</div>
+				<div class="panel-heading">Forgot Password</div>
 				<div class="panel-body">
 					<form role="form" method="post" action="resetPs.php">
 						<fieldset>

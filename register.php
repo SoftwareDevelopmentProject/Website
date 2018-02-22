@@ -12,6 +12,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <head>
     <title>Technology BookStore:Register</title>
     <?php include "_head.php";?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
@@ -21,60 +24,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   document.getElementById("click").click();
 		   }</script>';
         } else {
-            echo '<script>alert("Failed Register, Email has been used. Please try again")</script>';
+            echo '<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Info!</strong>Failed Register, Email has been used. Please try again</div>';
 
         }
     }
 
 ?>
-<body onLoad="click()">
+<body >
     <?php include "_header.php";?>
-     <!--//modal-->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#success" id="click" style="display: none">Click</button>
-      <div class="modal fade" id="success">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-         <img src="images/logo.png" style="border-radius: 99px;">
-          <center><h2 class="modal-title" style="color: black;">Register successful</h2></center>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body popup-body">
-          Congratulation! You have been register as TP BookStore member. Let's try to <a href="login.php" style="color: white">login now!</a>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-         <button type="button" class="btn btn-primary grey" onClick="window.open('login.php','_self')">Go Login</button>
-          <button type="button" class="btn btn-primary grey" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-      <!--//end modal -->
+
        <div class="register_account" style="margin-bottom: 50px;">
           	<div class="wrap">
     	      <h4 class="title">Create an Account</h4>
     		   <form method="post">
     			 <div class="col_1_of_2 span_1_of_2">
                      <div><label>Name</label></div>
-		   			 <div><input type="text" name ="name" value=""></div>
+		   			 <div><input type="text" name ="name" value="" required></div>
                      <div><label>Email</label></div>
-                     <div><input type="email" name="email" value=""></div>
+                     <div><input type="email" name="email" value="" required></div>
                      <div><label>Password</label></div>
-                     <div><input type="password" name="password" value=""></div>
+                     <div><input type="password" name="password" value="" id="password" pattern=".{5,20}" maxlength="20" title="Your password must be 5-20 character" required></div>
                      <div><label>Confirm Password</label></div>
-                     <div><input type="password" name="confirmpassword" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'confirmpassword';}"></div>
+                     <div><input type="password" name="confirmpassword" value="" id="confirmpassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'confirmpassword';}"></div>
 		    	 </div>
 		    	  <div class="col_1_of_2 span_1_of_2">
                       <div><label>Phone</label></div>
-                      <div><input type="text" name="phone" value=""></div>
+                      <div><input type="text" name="phone" value="" required></div>
                       <div><label>Address</label></div>
-                      <div><input type="text" name="address" value=""></div>
+                      <div><input type="text" name="address" value="" required></div>
                       <div><label>Country</label></div>
                       <div><select id="country" name="country" onchange="change_country(this.value)" class="frm-field required">
 		            <option value="null">Select a Country</option>         
@@ -274,7 +252,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		            <option value="SN">Senegal</option>
 		         </select></div>
 		          </div>
+                   <script>
+                       var password = document.getElementById("password")
+                           , confirm_password = document.getElementById("confirmpassword");
 
+                       function validatePassword(){
+                           if(password.value != confirm_password.value) {
+                               confirm_password.setCustomValidity("Passwords Don't Match");
+                           } else {
+                               confirm_password.setCustomValidity('');
+                           }
+                       }
+
+                       password.onchange = validatePassword;
+                       confirm_password.onkeyup = validatePassword;
+                   </script>
 		         <div class="clear"></div>
                    <input type="submit" class="grey" value="Submit"  name="submit"/>
                    <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
