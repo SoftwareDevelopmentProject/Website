@@ -12,7 +12,7 @@ session_start();
     <!DOCTYPE HTML>
     <html>
 <head>
-    <title>Register</title>
+    <title>Technology BookStore:Change Password</title>
     <?php include "_head.php";?>
     <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all" />

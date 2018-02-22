@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <base href="../" />
-    <title>Technology Bookstore Shop Now</title>
+    <title>Technology Bookstore:Shop Now</title>
     <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
 <?php include"_head.php";?>
 </head>

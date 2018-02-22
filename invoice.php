@@ -6,7 +6,7 @@ $db = new DbFunction();
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Invoice Technology Park Bookstore</title>
+    <title>Technology Bookstore: Invoice</title>
 
     <style>
         .invoice-box {

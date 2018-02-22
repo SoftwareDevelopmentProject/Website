@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Technology BookStore Reward</title>
+    <title>Technology BookStore:Reward</title>
     <?php include"_head.php";?>
 </head>
 <body>

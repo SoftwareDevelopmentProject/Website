@@ -11,12 +11,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Free Adidas Website Template | Checkout :: w3layouts</title>
+    <title>Technology BookStore:Cart</title>
     <?php include "_head.php"; ?>
+     
     <link href="admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all"/>
     <link href="admin/css/bootstrap-table.css" rel="stylesheet" type="text/css" media="all"/>
 </head>
-<?php if (isset($_POST['clear'])) {
+<?php
+
+if (isset($_POST['clear'])) {
     $db->setSession();
     header("Refresh:0");
 }

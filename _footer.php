@@ -3,7 +3,7 @@
         <div class="wrap">
             <div class="col_1_of_footer-top span_1_of_footer-top">
                 <ul class="f_list">
-                    <li><img src="images/f_icon.png" alt=""/><span class="delivery">Free delivery on all orders over £100*</span></li>
+                    <li><img src="images/f_icon.png" alt=""/><span class="delivery">Free delivery services</span></li>
                 </ul>
             </div>
             <div class="col_1_of_footer-top span_1_of_footer-top">
@@ -23,19 +23,11 @@
         <div class="wrap">
             <div class="section group">
                 <div class="col_1_of_middle span_1_of_middle">
-                    <dl id="sample" class="dropdown">
-                        <dt><a href="#"><span>Please Select a Country</span></a></dt>
-                        <dd>
-                            <ul>
-                                <li><a href="#">Australia<img class="flag" src="images/as.png" alt="" /><span class="value">AS</span></a></li>
-                                <li><a href="#">Sri Lanka<img class="flag" src="images/srl.png" alt="" /><span class="value">SL</span></a></li>
-                                <li><a href="#">Newziland<img class="flag" src="images/nz.png" alt="" /><span class="value">NZ</span></a></li>
-                                <li><a href="#">Pakistan<img class="flag" src="images/pk.png" alt="" /><span class="value">Pk</span></a></li>
-                                <li><a href="#">United Kingdom<img class="flag" src="images/uk.png" alt="" /><span class="value">UK</span></a></li>
-                                <li><a href="#">United States<img class="flag" src="images/us.png" alt="" /><span class="value">US</span></a></li>
-                            </ul>
-                        </dd>
-                    </dl>
+                    <div id="google_translate_element" style="margin:auto"></div><script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                        }
+                    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
                 </div>
                 <div class="col_1_of_middle span_1_of_middle">
                     <ul class="f_list1">

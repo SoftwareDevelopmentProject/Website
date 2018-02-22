@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <base href="../">
-<title>Free Adidas Website Template | Single :: w3layouts</title>
+<title>Technology BookStore:Book</title>
     <?php include "_head.php";?>
 
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />

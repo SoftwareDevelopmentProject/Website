@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Details</title>
+    <title>Technology BookStore:Order Details</title>
     <?php include"_head.php";?>
 </head>
 

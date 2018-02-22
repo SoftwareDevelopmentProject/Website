@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>New-Arrival</title>
+    <title>Technology BookStore:New-Arrival</title>
     <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
     <?php include"_head.php";?>
 </head>

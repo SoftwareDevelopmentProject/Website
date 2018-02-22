@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Free Adidas Website Template | Home :: w3layouts</title>
+    <title>Technology Bookstore:Home</title>
     <?php include "_head.php"; ?>
 </head>
 <body>

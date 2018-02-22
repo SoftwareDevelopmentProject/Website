@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Register</title>
+    <title>Technology BookStore:Register</title>
     <?php include "_head.php";?>
 </head>
 <?php
