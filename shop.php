@@ -50,18 +50,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					   </div>
 					    </div>
 					 
-						 <ul class="list2">
-						  <li>
-						  	<img src="images/plus.png" alt=""/>
-						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><button style="background-color: transparent;border: none;color: white;"> Add To Cart</button>
-								<ul class="sub-icon1 list">
-									<li><h3>sed diam nonummy</h3><a href=""></a></li>
-									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-								</ul>
-							  </li>
-							 </ul>
-						   </li>
+						  <ul class="list2">
+							<button style="background-color: transparent;color: white;border: none; width: 100%;">Add To Cart</button>	  
 					     </ul>
 			    	    <div class="clear"></div>
 			    	</a></div></form>';
