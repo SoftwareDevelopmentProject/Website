@@ -208,6 +208,16 @@ class DbFunction {
         }
         return $books9;
     }
+    public function getTop10Books() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $books = array();
+        $result = mysqli_query($con, "SELECT book.* FROM order_detail INNER JOIN book ON order_detail.book_id = book.book_id GROUP BY book_id ORDER BY SUM(order_detail_quantity) DESC LIMIT 10");
+        while ($book = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            array_push($books, $book);
+        }
+        return $books;
+    }
     /*show book by genre in shop page*/
     public function getBookGenre($genres_name){
         $db = new DbConnect();
