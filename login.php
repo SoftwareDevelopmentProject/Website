@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 								<input name="password" type="password" value="">
 							</p>
 							 <p id="login-form-remember">
-								<label><a href="#">Forget Your Password ? </a></label>
+								<label><a href="forgotpassword.php">Forget Your Password ? </a></label>
 							 </p>
 							 <p>
 								<input type="submit" value="Login">

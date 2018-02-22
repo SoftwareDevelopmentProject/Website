@@ -596,6 +596,25 @@ class DbFunction {
         $member = mysqli_fetch_array($result_member,MYSQLI_ASSOC);
         return $member;
     }
+    public function getMemberByEmail($email) {
+        $db = new DbConnect();
+        $con =$db->connect();
+        $result =mysqli_query($con, "SELECT member_id, MD5(member_password) as token FROM member WHERE member_email='$email'");
+        $member = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $member;
+    }
+    public function isRecoveryGranted($member_id, $token) {
+        $db = new DbConnect();
+        $con =$db->connect();
+        $result =mysqli_query($con, "SELECT member_password FROM member WHERE member_id = $member_id AND MD5(member_password) = '$token'");
+        $member = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        return $member;
+    }
+    public function memberChangePassword($member_id, $new_password) {
+        $db = new DbConnect();
+        $con =$db->connect();
+        return mysqli_query($con, "UPDATE member SET member_password = '$new_password' WHERE member_id = $member_id");
+    }
     /*
     public function reportGetMemberById($id){
         $db = new DbConnect();
