@@ -69,6 +69,17 @@ class DbFunction {
         $con = $db->connect();
         return mysqli_query($con, "INSERT INTO message (`name`, email, description) VALUES ('$name', '$email', '$description')");
     }
+
+    public function getContact() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $messages = array();
+        $result = mysqli_query($con, "SELECT * FROM message");
+        while ($message = mysqli_fetch_array($result)) {
+            array_push($messages, $message);
+        }
+        return $messages;
+    }
 	
 	public function previewImage($file){
 		if (file_exists("../images/Products/preview.jpg")){
