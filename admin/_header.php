@@ -117,7 +117,6 @@ if(isset($_SESSION['staff'])) {
         </div>
     </form>
     <ul class="nav menu">
-        <li <?php if (isset($page) && ($page == 'dashboard')) echo 'class="active"'; ?>><a href="index.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
         <?php if ($user['staff_role'] > 0) : ?>
          <li <?php if (isset($page) && ($page == 'stock')) echo 'class="active"'; ?>><a href="stock.php"><em class="fa fa-list-ol">&nbsp;</em> Stock</a></li>
         <li <?php if (isset($page) && ($page == 'staff')) echo 'class="active"'; ?>><a href="staffs.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
@@ -138,7 +137,7 @@ if(isset($_SESSION['staff'])) {
         <?php endif ;?>
         <li <?php if (isset($page) && ($page == 'member')) echo 'class="active"'; ?>><a href="member.php"><em class="fa fa-address-card">&nbsp;</em> Member</a></li>
         <li <?php if (isset($page) && ($page == 'bookRequest')) echo 'class="active"'; ?>><a href="bookRequest.php"><em class="fa fa-list-ol">&nbsp;</em> Book Request</a></li>
-        <li <?php if (isset($page) && ($page == 'widgets')) echo 'class="active"'; ?>><a href="widgets.php"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
+        <li <?php if (isset($page) && ($page == 'message')) echo 'class="active"'; ?>><a href="message.php"><em class="fa fa-reply">&nbsp;</em> Messages</a></li>
         <li data-toggle="modal" data-target="#OutModal"><a href="#"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>
 </div><!--/.sidebar-->
