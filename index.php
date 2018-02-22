@@ -11,7 +11,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <html>
 <head>
     <title>Technology Bookstore:Home</title>
-    <?php include "_head.php"; ?>
+    <?php include "_head.php";
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+        $db->addCart($_POST['book_id'],$_POST['quantity']);
+    }
+    ?>
 </head>
 <body>
     <?php include "_header.php"; ?>
@@ -93,7 +97,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                        <?php
                        $books6 = $db->get6book();
                        foreach($books6 as $book6) {
-                           echo ' <div class="col_1_of_3 span_1_of_3"><a href="singles/'.$book6['book_id'].'">
+                           echo '<form method="post"><div class="col_1_of_3 span_1_of_3"><a href="singles/'.$book6['book_id'].'">
+                    <input type="hidden" name="book_id" value="' . $book6['book_id'] . '"/>
+                    <input type="hidden" name="quantity" value="1"/>
 				     <div class="view view-fifth">
 
 				  	  <div class="top_box">
@@ -112,7 +118,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						  <li>
 						  	<img src="images/plus.png" alt=""/>
 						  	<ul class="icon1 sub-icon1 profile_img">
-							  <li><a class="active-icon c1" href="#">Add To Cart </a>
+							  <li><button style="background-color: transparent;border: none;color: white;"> Add To Cart</button>
 								<ul class="sub-icon1 list">
 									<li><h3>sed diam nonummy</h3><a href=""></a></li>
 									<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -122,7 +128,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						   </li>
 					     </ul>
 			    	    <div class="clear"></div>
-			    	</a></div>';
+			    	</a></div></form>';
                        }
 
 			  ?>
