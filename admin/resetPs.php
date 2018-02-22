@@ -36,7 +36,7 @@ session_start();
 								<input class="form-control" placeholder="Password" name="password" type="password" id="ps" autofocus required>
 								<input class="form-control" placeholder="Confirm Password" name="confirmPassword" type="password" id="cps" style="margin-top: 2em" onKeyUp="checkPs(this.value)">
 								<p class="err" id="ps_err" required>Password does not match !</p>	
-								<input type="hidden" name="code" value="<?php if (isset($_POST['code']) && $_POST['code']==$realCode) echo $_POST['code'];?>"						
+								<input type="hidden" name="code" value="<?php if (isset($_POST['code']) && $_POST['code']==$realCode) echo $_POST['code'];?>">						
 							</div>
 							<input type="submit" class="btn btn-primary" style="margin-right: 20px" id="psSub" value="Subit" name="setNewPs">
 							<a href="index.php" class="btn btn-default" style="float: right">Cancel</a>

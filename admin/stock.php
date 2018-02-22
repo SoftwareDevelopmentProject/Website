@@ -33,9 +33,10 @@
 				$b = array();
 				$wantsubmit = false;
 				foreach($_POST as $book_id => $quantity) {
-					if ($quantity > 0)
+					if ($quantity > 0){
 						$wantsubmit = true;
 						array_push($b, array('id' => $book_id, 'quantity' => $quantity));
+					}
 				}
 				if ($wantsubmit)
 						$db->insertBookRequest($_SESSION['staff'],$b);
@@ -544,7 +545,6 @@
                 reader.onload = function (e) {
                     $('#imgToRemove').attr('src', e.target.result);
 					$('#largePreview2').removeAttr('src');
-					alert('hi');
                 }
 
                 reader.readAsDataURL(input.files[0]);

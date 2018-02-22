@@ -46,6 +46,16 @@ class DbFunction {
         }
         return $books;
     }
+	public function get3Books() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $books = array();
+        $result_book = mysqli_query($con, "SELECT book.book_id, book.book_title, book.book_author, book.book_publisher, book.book_description, book.book_stock, book.book_price, book.book_years, genre.genre_name FROM book INNER JOIN genre ON book.genre_id = genre.genre_id order by book.book_id LIMIT 3");
+        while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
+            array_push($books, $book);
+        }
+        return $books;
+    }
     //add new book
     public function add_book($title, $author, $genre, $description, $publisher, $years, $price, $amount,$file){
         $db = new DbConnect();
@@ -392,6 +402,17 @@ class DbFunction {
         }
         return $staffs;
     }
+	 public function get3Staff() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $staffs= array();
+        $result = mysqli_query($con, "SELECT * FROM staff LIMIT 3");
+        while ($staff = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+            array_push($staffs, $staff);
+        }
+        return $staffs;
+    }
+	
     public function generateCode($email) {
         $db = new DbConnect();
         $con = $db->connect();
@@ -513,7 +534,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $report = array();
-        $result_member =mysqli_query($con, "SELECT * FROM member where YEAR(member_created_time)=$year");
+        $result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` WHERE YEAR(member_created_time)=$year GROUP BY `member`.`member_id`");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }
@@ -551,6 +572,16 @@ class DbFunction {
         }
         return $request;
     }
+	public function get3Request(){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $request = array();
+        $result_request =mysqli_query($con, "SELECT * FROM request INNER JOIN staff ON staff.staff_id = request.staff_id INNER JOIN request_status ON request.request_status_id = request_status.request_status_id ORDER BY request_status.request_status_id DESC LIMIT 3");
+        while($result = mysqli_fetch_assoc($result_request)) {
+            array_push($request, $result);
+        }
+        return $request;
+    }
     public function getRequestDetail($id){
         $db = new DbConnect();
         $con =$db->connect();
@@ -583,6 +614,16 @@ class DbFunction {
         $con =$db->connect();
         $report = array();
         $result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` GROUP BY `member`.`member_id`");
+        while($result = mysqli_fetch_assoc($result_member)) {
+            array_push($report, $result);
+        }
+        return $report;
+    }
+	 public function reportGet3Member(){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $report = array();
+        $result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` GROUP BY `member`.`member_id` LIMIT 3");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }
@@ -649,7 +690,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $report = array();
-        $result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time)=$month)");
+        $result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time)=$month) GROUP BY `member`.`member_id` ");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }
@@ -670,7 +711,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $report = array();
-        $result_member =mysqli_query($con, "SELECT * FROM member WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time) = $month AND DAY(member_created_time)=$day)");
+        $result_member =mysqli_query($con, "SELECT `member`.`member_id`, `member`.`member_name`,`member`.`member_created_time`, `member`.`member_trustfulness`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (0) THEN 1 END) AS `negative_feedback`, COUNT(CASE WHEN `feedback_rating`.`feedback_id` IN (1,2) THEN 1 END) AS `positive_feedback` FROM `feedback` INNER JOIN `feedback_rating` ON `feedback`.`feedback_id` = `feedback_rating`.`feedback_id` RIGHT JOIN `member` ON `member`.`member_id` = `feedback`.`member_id` WHERE (YEAR(member_created_time)=$year AND MONTH(member_created_time) = $month AND DAY(member_created_time)=$day) GROUP BY `member`.`member_id`");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }

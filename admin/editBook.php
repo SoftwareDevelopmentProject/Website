@@ -9,7 +9,7 @@ $books=$db->getBookToEdit($_GET['id']);
 								<label class="col-md-3 control-label" for="image">Privew</label>
 									<div class="col-md-9">
 										<div>
-										<img src="../images/Products/'.$book['book_id'].'.jpg" alt="/" id="imgToRemove" class="myImg" data-toggle="modal" data-target="#previewModal2" onClick="showLarge(\'../images/Products/'.$book['book_id'].'.jpg\')">
+										<img src="../images/Products/'.$book['book_id'].'.jpg" alt="/" id="imgToRemove" class="myImg" data-toggle="modal" data-target="#previewModal2" onClick="showLarge(this.src)">
 										</div>
 										<strong><p id="image_name2">'.$book['book_title'].'.jpg</p></strong>
 									</div>

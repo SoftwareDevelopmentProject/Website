@@ -188,8 +188,8 @@ $page = 'staff';
 					<td>
 						<form method="post">
 							<select name="role" required class="drop_down" onchange="changeRole(this.value, <?php echo $staff['staff_role']; ?>, <?php echo $staff['staff_id']; ?>);">
-								<option value="0" <?php if ($staff[ 'staff_role']==0){ echo 'selected'; } ?>>Staff</option>
-								<option value="1" <?php if ($staff[ 'staff_role']==1){ echo 'selected'; } ?>>Admin</option>
+								<option value="1" <?php if ($staff[ 'staff_role']==1){ echo 'selected'; } ?>>Staff</option>
+								<option value="2" <?php if ($staff[ 'staff_role']==2){ echo 'selected'; } ?>>Admin</option>
 							</select>
 							<input type="hidden" name="id" value="<?php echo $staff['staff_id']; ?>">
 					</td>
