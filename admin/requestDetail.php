@@ -15,7 +15,7 @@ echo'<table class="table table-hover">
 					<td width="">Request Amount</td>
 				</tr>';
 foreach($details as $detail) {
-	echo 	'<tr><td>'.$detail['book_id'].'</td>
+	echo 	'<tr><td>BID'.sprintf('%04d',$detail['book_id']).'</td>
 			<td>'.$detail['book_title'].'</td>
 			<td>'.$detail['book_author'].'</td>
             <td>'.$detail['genre_name'].'</td>

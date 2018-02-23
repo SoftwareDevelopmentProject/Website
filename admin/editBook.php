@@ -64,16 +64,16 @@ $books=$db->getBookToEdit($_GET['id']);
 								<label class="col-md-3 control-label" for="genre">Genre</label>
 									<div class="col-md-9">
 										<select class="form-control" style="width: 30%" name="genre" id="genre">
-											<option value="1"';if($book['genre_id']==1) {echo 'selected';}echo'>1</option>
-											<option value="2"';if($book['genre_id']==2) {echo 'selected';}echo'>2</option>
-											<option value="2"';if($book['genre_id']==3) {echo 'selected';}echo'>3</option>
-											<option value="4"';if($book['genre_id']==4) {echo 'selected';}echo'>4</option>
-											<option value="5"';if($book['genre_id']==5) {echo 'selected';}echo'>5</option>
-											<option value="6"';if($book['genre_id']==6) {echo 'selected';}echo'>6</option>
-											<option value="7"';if($book['genre_id']==7) {echo 'selected';}echo'>7</option>
-											<option value="8"';if($book['genre_id']==8) {echo 'selected';}echo'>8</option>
-											<option value="9"';if($book['genre_id']==9) {echo 'selected';}echo'>9</option>
-											<option value="10"';if($book['genre_id']==10) {echo 'selected';}echo'>10</option>
+											<option value="1"';if($book['genre_id']==1) {echo 'selected';}echo'>Science</option>
+											<option value="2"';if($book['genre_id']==2) {echo 'selected';}echo'>History</option>
+											<option value="2"';if($book['genre_id']==3) {echo 'selected';}echo'>Romance</option>
+											<option value="4"';if($book['genre_id']==4) {echo 'selected';}echo'>Action</option>
+											<option value="5"';if($book['genre_id']==5) {echo 'selected';}echo'>Horror</option>
+											<option value="6"';if($book['genre_id']==6) {echo 'selected';}echo'>FairyTale</option>
+											<option value="7"';if($book['genre_id']==7) {echo 'selected';}echo'>Travel</option>
+											<option value="8"';if($book['genre_id']==8) {echo 'selected';}echo'>Math</option>
+											<option value="9"';if($book['genre_id']==9) {echo 'selected';}echo'>Cookbooks</option>
+											<option value="10"';if($book['genre_id']==10) {echo 'selected';}echo'>Comics</option>
 										</select>
 										
 									</div>

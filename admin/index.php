@@ -22,13 +22,13 @@
 			<img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75">
 			<h2>Welcome to Technology's Parck Bookstore ( <?php if(isset($user)){
 					switch ($user['staff_role']) {
-						case 0:
+						case 1:
 							echo 'Staff';
 							break;
-						case 1:
+						case 2:
 							echo 'Admin';
 							break;
-						case 2:
+						case 3:
 							echo 'Manager';				
 					}		
 				} 

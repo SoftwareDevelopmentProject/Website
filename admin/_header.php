@@ -19,13 +19,13 @@ if(isset($_SESSION['staff'])) {
             <a class="navbar-brand" href="index.php"><span><img src="../images/logo.png" style="border-radius: 99px;opacity: 0.75" width="250px" height="28px"> TP Bookstore </span>
 				<?php if(isset($user)){
 					switch ($user['staff_role']) {
-						case 0:
+						case 1:
 							echo 'Staff';
 							break;
-						case 1:
+						case 2:
 							echo 'Admin';
 							break;
-						case 2:
+						case 3:
 							echo 'Manager';				
 					}		
 				} 
@@ -59,11 +59,11 @@ if(isset($_SESSION['staff'])) {
     </div>
     <div class="divider"></div>
     <ul class="nav menu">
-        <?php if ($user['staff_role'] > 0) : ?>
          <li <?php if (isset($page) && ($page == 'stock')) echo 'class="active"'; ?>><a href="stock.php"><em class="fa fa-list-ol">&nbsp;</em> Stock</a></li>
+         <?php if ($user['staff_role'] > 1) : ?>
         <li <?php if (isset($page) && ($page == 'staff')) echo 'class="active"'; ?>><a href="staffs.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
         <?php endif; ?>
-        <?php if ($user['staff_role'] > 1) : ?>
+        <?php if ($user['staff_role'] > 2) : ?>
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-line-chart">&nbsp;</em> Report <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
             </a>
@@ -78,7 +78,9 @@ if(isset($_SESSION['staff'])) {
         </li>
         <?php endif ;?>
         <li <?php if (isset($page) && ($page == 'member')) echo 'class="active"'; ?>><a href="member.php"><em class="fa fa-address-card">&nbsp;</em> Member</a></li>
+        <?php if ($user['staff_role'] > 1) : ?>
         <li <?php if (isset($page) && ($page == 'bookRequest')) echo 'class="active"'; ?>><a href="bookRequest.php"><em class="fa fa-list-ol">&nbsp;</em> Book Request</a></li>
+        <?php endif; ?>
         <li <?php if (isset($page) && ($page == 'message')) echo 'class="active"'; ?>><a href="message.php"><em class="fa fa-reply">&nbsp;</em> Messages</a></li>
         <li data-toggle="modal" data-target="#OutModal"><a href="#"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>

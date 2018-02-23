@@ -58,28 +58,28 @@
 							<div class="col-md-12 no-padding">
 								<div class="row progress-labels">
 									<div class="col-sm-6">Janary</div>
-									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m0'].' ('.($num['m0']/$num['y']*100).'%)';?></div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m0'].' ('.round(($num['m0']/$num['y']*100),2).'%)';?></div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: <?php echo ($num['m0']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">Febuary</div>
-									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m1'].' ('.($num['m1']/$num['y']*100).'%)';?></div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m1'].' ('.round(($num['m1']/$num['y']*100),2).'%)';?></div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: <?php echo ($num['m1']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">March</div>
-									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m2'].' ('.($num['m2']/$num['y']*100).'%)';?></div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m2'].' ('.round(($num['m2']/$num['y']*100),2).'%)';?></div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: <?php echo ($num['m2']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 								<div class="row progress-labels">
 									<div class="col-sm-6">April</div>
-									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m3'].' ('.($num['m3']/$num['y']*100).'%)';?></div>
+									<div class="col-sm-6" style="text-align: right;"><?php echo $num['m3'].' ('.round(($num['m3']/$num['y']*100),2).'%)';?></div>
 								</div>
 								<div class="progress">
 									<div data-percentage="0%" style="width: <?php echo ($num['m3']/$num['y']*100).'%';?>;" class="progress-bar progress-bar-blue" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
@@ -156,160 +156,6 @@
 		</div>
 		<!-- //dash board-->
 			
-		<div class="padding" style="overflow: auto; height: auto;">
-			<tr><form method="post">
-				<td colspan="11" align="right" height="50px" >
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="day" id="day" onChange="loadMemberByDay(this.value)" disabled>
-					<option value="day">Day</option>
-				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="month" id="month" onChange="loadDay(this.value)" disabled>
-					<option value="month">Month</option>
-				</select>
-				<select class="drop_down pull-right" style="width: 10%;margin-right: 1em" name="year" id="year" onChange="loadMonth(this.value)">
-					<option value="year">Year</option>
-					<?php  	
-						$years=$db->getMemberYear();
-						foreach ($years as $year):
-							echo 
-	'<option value="'.$year.'">'.$year.'</option>';
-					endforeach;
-					?>
-				</select>
-				</td>
-			</tr></form>
-			<h2>Member Report</h2>
-			<table class="table table-hover">
-				<tr>
-					<td width="">Member ID</td>
-					<td width="">Member Name</td>
-					<td width="">Created at</td>
-					<td width="">Status</td>
-					<td width="">Positive Feedback</td>
-					<td width="">Negative Feedback</td>
-				</tr>
-				<?php
-					$members=$db->reportGetMember();
-					foreach ($members as $member):
-                ?>
-					<tr>
-						<td><?php echo $member['member_id']; ?></td>
-						<td><?php echo $member['member_name']; ?></td>
-                        <td><?php echo $member['member_created_time']; ?></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <?php endforeach; ?>
-            </table>
-			  			
-        </div>
-						
-				
-            <?php include_once '_footer.php'; ?>
-
-	</div>	<!--/.main-->
-	
-	<script>
-		//filter fuction 
-			function loadAllMemberReport() {
-				  var xhttp; 
-				  xhttp = new XMLHttpRequest();
-				  xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("table").innerHTML = this.responseText;
-					}
-				  };
-				  xhttp.open("GET", "getMemberReport?year=all&act=report", true);
-				  xhttp.send();
-				}
-		
-			function loadMonth(year) {
-				  var xhttp;    
-				  if (year == "year") {
-					$('#month').attr('disabled', 'disabled');
-					$('#month option[value="month"]').attr('selected', 'selected');
-					$('#day').attr('disabled', 'disabled');
-					$('#day option[value="day"]').attr('selected', 'selected');
-					loadAllMemberReport();
-					return;
-				  }
-				  xhttp = new XMLHttpRequest();
-				  xhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						$('#month').removeAttr('disabled');
-						document.getElementById("month").innerHTML = this.responseText;
-						loadMemberByYear(year);
-					}
-				  };
-				  xhttp.open("GET", "getMemberMonth?year="+year+"&act=report", true);
-				  xhttp.send();
-				}
-			function loadMemberByMonth(month){
-				var xhttp; 
-				var year = $('#year').val();
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-						};
-					xhttp.open("GET", "getMemberByMonth?month="+month+"&year="+year+"&act=report", true);
-					xhttp.send();
-				}
-
-		
-			function loadMemberByYear(year){
-				 	var xhttp;    
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-					  };
-					xhttp.open("GET", "getMemberByYear?year="+year+"&act=report", true);
-					xhttp.send();
-			}
-
-			function loadDay(month) {
-					  var xhttp;    
-					  if (month == "month") {
-						$('#day').attr('disabled', 'disabled');
-						$('#day option[value="day"]').attr('selected', 'selected');
-						loadMemberByYear($('#year').val());
-						return;
-					  }
-					  xhttp = new XMLHttpRequest();
-					  xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							$('#day').removeAttr('disabled');
-							document.getElementById("day").innerHTML = this.responseText; 
-							loadMemberByMonth(month);
-						}
-					  };
-					  xhttp.open("GET", "getMemberDay?day="+month+"&act=report", true);
-					  xhttp.send();
-					}
-			function loadMemberByDay(day){
-				 	var xhttp;
-					var month = $('#month').val();
-					var year = $('#year').val();
-					if (day == "day") {
-						loadMemberByMonth(month);;
-						return;
-					  }
-					xhttp = new XMLHttpRequest();
-					xhttp.onreadystatechange = function() {
-						if (this.readyState == 4 && this.status == 200) {
-							document.getElementById('table').innerHTML=this.responseText;
-							}
-					  };
-					xhttp.open("GET", "getMemberByDay?day="+day+"&month="+month+"&year="+year+"&act=report", true);
-					xhttp.send();
-			}
-		
-		
-	</script>
-	
 
 </body>
 </html>

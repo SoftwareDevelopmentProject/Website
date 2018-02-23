@@ -246,16 +246,12 @@
 								<label class="col-md-3 control-label" for="genre">Genre</label>
 									<div class="col-md-9">
 										<select class="form-control" style="width: 30%" name="genre" id="genre">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-											<option value="7">7</option>
-											<option value="8">8</option>
-											<option value="9">9</option>
-											<option value="10">4</option>
+										<?php 
+											$genres = $db->getGenre();
+											foreach($genres as $genre){
+												echo '<option value="'.$genre['genre_id'].'">'.$genre['genre_name'].'</option>';
+											}
+											?>
 										</select>
 										
 									</div>

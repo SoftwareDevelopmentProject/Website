@@ -41,73 +41,14 @@ $page = 'staff';
 		if ( $result ):
 			new Email( $_POST[ 'email' ], "Account created", "Welcome to join as Technology Park's Bookstore staff. Your staff account is just been created and your password would be your phone number." );
 		?>
-		<div id="popupBox" style="display:block">
-			<div id="popupcontent" class="popup-content">
-				<div class="popup-header">
-					<span class="close">&times;</span>
-					<h2>Successful</h2>
-				</div>
-				<div class="popup-body">
-					Add staff successful and email is sent!
-				</div>
-				<div class="popup-footer">
-					<button class="btn btn-primary btn-md" id="ok">OK</button>
-				</div>
-			</div>
-		</div>
 		<?php else: ?>
-		<div id="popupBox" style="display:block">
-			<div id="popupcontent" class="popup-content">
-				<div class="popup-header">
-					<span class="close">&times;</span>
-					<h2>Error</h2>
-				</div>
-				<div class="popup-body" style="background-color:red">
-					No change is made !
-				</div>
-				<div class="popup-footer">
-					<button class="btn btn-danger btn-md" id="ok" style="background-color:red">OK</button>
-				</div>
-			</div>
-		</div>
 		<?php endif; ?>
 		<?php
 		elseif ( isset( $_POST[ 'save_staff_role' ] ) ):
 			$result = $db->up_staff( $_POST[ 'id' ], $_POST[ 'role' ] );
 		if ( $result ):
 			?>
-		<div id="popupBox" style="display:block">
-			<div id="popupcontent" class="popup-content">
-				<div class="popup-header">
-					<span class="close">&times;</span>
-					<h2>Successful</h2>
-				</div>
-				<div class="popup-body">
-					Change role successful !
-
-				</div>
-				<div class="popup-footer">
-					<button class="btn btn-primary btn-md" id="ok">OK</button>
-				</div>
-			</div>
-		</div>
 		<?php else: ?>
-		<div id="popupBox" style="display:block">
-			<div id="popupcontent" class="popup-content">
-				<div class="popup-header">
-					<span class="close">&times;</span>
-					<h2>Error</h2>
-				</div>
-				<div class="popup-body" style="background-color:red">
-					No change is made!
-
-				</div>
-				<div class="popup-footer">
-					<button class="btn btn-danger btn-md" id="ok" style="background-color:red">OK</button>
-				</div>
-			</div>
-
-		</div>
 		<?php endif;?>
 		<?php
 		elseif ( isset( $_POST[ 'del' ] ) ):
@@ -239,7 +180,7 @@ $page = 'staff';
 										<div class="form-group">
 											<label class="col-md-3 control-label" for="email">Email</label>
 												<div class="col-md-9">
-													<input id="email" name="emailr" type="email" placeholder="Email" class="form-control margin_fix" onKeyUp="checkEmail(this.value)" required>
+													<input id="email" name="email" type="email" placeholder="Email" class="form-control margin_fix" onKeyUp="checkEmail(this.value)" required>
 													<p class=err id="email_err"></p>
 												</div>
 										</div>
