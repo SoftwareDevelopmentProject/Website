@@ -288,6 +288,7 @@ class DbFunction {
                 if (password_verify($password, $member['member_password'])) {
                     $_SESSION['user'] = $member['member_id'];
                     $this->recordLoginAttempt($member['member_id'], true);
+					$this->insertMemberLog($member['member_id']);
                     return LOGIN_SUCCESS;
                 }
                 $this->recordLoginAttempt($member['member_id'], false);
@@ -550,6 +551,34 @@ class DbFunction {
             array_push($year, $result['year']);
         }
         return $year;
+    }
+	
+	 public function getMemberLog(){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $report = array();
+        $result_member =mysqli_query($con, "SELECT * FROM activity_log INNER JOIN member ON member.member_id=activity_log.member_id ORDER BY member.member_trustfulness,activity_log.login_time DESC");
+        while($result = mysqli_fetch_assoc($result_member)) {
+            array_push($report, $result);
+        }
+        return $report;
+    }
+	public function getMemberLogByTrust($trust){
+        $db = new DbConnect();
+        $con =$db->connect();
+        $report = array();
+        $result_member =mysqli_query($con, "SELECT * FROM activity_log INNER JOIN member ON member.member_id=activity_log.member_id WHERE member.member_trustfulness = '$trust' ORDER BY activity_log.login_time DESC");
+        while($result = mysqli_fetch_assoc($result_member)) {
+            array_push($report, $result);
+        }
+        return $report;
+	}
+		
+	    public function insertMemberLog($member){
+        $db = new DbConnect();
+        $con = $db->connect();
+        $result= mysqli_query($con, "INSERT INTO activity_log (member_id) VALUES ($member)");
+			return $result;
     }
 
     //upload book request
