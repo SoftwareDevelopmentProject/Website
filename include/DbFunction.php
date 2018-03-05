@@ -436,12 +436,22 @@ class DbFunction {
         return $tar_staff;
     }
     //Order_History
-    public  function getOrderbyorderid($order_id){
+    public function getOrderbyorderid($order_id){
         $db = new DbConnect();
         $con  = $db->connect();
         $order = mysqli_query($con,"SELECT * from `order` WHERE order.order_id = $order_id");
         $result_orderid = mysqli_fetch_array($order);
         return $result_orderid;
+    }
+	public function getOrderDetailsById($id){
+		$db = new DbConnect();
+        $con  = $db->connect();
+        $result_order=array();
+        $order = mysqli_query($con,"SELECT * FROM order_detail INNER JOIN book ON book.book_id=order_detail.book_id WHERE order_detail.order_id=$id");
+        while($result_order1= mysqli_fetch_array($order)){
+            array_push($result_order,$result_order1);
+        }
+        return $result_order;
     }
     public function getOrder($user_id){
         $db = new DbConnect();
@@ -813,7 +823,26 @@ class DbFunction {
 		 }
 		 return $books;
 	 }
+	
+		public function getAllOrder() {
+        $db = new DbConnect();
+        $con = $db->connect();
+        $books = array();
+        $result_book = mysqli_query($con, "SELECT * FROM `order` ORDER BY order_created_time DESC");
+        while ($book = mysqli_fetch_array($result_book,MYSQLI_ASSOC)) {
+            array_push($books, $book);
+        }
+        return $books;
+    }
+	
+		public function updateOrderStatus($status,$id) {
+			$db = new DbConnect();
+			$con = $db->connect();
+			$books = array();
+			$result_book = mysqli_query($con, "UPDATE `order` SET order_status='$status' WHERE order_id=$id");
+			return $books;
 
+		}
 }
 
 

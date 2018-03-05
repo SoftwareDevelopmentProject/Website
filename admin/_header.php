@@ -60,6 +60,7 @@ if(isset($_SESSION['staff'])) {
     <div class="divider"></div>
     <ul class="nav menu">
          <li <?php if (isset($page) && ($page == 'stock')) echo 'class="active"'; ?>><a href="stock.php"><em class="fa fa-list-ol">&nbsp;</em> Stock</a></li>
+         <li <?php if (isset($page) && ($page == 'order')) echo 'class="active"'; ?>><a href="order.php"><em class="fa fa-list-ol">&nbsp;</em> Order</a></li>
          <?php if ($user['staff_role'] > 1) : ?>
         <li <?php if (isset($page) && ($page == 'staff')) echo 'class="active"'; ?>><a href="staffs.php"><em class="fa fa-users">&nbsp;</em> Staff</a></li>
         <?php endif; ?>
