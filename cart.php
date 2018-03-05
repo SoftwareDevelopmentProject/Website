@@ -71,8 +71,7 @@ if (isset($_POST['delete'])) {
                         <td style="text-align:left"><input type="checkbox" name="book[]"
                                                               onchange="check(this, <?php echo $subtotal; ?>)"
                                                               value="<?php echo $book['book_id']; ?>"/></td>
-                        <td style="width: 220px;text-align: center"><img
-                                    src="images/products/<?php echo $book['book_id']; ?>.jpg" alt=""/></td>
+                        <td style="width: 220px;text-align: center"><img src="images/products/<?php echo $book['book_id']; ?>.jpg" alt=""/></td>
                         <td style="text-align: center"><?php echo $book['book_title']; ?></td>
                         <td style="text-align: center"><?php echo $book['book_price']; ?></td>
                         <td style="text-align: center"><?php echo $book['quantity']; ?></td>
@@ -121,8 +120,15 @@ if (isset($_POST['delete'])) {
 <script language="JavaScript">
     function selectAll(source) {
         checkboxes = document.getElementsByName('book[]');
-        for(var i in checkboxes)
-            checkboxes[i].checked = source.checked;
+        for(var i in checkboxes) {
+            if (source.checked) {
+                if (!checkboxes[i].checked)
+                    checkboxes[i].click();
+            } else {
+                if (checkboxes[i].checked)
+                    checkboxes[i].click();
+            }
+        }
     }
 </script>
 <form id="deleteItem" method="post">
