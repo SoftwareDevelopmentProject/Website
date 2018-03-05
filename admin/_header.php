@@ -67,12 +67,15 @@ if(isset($_SESSION['staff'])) {
         <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-line-chart">&nbsp;</em> Report <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
             </a>
-            <ul class="children <?php if (isset($page) && (($page == 'member report')||($page == 'sale report'))){ echo '';}else{ echo 'collapse';} ?>" id="sub-item-1">
-                <li><a class="" href="charts.php">
+            <ul class="children <?php if (isset($page) && (($page == 'member report')||($page == 'sale report') || ($page == 'activityLog'))){ echo '';}else{ echo 'collapse';} ?>" id="sub-item-1">
+                <li><a <?php if (isset($page) && ($page == 'sale report')) echo 'class="active"'; ?>class="" href="charts.php">
                         <span class="fa fa-book">&nbsp;</span> Sale report
                     </a></li>
                 <li><a <?php if (isset($page) && ($page == 'member report')) echo 'class="active"'; ?> href="memberReport.php">
                         <span class="fa fa-book">&nbsp;</span> Member report
+                    </a></li>
+                     <li><a <?php if (isset($page) && ($page == 'activityLog')) echo 'class="active"'; ?>class="" href="activityLog.php">
+                        <span class="fa fa-book">&nbsp;</span> Member Activity Log
                     </a></li>
             </ul>
         </li>
