@@ -122,6 +122,7 @@ class DbFunction {
         $db = new DbConnect();
         $con = $db->connect();
         mysqli_query($con, "INSERT INTO feedback(feedback_scale, feedback_comment, member_id, book_id) VALUES($scale, '$feedback', $user_id, $book_id)");
+
     }
     public function rateFeedback($user_id, $feedback_id, $scale) {
         $db = new DbConnect();
@@ -567,7 +568,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $report = array();
-        $result_member =mysqli_query($con, "SELECT * FROM activity_log INNER JOIN member ON member.member_id=activity_log.member_id ORDER BY member.member_trustfulness,activity_log.login_time DESC");
+        $result_member =mysqli_query($con, "SELECT * FROM login_attempt INNER JOIN member ON member.member_id=login_attempt.member_id ORDER BY member.member_trustfulness,login_attempt.created_at DESC");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }
@@ -577,7 +578,7 @@ class DbFunction {
         $db = new DbConnect();
         $con =$db->connect();
         $report = array();
-        $result_member =mysqli_query($con, "SELECT * FROM activity_log INNER JOIN member ON member.member_id=activity_log.member_id WHERE member.member_trustfulness = '$trust' ORDER BY activity_log.login_time DESC");
+        $result_member =mysqli_query($con, "SELECT * FROM login_attempt INNER JOIN member ON member.member_id=login_attempt.member_id WHERE member.member_trustfulness = '$trust' ORDER BY login_attempt.created_at DESC");
         while($result = mysqli_fetch_assoc($result_member)) {
             array_push($report, $result);
         }

@@ -1,10 +1,10 @@
 <?php
-
-// Database Related
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'sdp');
+
+// Database Related
 
 // Security options
 define('SECURITY_MAX_LOGIN_TIMEOUT', 360); // 360 minutes

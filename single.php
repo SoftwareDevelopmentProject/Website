@@ -71,7 +71,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <h3 class="m_3"><?php echo $books['book_title']; ?></h3>
 
 				<div class="price_single">
-							  <span class="">&dollar;<?php echo $books['book_price']; ?></span>
+							  <span class="">RM<?php echo $books['book_price']; ?></span>
 
 							</div>
                 <?php
@@ -80,7 +80,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 }
                 if (isset($_POST['scale'])) {
                     $db->addFeedback($user['member_id'], $_GET['book_id'], $_POST['scale'], $_POST['review']);
-                    echo '<script>window.location.replace("' . $_GET['book_id'] . '");</script>';
+                    //echo '<script>window.location.replace("' . $_GET['book_id'] . '");</script>';
                 }
 
 
@@ -122,7 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
          <ul id="flexiselDemo3">
              <?php $books5 = $db->get5book();
              foreach($books5 as $book5){
-                 echo'	<li><a href="singles/'.$book5['book_id'].'"><img src="images/Products/'.$book5['book_id'].'.jpg" /></a><div class="grid-flex"><a href="singles/'.$book5['book_id'].'">'.$book5['book_title'].'</a><p>&dollar;'.$book5['book_price'].'</p></div></li>';
+                 echo'	<li><a href="singles/'.$book5['book_id'].'"><img src="images/Products/'.$book5['book_id'].'.jpg" /></a><div class="grid-flex"><a href="singles/'.$book5['book_id'].'">'.$book5['book_title'].'</a><p>RM '.$book5['book_price'].'</p></div></li>';
              }?>
 
 		 </ul>
@@ -195,7 +195,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	 <div class="toogle">
      	<h3 class="m_3">Product Reviews</h3>
          <?php if ($user != null) : ?>
-         <form method="post">
+         <form method="post" action="singles/<?php echo $_GET['book_id'] ?>">
              <select name="scale">
                  <option selected disabled>Rating scale</option>
                  <option value="1">1</option>
@@ -209,10 +209,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                  <option value="9">9</option>
                  <option value="10">10</option>
              </select>
+             <br>
+             <br>
              <textarea name="review" style="width: 100%; height: 80px" placeholder="Write a review..."></textarea>
              <input type="submit" value="Submit" />
          </form>
+
          <?php endif; ?>
+
          <div class="review-container" style="margin-top: 30px;">
              <?php foreach($books['feedback'] as $feedback) : ?>
             <p style="margin: 15px 0; padding: 5px;">
