@@ -31,7 +31,7 @@ $db = new DbFunction;
 									echo 'Trusted';
 							} 
 							?></td>
-                        <td><?php echo $member['login_time']; ?></td>
+                        <td><?php echo $member['created_at']; ?></td>
                         <td><button type="button" class="btn btn-primary" onClick="getMemberDetail(<?php echo $member['member_id'];?>)" data-toggle="modal" data-target="#viewMember">View Profile</button></td>
                     </tr>
                     <?php endforeach; ?>

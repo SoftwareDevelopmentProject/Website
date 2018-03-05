@@ -22,7 +22,7 @@ session_start();
                 <th class="fixed-table-header">Book Title</th>
                 <th class="fixed-table-header">Book Price</th>
                 <th class="fixed-table-header">Quantity</th>
-                <th class="fixed-table-header">Subtotal</th>
+                <th class="fixed-table-header">Subtotal(RM)</th>
 
             </tr>
             <?php
@@ -36,7 +36,7 @@ session_start();
             ?>
             <tr>
                 <td><?php echo $o['order_transaction_id'];?></td>
-                <td><?php echo '<img src="images/products/'.$o['book_id'].'" alt="">';?></td>
+                <td><a href="singles/<?php echo $o['book_id']; ?>"><?php echo '<img src="images/products/'.$o['book_id'].'" alt="">';?></a></td>
                 <td><?php echo $o['book_title'];?></td>
                 <td><?php echo $o['book_price'];?></td>
                 <td><?php echo $o['order_detail_quantity'];?></td>
@@ -44,7 +44,7 @@ session_start();
             </tr>
             <?php  }?>
             <tr>
-                <td></td>
+                <td>Total(RM)</td>
                 <td></td>
                 <td></td>
                 <td></td>

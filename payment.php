@@ -57,7 +57,7 @@ if($user == null){
 <div class="register_account" style="margin-bottom: 50px;">
     <div class="wrap">
         <h4 class="title">Checkout </h4>
-        <form method="post" style="width: 100%" >
+        <form method="post" style="width: 100%"  novalidate>
             <center>
             <div class="col_1_of_1 span_1_of_1" style="margin: auto">
                 <div><label>RecipentName</label></div><div><input type="text" name ="name" style="width: 50%;" required></div>

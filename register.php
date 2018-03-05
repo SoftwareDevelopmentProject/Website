@@ -19,10 +19,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         if($db->register($_POST['name'],$_POST['email'],$_POST['password'],$_POST['phone'],$_POST['address'],$_POST['country'])){
-           echo '<script type="text/javascript">
-		   function click(){
-		   document.getElementById("click").click();
-		   }</script>';
+           echo '<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
+                <strong>Congratulation!</strong>Register Successfully</div>';
         } else {
             echo '<div class="alert alert-info" style="background-color: #d5d5d5;border: none;">
                 <strong>Info!</strong>Failed Register, Email has been used. Please try again</div>';
